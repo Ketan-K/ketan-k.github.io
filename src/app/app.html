@@ -33,17 +33,17 @@
     [company]="profile()?.company || 'Not available'"
     [website]="profile()?.blog || 'Not available'"
     [profileLinks]="profileLinks()"
-    [followers]="stats().followers ?? '--'"
-    [repos]="stats().repos ?? '--'"
-    [following]="stats().following ?? '--'"
+    [followers]="stats().followers"
+    [repos]="stats().repos"
+    [following]="stats().following"
   />
 
   <app-projects-page
     [isActive]="activePage() === 2"
     [isPast]="activePage() > 2"
     [isFuture]="activePage() < 2"
-    [totalStars]="repoMetrics().stars || '--'"
-    [totalForks]="repoMetrics().forks || '--'"
+    [totalStars]="repoMetrics().stars"
+    [totalForks]="repoMetrics().forks"
     [repoSubtitle]="repoSubtitle()"
     [featuredRepos]="featuredRepos()"
     [pinnedSubtitle]="pinnedSubtitle()"

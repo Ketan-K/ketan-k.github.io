@@ -1,4 +1,4 @@
-# NeonFlip — AI Futuristic GitHub Portfolio
+# VibeFolio — AI Futuristic GitHub Portfolio
 
 ## Migration Status (March 2026)
 
