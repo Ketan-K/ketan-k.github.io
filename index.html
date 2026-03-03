@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GitHub Profile | Futuristic Portfolio</title>
+    <meta
+      name="description"
+      content="Futuristic AI-themed GitHub portfolio with immersive 3D page transitions."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="space-canvas"></canvas>
+
+    <div class="scanlines" aria-hidden="true"></div>
+    <div class="aura aura-1" aria-hidden="true"></div>
+    <div class="aura aura-2" aria-hidden="true"></div>
+
+    <main id="flipbook" class="flipbook" aria-live="polite">
+      <section class="page" data-page="0" id="home">
+        <div class="page-inner hero">
+          <p class="eyebrow">AI × 3D × FUTURISM</p>
+          <h1 id="hero-name">Loading Profile...</h1>
+          <p class="lead" id="hero-bio">
+            Syncing GitHub profile intelligence.
+          </p>
+          <form id="profile-form" class="profile-form" autocomplete="off">
+            <input id="profile-input" type="text" placeholder="GitHub username" aria-label="GitHub username" />
+            <button type="submit">Load Profile</button>
+          </form>
+          <div class="meta-chips" id="hero-meta"></div>
+          <div class="hero-actions">
+            <a id="github-link" href="#" target="_blank" rel="noreferrer">Open GitHub</a>
+            <a id="contact-cta" href="#">Connect</a>
+            <button id="next-btn" type="button">Enter Portfolio</button>
+          </div>
+          <p class="hint">Use mouse wheel, arrow keys, space, or swipe to flip pages.</p>
+        </div>
+      </section>
+
+      <section class="page" data-page="1" id="about">
+        <div class="page-inner glass">
+          <p class="eyebrow">IDENTITY</p>
+          <h2>Profile Intelligence</h2>
+          <p id="about-bio">
+            Live summary will appear after profile sync.
+          </p>
+          <div class="profile-grid" id="profile-grid">
+            <article>
+              <h3>Location</h3>
+              <p data-profile="location">-</p>
+            </article>
+            <article>
+              <h3>Company</h3>
+              <p data-profile="company">-</p>
+            </article>
+            <article>
+              <h3>Website</h3>
+              <p data-profile="blog">-</p>
+            </article>
+          </div>
+          <div class="stat-grid" id="github-stats">
+            <article>
+              <h3>Followers</h3>
+              <p data-stat="followers">--</p>
+            </article>
+            <article>
+              <h3>Public Repos</h3>
+              <p data-stat="repos">--</p>
+            </article>
+            <article>
+              <h3>Following</h3>
+              <p data-stat="following">--</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" data-page="2" id="projects">
+        <div class="page-inner glass">
+          <p class="eyebrow">LIVE SIGNALS</p>
+          <h2>Featured Repositories</h2>
+          <p class="muted" id="repo-subtitle">Waiting for profile selection.</p>
+          <div id="repo-list" class="repo-list" aria-live="polite"></div>
+          <a id="all-repos-link" class="text-link" href="#" target="_blank" rel="noreferrer">
+            Explore all repositories →
+          </a>
+        </div>
+      </section>
+
+      <section class="page" data-page="3" id="skills">
+        <div class="page-inner glass">
+          <p class="eyebrow">STACK MATRIX</p>
+          <h2>Dynamic Stack</h2>
+          <div class="skill-cloud" id="skill-cloud"></div>
+          <p id="skill-summary">Top languages and technologies will render from repositories.</p>
+        </div>
+      </section>
+
+      <section class="page" data-page="4" id="ai-lab">
+        <div class="page-inner glass ai-panel">
+          <p class="eyebrow">AI CONSOLE</p>
+          <h2>Neural Assistant</h2>
+          <p class="muted">
+            Type a command like: “set user torvalds”, “go to projects”, or “summarize profile”.
+          </p>
+          <div id="ai-log" class="ai-log"></div>
+          <form id="ai-form" class="ai-form" autocomplete="off">
+            <input
+              id="ai-input"
+              type="text"
+              placeholder="Enter command..."
+              aria-label="AI command input"
+            />
+            <button type="submit">Run</button>
+          </form>
+          <div class="contact-card" id="contact-card">
+            <h3>Connect</h3>
+            <p class="muted" id="contact-copy">
+              Contact actions are generated from profile data.
+            </p>
+            <div class="hero-actions contact-actions">
+              <a id="contact-mail" href="#">Email</a>
+              <a id="contact-github" href="#" target="_blank" rel="noreferrer">GitHub</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="dots" aria-label="Page navigation" id="page-dots"></nav>
+
+    <script src="script.js"></script>
+  </body>
+</html>
