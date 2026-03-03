@@ -40,15 +40,33 @@
     <div class="stat-grid" id="github-stats">
       <article>
         <h3>Followers</h3>
-        <p data-stat="followers">{{ followers() }}</p>
+        <p
+          data-stat="followers"
+          [appAnimateNumber]="followers()"
+          [animateWhen]="isActive()"
+          animateEffect="hybrid"
+          [animateDuration]="980"
+        ></p>
       </article>
       <article>
         <h3>Public Repos</h3>
-        <p data-stat="repos">{{ repos() }}</p>
+        <p
+          data-stat="repos"
+          [appAnimateNumber]="repos()"
+          [animateWhen]="isActive()"
+          animateEffect="hybrid"
+          [animateDuration]="980"
+        ></p>
       </article>
       <article>
         <h3>Following</h3>
-        <p data-stat="following">{{ following() }}</p>
+        <p
+          data-stat="following"
+          [appAnimateNumber]="following()"
+          [animateWhen]="isActive()"
+          animateEffect="hybrid"
+          [animateDuration]="980"
+        ></p>
       </article>
     </div>
   </div>

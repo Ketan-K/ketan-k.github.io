@@ -12,11 +12,23 @@
     <div class="analytics-grid" id="repo-analytics" aria-live="polite">
       <article>
         <h3>Total Stars</h3>
-        <p data-metric="stars">{{ totalStars() }}</p>
+        <p
+          data-metric="stars"
+          [appAnimateNumber]="totalStars()"
+          [animateWhen]="isActive()"
+          animateEffect="hybrid"
+          [animateDuration]="1050"
+        ></p>
       </article>
       <article>
         <h3>Total Forks</h3>
-        <p data-metric="forks">{{ totalForks() }}</p>
+        <p
+          data-metric="forks"
+          [appAnimateNumber]="totalForks()"
+          [animateWhen]="isActive()"
+          animateEffect="hybrid"
+          [animateDuration]="1050"
+        ></p>
       </article>
     </div>
     <p class="muted" id="repo-subtitle">{{ repoSubtitle() }}</p>
@@ -29,7 +41,14 @@
             <h3><a [href]="repo.html_url" target="_blank" rel="noreferrer">{{ repo.name }}</a></h3>
             <p>{{ repo.description || 'No description provided.' }}</p>
             <p class="repo-meta">
-              ★ {{ repo.stargazers_count }} · {{ repo.language || 'No primary language' }} · Updated
+              ★
+              <span
+                [appAnimateNumber]="repo.stargazers_count"
+                [animateWhen]="isActive()"
+                animateEffect="hybrid"
+                [animateDuration]="820"
+              ></span>
+              · {{ repo.language || 'No primary language' }} · Updated
               {{ compactDate()(repo.updated_at) }}
             </p>
           </article>
@@ -46,7 +65,12 @@
           <article class="pinned-card">
             <h4><a [href]="repo.url" target="_blank" rel="noreferrer">{{ repo.name }}</a></h4>
             <p>{{ repo.description || 'No description provided.' }}</p>
-            <p class="repo-meta">★ {{ repo.stars }} · {{ repo.primaryLanguage || 'Mixed stack' }}</p>
+            <p class="repo-meta">
+              ★
+              <span [appAnimateNumber]="repo.stars" [animateWhen]="isActive()" animateEffect="hybrid" [animateDuration]="820"></span>
+              ·
+              {{ repo.primaryLanguage || 'Mixed stack' }}
+            </p>
           </article>
         }
       }

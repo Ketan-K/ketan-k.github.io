@@ -17,7 +17,14 @@
           <div class="lang-row">
             <span class="lang-name">{{ row.language }}</span>
             <div class="lang-track"><div class="lang-fill" [style.width.%]="row.percentage"></div></div>
-            <span class="lang-value">{{ row.percentage }}%</span>
+            <span class="lang-value">
+              <span
+                [appAnimateNumber]="row.percentage"
+                [animateWhen]="isActive()"
+                animateEffect="count"
+                [animateDuration]="760"
+              ></span>%
+            </span>
           </div>
         }
       }

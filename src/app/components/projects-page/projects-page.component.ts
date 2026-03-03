@@ -1,5 +1,6 @@
 import { Component, input } from '@angular/core';
 import { GithubEvent } from '../../github.service';
+import { AnimateNumberDirective } from '../../directives/animate-number.directive';
 
 export interface FeaturedRepo {
   html_url: string;
@@ -21,6 +22,7 @@ export interface PinnedRepo {
 @Component({
   selector: 'app-projects-page',
   standalone: true,
+  imports: [AnimateNumberDirective],
   templateUrl: './projects-page.component.html',
   styleUrl: './projects-page.component.scss',
 })
@@ -28,8 +30,8 @@ export class ProjectsPageComponent {
   readonly isActive = input.required<boolean>();
   readonly isPast = input.required<boolean>();
   readonly isFuture = input.required<boolean>();
-  readonly totalStars = input.required<number | string>();
-  readonly totalForks = input.required<number | string>();
+  readonly totalStars = input.required<number>();
+  readonly totalForks = input.required<number>();
   readonly repoSubtitle = input.required<string>();
   readonly featuredRepos = input.required<FeaturedRepo[]>();
   readonly pinnedSubtitle = input.required<string>();

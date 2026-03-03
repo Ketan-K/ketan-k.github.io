@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { AnimateNumberDirective } from '../../directives/animate-number.directive';
 
 export interface LanguageRow {
   language: string;
@@ -8,6 +9,7 @@ export interface LanguageRow {
 @Component({
   selector: 'app-skills-page',
   standalone: true,
+  imports: [AnimateNumberDirective],
   templateUrl: './skills-page.component.html',
   styleUrl: './skills-page.component.scss',
 })

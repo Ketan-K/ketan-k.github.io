@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { AnimateNumberDirective } from '../../directives/animate-number.directive';
 
 export interface ProfileLink {
   label: string;
@@ -8,6 +9,7 @@ export interface ProfileLink {
 @Component({
   selector: 'app-about-page',
   standalone: true,
+  imports: [AnimateNumberDirective],
   templateUrl: './about-page.component.html',
   styleUrl: './about-page.component.scss',
 })
@@ -20,7 +22,7 @@ export class AboutPageComponent {
   readonly company = input.required<string>();
   readonly website = input.required<string>();
   readonly profileLinks = input.required<ProfileLink[]>();
-  readonly followers = input.required<number | string>();
-  readonly repos = input.required<number | string>();
-  readonly following = input.required<number | string>();
+  readonly followers = input.required<number | null>();
+  readonly repos = input.required<number | null>();
+  readonly following = input.required<number | null>();
 }
