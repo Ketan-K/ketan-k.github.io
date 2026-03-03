@@ -45,6 +45,9 @@ It feels like a personal website, but works like a smart dashboard.
 - Dynamic sections:
   - Hero + About from profile metadata
   - Live repository ranking (stars + recency)
+  - Repo analytics (total stars + forks)
+  - Pinned-style featured repositories (public-data mode)
+  - Language share visualization
   - Dynamic stack cloud (languages + topics)
   - Smart contact action (email if public, otherwise GitHub)
 

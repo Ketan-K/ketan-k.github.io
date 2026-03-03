@@ -66,6 +66,7 @@
               <p data-profile="blog">-</p>
             </article>
           </div>
+          <div class="profile-links" id="profile-links" aria-live="polite"></div>
           <div class="stat-grid" id="github-stats">
             <article>
               <h3>Followers</h3>
@@ -87,8 +88,21 @@
         <div class="page-inner glass">
           <p class="eyebrow">LIVE SIGNALS</p>
           <h2>Featured Repositories</h2>
+          <div class="analytics-grid" id="repo-analytics" aria-live="polite">
+            <article>
+              <h3>Total Stars</h3>
+              <p data-metric="stars">--</p>
+            </article>
+            <article>
+              <h3>Total Forks</h3>
+              <p data-metric="forks">--</p>
+            </article>
+          </div>
           <p class="muted" id="repo-subtitle">Waiting for profile selection.</p>
           <div id="repo-list" class="repo-list" aria-live="polite"></div>
+          <h3 class="sub-heading">Pinned Repositories</h3>
+          <p class="muted" id="pinned-subtitle">Waiting for profile selection.</p>
+          <div id="pinned-list" class="pinned-list" aria-live="polite"></div>
           <a id="all-repos-link" class="text-link" href="#" target="_blank" rel="noreferrer">
             Explore all repositories →
           </a>
@@ -99,6 +113,7 @@
         <div class="page-inner glass">
           <p class="eyebrow">STACK MATRIX</p>
           <h2>Dynamic Stack</h2>
+          <div class="language-share" id="language-share" aria-live="polite"></div>
           <div class="skill-cloud" id="skill-cloud"></div>
           <p id="skill-summary">Top languages and technologies will render from repositories.</p>
         </div>
@@ -122,14 +137,15 @@
             <button type="submit">Run</button>
           </form>
           <div class="contact-card" id="contact-card">
-            <h3>Connect</h3>
+            <h3 id="connect-title">Connect & Collaborate</h3>
             <p class="muted" id="contact-copy">
-              Contact actions are generated from profile data.
+              Loading profile contact channels...
             </p>
-            <div class="hero-actions contact-actions">
+            <div class="hero-actions contact-actions" id="contact-actions">
               <a id="contact-mail" href="#">Email</a>
               <a id="contact-github" href="#" target="_blank" rel="noreferrer">GitHub</a>
             </div>
+            <div class="connect-links" id="connect-links" aria-live="polite"></div>
           </div>
         </div>
       </section>
