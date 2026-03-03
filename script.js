@@ -5,9 +5,12 @@ const nextBtn = document.getElementById('next-btn');
 const repoList = document.getElementById('repo-list');
 const repoSubtitle = document.getElementById('repo-subtitle');
 const allReposLink = document.getElementById('all-repos-link');
+const pinnedList = document.getElementById('pinned-list');
+const pinnedSubtitle = document.getElementById('pinned-subtitle');
 
 const skillCloud = document.getElementById('skill-cloud');
 const skillSummary = document.getElementById('skill-summary');
+const languageShare = document.getElementById('language-share');
 
 const aiLog = document.getElementById('ai-log');
 const aiForm = document.getElementById('ai-form');
@@ -17,12 +20,16 @@ const heroName = document.getElementById('hero-name');
 const heroBio = document.getElementById('hero-bio');
 const heroMeta = document.getElementById('hero-meta');
 const aboutBio = document.getElementById('about-bio');
+const profileLinks = document.getElementById('profile-links');
 
 const githubLink = document.getElementById('github-link');
 const contactCta = document.getElementById('contact-cta');
 const contactMail = document.getElementById('contact-mail');
 const contactGithub = document.getElementById('contact-github');
 const contactCopy = document.getElementById('contact-copy');
+const connectTitle = document.getElementById('connect-title');
+const contactActions = document.getElementById('contact-actions');
+const connectLinks = document.getElementById('connect-links');
 
 const profileForm = document.getElementById('profile-form');
 const profileInput = document.getElementById('profile-input');
@@ -35,6 +42,7 @@ let activePage = 0;
 let isAnimating = false;
 let profileCache = null;
 let reposCache = [];
+let socialAccountsCache = [];
 
 function ensureLink(urlOrText) {
   if (!urlOrText) return '';
@@ -66,6 +74,172 @@ function setProfileField(key, value, asLink = false) {
   }
 
   node.textContent = value;
+}
+
+function renderProfileLinks(profile, socials = []) {
+  profileLinks.innerHTML = '';
+
+  const links = [];
+  links.push({ label: 'GitHub', href: profile.html_url });
+
+  if (profile.blog) {
+    links.push({ label: 'Website', href: ensureLink(profile.blog) });
+  }
+
+  if (profile.twitter_username) {
+    links.push({
+      label: 'X/Twitter',
+      href: `https://x.com/${profile.twitter_username}`,
+    });
+  }
+
+  if (profile.email) {
+    links.push({ label: 'Email', href: `mailto:${profile.email}` });
+  }
+
+  socials.forEach((account) => {
+    if (!account?.provider || !account?.url) {
+      return;
+    }
+
+    const exists = links.some((item) => item.href === account.url);
+    if (!exists) {
+      links.push({ label: account.provider, href: account.url });
+    }
+  });
+
+  links.forEach((item) => {
+    const anchor = document.createElement('a');
+    anchor.href = item.href;
+    if (!item.href.startsWith('mailto:')) {
+      anchor.target = '_blank';
+      anchor.rel = 'noreferrer';
+    }
+    anchor.textContent = item.label;
+    profileLinks.append(anchor);
+  });
+}
+
+function renderConnectSection(profile, socials = []) {
+  if (!profile) {
+    connectTitle.textContent = 'Connect';
+    contactCopy.textContent = 'Unable to load profile contact channels.';
+    contactActions.style.display = 'none';
+    connectLinks.innerHTML = '';
+    return;
+  }
+
+  contactActions.style.display = 'flex';
+  connectTitle.textContent = `Connect with ${profile.name || profile.login}`;
+  contactCopy.textContent = `Open collaboration channels for @${profile.login}.`;
+
+  const links = [];
+  links.push({ label: 'GitHub Profile', href: profile.html_url });
+
+  if (profile.blog) {
+    links.push({ label: 'Website', href: ensureLink(profile.blog) });
+  }
+
+  if (profile.twitter_username) {
+    links.push({ label: 'X/Twitter', href: `https://x.com/${profile.twitter_username}` });
+  }
+
+  if (profile.email) {
+    links.push({ label: 'Email', href: `mailto:${profile.email}` });
+  }
+
+  socials.forEach((account) => {
+    if (!account?.provider || !account?.url) {
+      return;
+    }
+
+    const exists = links.some((item) => item.href === account.url);
+    if (!exists) {
+      links.push({ label: account.provider, href: account.url });
+    }
+  });
+
+  connectLinks.innerHTML = '';
+  links.slice(0, 8).forEach((item) => {
+    const anchor = document.createElement('a');
+    anchor.href = item.href;
+    anchor.textContent = item.label;
+    if (!item.href.startsWith('mailto:')) {
+      anchor.target = '_blank';
+      anchor.rel = 'noreferrer';
+    }
+    connectLinks.append(anchor);
+  });
+}
+
+function renderRepoAnalytics(repos) {
+  const totals = repos.reduce(
+    (acc, repo) => {
+      acc.stars += repo.stargazers_count || 0;
+      acc.forks += repo.forks_count || 0;
+      return acc;
+    },
+    { stars: 0, forks: 0 }
+  );
+
+  const starsNode = document.querySelector('[data-metric="stars"]');
+  const forksNode = document.querySelector('[data-metric="forks"]');
+
+  starsNode.textContent = totals.stars.toLocaleString();
+  forksNode.textContent = totals.forks.toLocaleString();
+}
+
+function renderLanguageShare(repos) {
+  languageShare.innerHTML = '';
+
+  const languageCount = new Map();
+  repos.forEach((repo) => {
+    if (!repo.language) return;
+    languageCount.set(repo.language, (languageCount.get(repo.language) || 0) + 1);
+  });
+
+  const rows = [...languageCount.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6);
+  const total = rows.reduce((sum, [, count]) => sum + count, 0);
+
+  if (!rows.length) {
+    languageShare.innerHTML = '<p class="muted">Language share unavailable for this profile.</p>';
+    return;
+  }
+
+  rows.forEach(([language, count]) => {
+    const percentage = Math.round((count / total) * 100);
+    const row = document.createElement('div');
+    row.className = 'lang-row';
+    row.innerHTML = `
+      <span class="lang-name">${language}</span>
+      <div class="lang-track"><div class="lang-fill" style="width: ${percentage}%"></div></div>
+      <span class="lang-value">${percentage}%</span>
+    `;
+    languageShare.append(row);
+  });
+}
+
+function renderPinnedList(items) {
+  pinnedList.innerHTML = '';
+
+  if (!items.length) {
+    pinnedSubtitle.textContent = 'No pinned/featured repositories available.';
+    pinnedList.innerHTML = '<p class="muted">Pinned feed is empty.</p>';
+    return;
+  }
+
+  pinnedSubtitle.textContent = 'Featured repositories from public profile data.';
+
+  items.slice(0, 4).forEach((repo) => {
+    const card = document.createElement('article');
+    card.className = 'pinned-card';
+    card.innerHTML = `
+      <h4><a href="${repo.url}" target="_blank" rel="noreferrer">${repo.name}</a></h4>
+      <p>${repo.description || 'No description provided.'}</p>
+      <p class="repo-meta">★ ${repo.stars || 0} · ${repo.primaryLanguage || 'Mixed stack'}</p>
+    `;
+    pinnedList.append(card);
+  });
 }
 
 function renderSkillCloud(repos) {
@@ -195,6 +369,26 @@ function renderRepositories(repos) {
     `;
     repoList.append(card);
   });
+}
+
+function renderFallbackPinnedFromRepos(repos) {
+  const featured = [...repos]
+    .sort((a, b) => {
+      if (b.stargazers_count !== a.stargazers_count) {
+        return b.stargazers_count - a.stargazers_count;
+      }
+      return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+    })
+    .slice(0, 4)
+    .map((repo) => ({
+      name: repo.name,
+      description: repo.description,
+      url: repo.html_url,
+      stars: repo.stargazers_count,
+      primaryLanguage: repo.language,
+    }));
+
+  renderPinnedList(featured);
 }
 
 const dots = pages.map((_, index) => {
@@ -433,6 +627,21 @@ async function loadGithubData() {
     profileCache = profile;
     hydrateProfile(profile);
 
+    let socialAccounts = [];
+    try {
+      const socialsResponse = await fetch(`https://api.github.com/users/${currentUser}/social_accounts`);
+      if (socialsResponse.ok) {
+        socialAccounts = await socialsResponse.json();
+      }
+    } catch (socialError) {
+      socialAccounts = [];
+    }
+
+    socialAccountsCache = socialAccounts;
+
+    renderProfileLinks(profile, socialAccounts);
+    renderConnectSection(profile, socialAccounts);
+
     const repoResponse = await fetch(
       `https://api.github.com/users/${currentUser}/repos?sort=updated&per_page=100`
     );
@@ -441,13 +650,24 @@ async function loadGithubData() {
     }
 
     reposCache = await repoResponse.json();
+    renderRepoAnalytics(reposCache);
     renderRepositories(reposCache);
+    renderLanguageShare(reposCache);
     renderSkillCloud(reposCache);
+
+    renderFallbackPinnedFromRepos(reposCache);
 
     addAiLine('AI', `Sync complete. Live GitHub data loaded for @${currentUser}.`);
   } catch (error) {
     repoSubtitle.textContent = 'Profile sync failed. Check username or API rate limits.';
     repoList.innerHTML = '<p class="muted">No data available at the moment.</p>';
+    pinnedSubtitle.textContent = 'Pinned feed unavailable.';
+    pinnedList.innerHTML = '<p class="muted">No pinned data available at the moment.</p>';
+    profileLinks.innerHTML = '';
+    renderConnectSection(null, []);
+    languageShare.innerHTML = '<p class="muted">Language share unavailable.</p>';
+    document.querySelector('[data-metric="stars"]').textContent = '--';
+    document.querySelector('[data-metric="forks"]').textContent = '--';
     skillCloud.innerHTML = '<span class="empty-chip">No data available at the moment.</span>';
     skillSummary.textContent = 'Try another username or wait for GitHub API cooldown.';
     addAiLine('AI', `Failed to load @${currentUser}. Verify username and try again.`);
