@@ -1,0 +1,85 @@
+<canvas id="space-canvas" #spaceCanvas></canvas>
+
+<div class="scanlines" aria-hidden="true"></div>
+<div class="aura aura-1" aria-hidden="true"></div>
+<div class="aura aura-2" aria-hidden="true"></div>
+
+<main id="flipbook" class="flipbook" aria-live="polite">
+  <app-home-page
+    [isActive]="activePage() === 0"
+    [isPast]="activePage() > 0"
+    [isFuture]="activePage() < 0"
+    [displayName]="displayName()"
+    [displayBio]="displayBio()"
+    [heroMeta]="heroMeta()"
+    [profileInput]="profileInput"
+    [profileUrl]="profileUrl()"
+    [contactMailHref]="contactMailHref()"
+    [liveState]="liveState()"
+    [liveTime]="liveTime()"
+    [refreshCountdown]="refreshCountdown()"
+    [showOffline]="!isSyncing() && liveState() === 'Live sync error'"
+    (profileInputChange)="profileInput = $event"
+    (profileSubmit)="onProfileSubmit()"
+    (nextPage)="nextPage()"
+  />
+
+  <app-about-page
+    [isActive]="activePage() === 1"
+    [isPast]="activePage() > 1"
+    [isFuture]="activePage() < 1"
+    [displayBio]="displayBio()"
+    [location]="profile()?.location || 'Not available'"
+    [company]="profile()?.company || 'Not available'"
+    [website]="profile()?.blog || 'Not available'"
+    [profileLinks]="profileLinks()"
+    [followers]="stats().followers ?? '--'"
+    [repos]="stats().repos ?? '--'"
+    [following]="stats().following ?? '--'"
+  />
+
+  <app-projects-page
+    [isActive]="activePage() === 2"
+    [isPast]="activePage() > 2"
+    [isFuture]="activePage() < 2"
+    [totalStars]="repoMetrics().stars || '--'"
+    [totalForks]="repoMetrics().forks || '--'"
+    [repoSubtitle]="repoSubtitle()"
+    [featuredRepos]="featuredRepos()"
+    [pinnedSubtitle]="pinnedSubtitle()"
+    [pinnedRepos]="pinnedRepos()"
+    [activitySubtitle]="activitySubtitle()"
+    [events]="events()"
+    [allReposUrl]="allReposUrl()"
+    [compactDate]="compactDate"
+    [humanizeEvent]="humanizeEvent"
+    [formatDateTime]="formatDateTime"
+  />
+
+  <app-skills-page
+    [isActive]="activePage() === 3"
+    [isPast]="activePage() > 3"
+    [isFuture]="activePage() < 3"
+    [languageRows]="languageRows()"
+    [skillChips]="skillChips()"
+    [skillSummary]="skillSummary()"
+  />
+
+  <app-ai-lab-page
+    [isActive]="activePage() === 4"
+    [isPast]="activePage() > 4"
+    [isFuture]="activePage() < 4"
+    [aiLog]="aiLog()"
+    [aiInput]="aiInput"
+    [contactTitle]="contactTitle()"
+    [contactCopy]="contactCopy()"
+    [contactMailHref]="contactMailHref()"
+    [contactMailLabel]="contactMailLabel()"
+    [profileUrl]="profileUrl()"
+    [connectLinks]="connectLinks()"
+    (aiInputChange)="aiInput = $event"
+    (aiSubmit)="onAiSubmit()"
+  />
+</main>
+
+<app-page-dots [pages]="pages" [activePage]="activePage()" (goToPage)="goToPage($event)" />

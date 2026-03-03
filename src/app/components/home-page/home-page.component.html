@@ -1,0 +1,42 @@
+<section
+  class="page"
+  data-page="0"
+  id="home"
+  [class.active]="isActive()"
+  [class.past]="isPast()"
+  [class.future]="isFuture()"
+>
+  <div class="page-inner hero">
+    <p class="eyebrow">AI × 3D × FUTURISM</p>
+    <h1 id="hero-name">{{ displayName() }}</h1>
+    <p class="lead" id="hero-bio">{{ displayBio() }}</p>
+    <form id="profile-form" class="profile-form" autocomplete="off" (submit)="onSubmit($event)">
+      <input
+        id="profile-input"
+        type="text"
+        placeholder="GitHub username"
+        aria-label="GitHub username"
+        [value]="profileInput()"
+        (input)="onInput($event)"
+      />
+      <button type="submit">Load Profile</button>
+    </form>
+    <div class="meta-chips" id="hero-meta">
+      @for (chip of heroMeta(); track chip) {
+        <span>{{ chip }}</span>
+      }
+    </div>
+    <div class="hero-actions">
+      <a id="github-link" [href]="profileUrl()" target="_blank" rel="noreferrer">Open GitHub</a>
+      <a id="contact-cta" [href]="contactMailHref()">Connect</a>
+      <button id="next-btn" type="button" (click)="nextPage.emit()">Enter Portfolio</button>
+    </div>
+    <div class="live-hud" id="live-hud" aria-live="polite">
+      <span class="live-dot" id="live-dot" [class.offline]="showOffline()"></span>
+      <span id="live-state">{{ liveState() }}</span>
+      <span id="live-time">{{ liveTime() }}</span>
+      <span id="refresh-countdown">{{ refreshCountdown() }}</span>
+    </div>
+    <p class="hint">Use mouse wheel, arrow keys, space, or swipe to flip pages.</p>
+  </div>
+</section>

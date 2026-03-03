@@ -1,0 +1,72 @@
+<section
+  class="page"
+  data-page="2"
+  id="projects"
+  [class.active]="isActive()"
+  [class.past]="isPast()"
+  [class.future]="isFuture()"
+>
+  <div class="page-inner glass">
+    <p class="eyebrow">LIVE SIGNALS</p>
+    <h2>Featured Repositories</h2>
+    <div class="analytics-grid" id="repo-analytics" aria-live="polite">
+      <article>
+        <h3>Total Stars</h3>
+        <p data-metric="stars">{{ totalStars() }}</p>
+      </article>
+      <article>
+        <h3>Total Forks</h3>
+        <p data-metric="forks">{{ totalForks() }}</p>
+      </article>
+    </div>
+    <p class="muted" id="repo-subtitle">{{ repoSubtitle() }}</p>
+    <div id="repo-list" class="repo-list" aria-live="polite">
+      @if (!featuredRepos().length) {
+        <p class="muted">Repository feed is empty.</p>
+      } @else {
+        @for (repo of featuredRepos(); track repo.html_url) {
+          <article class="repo-card">
+            <h3><a [href]="repo.html_url" target="_blank" rel="noreferrer">{{ repo.name }}</a></h3>
+            <p>{{ repo.description || 'No description provided.' }}</p>
+            <p class="repo-meta">
+              ★ {{ repo.stargazers_count }} · {{ repo.language || 'No primary language' }} · Updated
+              {{ compactDate()(repo.updated_at) }}
+            </p>
+          </article>
+        }
+      }
+    </div>
+    <h3 class="sub-heading">Pinned Repositories</h3>
+    <p class="muted" id="pinned-subtitle">{{ pinnedSubtitle() }}</p>
+    <div id="pinned-list" class="pinned-list" aria-live="polite">
+      @if (!pinnedRepos().length) {
+        <p class="muted">Pinned feed is empty.</p>
+      } @else {
+        @for (repo of pinnedRepos(); track repo.url) {
+          <article class="pinned-card">
+            <h4><a [href]="repo.url" target="_blank" rel="noreferrer">{{ repo.name }}</a></h4>
+            <p>{{ repo.description || 'No description provided.' }}</p>
+            <p class="repo-meta">★ {{ repo.stars }} · {{ repo.primaryLanguage || 'Mixed stack' }}</p>
+          </article>
+        }
+      }
+    </div>
+    <h3 class="sub-heading">Recent Activity</h3>
+    <p class="muted" id="activity-subtitle">{{ activitySubtitle() }}</p>
+    <div id="activity-list" class="activity-list" aria-live="polite">
+      @if (!events().length) {
+        <p class="muted">Activity feed is empty.</p>
+      } @else {
+        @for (event of events().slice(0, 5); track $index) {
+          <article class="activity-item">
+            <p>{{ humanizeEvent()(event) }}</p>
+            <p class="repo-meta">{{ formatDateTime()(event.created_at) }}</p>
+          </article>
+        }
+      }
+    </div>
+    <a id="all-repos-link" class="text-link" [href]="allReposUrl()" target="_blank" rel="noreferrer">
+      Explore all repositories →
+    </a>
+  </div>
+</section>

@@ -1,5 +1,42 @@
 # NeonFlip — AI Futuristic GitHub Portfolio
 
+## Migration Status (March 2026)
+
+This project is being migrated to Angular 21 + Tailwind + Sass.
+
+- Active app source: `src/`
+- Angular entrypoint: `src/index.html`
+- Angular runtime logic: `src/app/app.ts`
+- Angular styles entrypoint: `src/styles.scss`
+- Component styles: `src/app/components/**/**/*.component.scss`
+
+### Run Angular App
+
+```bash
+npm install
+npm start
+```
+
+## Deploy to GitHub Pages (GitHub Actions)
+
+This repo now includes a workflow at `.github/workflows/deploy-pages.yml`.
+
+### One-time GitHub setup
+
+1. Open repository **Settings** → **Pages**.
+2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
+3. Ensure your default deployment branch is `main`.
+
+### Deploy
+
+- Push to `main` to trigger deployment automatically.
+- Or run it manually from **Actions** → **Build and Deploy to GitHub Pages** → **Run workflow**.
+
+### Base URL behavior
+
+- If repository is `username.github.io`, workflow builds with base href `/`.
+- Otherwise, workflow builds with base href `/<repo-name>/`.
+
 Welcome to a cyberpunk-style portfolio that feels like a sci-fi interface and runs on **live GitHub data**.
 
 This site is built for `Ketan-K`, designed to host on **GitHub Pages**, and crafted with:
@@ -55,18 +92,19 @@ It feels like a personal website, but works like a smart dashboard.
 
 ## Tech Stack
 
-- HTML
-- CSS
-- Vanilla JavaScript
+- Angular 21 (standalone components)
+- TypeScript
+- Sass + Tailwind CSS
 - GitHub REST API
 
 ---
 
 ## Project Structure
 
-- `index.html` — page structure and sections
-- `style.css` — visual system, dark futuristic UI, effects
-- `script.js` — navigation engine, AI commands, GitHub data pipeline
+- `src/index.html` — Angular document shell
+- `src/app/` — standalone components, runtime logic, data service
+- `src/styles.scss` — global tokens + layout/motion foundation
+- `src/app/components/**/**/*.component.scss` — per-component styles
 - `README.md` — docs
 - `LICENSE` — MIT license
 
@@ -77,12 +115,13 @@ It feels like a personal website, but works like a smart dashboard.
 From project root:
 
 ```bash
-python -m http.server 5500
+npm install
+npm start
 ```
 
 Open in browser:
 
-- `http://127.0.0.1:5500/index.html`
+- `http://localhost:4200/`
 
 ---
 
@@ -106,8 +145,8 @@ Try commands like:
 
 You can directly open with a profile:
 
-- `index.html?user=Ketan-K`
-- `index.html?user=torvalds`
+- `http://localhost:4200/?user=Ketan-K`
+- `http://localhost:4200/?user=torvalds`
 
 The last loaded username is saved in local storage.
 

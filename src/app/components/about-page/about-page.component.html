@@ -1,0 +1,55 @@
+<section
+  class="page"
+  data-page="1"
+  id="about"
+  [class.active]="isActive()"
+  [class.past]="isPast()"
+  [class.future]="isFuture()"
+>
+  <div class="page-inner glass">
+    <p class="eyebrow">IDENTITY</p>
+    <h2>Profile Intelligence</h2>
+    <p id="about-bio">{{ displayBio() }}</p>
+    <div class="profile-grid" id="profile-grid">
+      <article>
+        <h3>Location</h3>
+        <p data-profile="location">{{ location() }}</p>
+      </article>
+      <article>
+        <h3>Company</h3>
+        <p data-profile="company">{{ company() }}</p>
+      </article>
+      <article>
+        <h3>Website</h3>
+        <p data-profile="blog">
+          @if (website() !== 'Not available') {
+            <a [href]="website()" target="_blank" rel="noreferrer">{{ website() }}</a>
+          } @else {
+            Not available
+          }
+        </p>
+      </article>
+    </div>
+    <div class="profile-links" id="profile-links" aria-live="polite">
+      @for (link of profileLinks(); track link.href) {
+        <a [href]="link.href" [target]="link.href.startsWith('mailto:') ? null : '_blank'" rel="noreferrer">
+          {{ link.label }}
+        </a>
+      }
+    </div>
+    <div class="stat-grid" id="github-stats">
+      <article>
+        <h3>Followers</h3>
+        <p data-stat="followers">{{ followers() }}</p>
+      </article>
+      <article>
+        <h3>Public Repos</h3>
+        <p data-stat="repos">{{ repos() }}</p>
+      </article>
+      <article>
+        <h3>Following</h3>
+        <p data-stat="following">{{ following() }}</p>
+      </article>
+    </div>
+  </div>
+</section>

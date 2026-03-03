@@ -1,0 +1,47 @@
+<section
+  class="page"
+  data-page="4"
+  id="ai-lab"
+  [class.active]="isActive()"
+  [class.past]="isPast()"
+  [class.future]="isFuture()"
+>
+  <div class="page-inner glass ai-panel">
+    <p class="eyebrow">AI CONSOLE</p>
+    <h2>Neural Assistant</h2>
+    <p class="muted">
+      Type a command like: “set user torvalds”, “go to projects”, or “summarize profile”.
+    </p>
+    <div id="ai-log" class="ai-log">
+      @for (line of aiLog(); track $index) {
+        <p class="ai-line"><strong>{{ line.speaker }}:</strong> {{ line.text }}</p>
+      }
+    </div>
+    <form id="ai-form" class="ai-form" autocomplete="off" (submit)="onSubmit($event)">
+      <input
+        id="ai-input"
+        type="text"
+        placeholder="Enter command..."
+        aria-label="AI command input"
+        [value]="aiInput()"
+        (input)="onInput($event)"
+      />
+      <button type="submit">Run</button>
+    </form>
+    <div class="contact-card" id="contact-card">
+      <h3 id="connect-title">{{ contactTitle() }}</h3>
+      <p class="muted" id="contact-copy">{{ contactCopy() }}</p>
+      <div class="hero-actions contact-actions" id="contact-actions">
+        <a id="contact-mail" [href]="contactMailHref()">{{ contactMailLabel() }}</a>
+        <a id="contact-github" [href]="profileUrl()" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+      <div class="connect-links" id="connect-links" aria-live="polite">
+        @for (link of connectLinks(); track link.href) {
+          <a [href]="link.href" [target]="link.href.startsWith('mailto:') ? null : '_blank'" rel="noreferrer">
+            {{ link.label }}
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+</section>
