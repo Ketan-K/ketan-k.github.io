@@ -1,0 +1,36 @@
+<section
+  class="page"
+  data-page="3"
+  id="skills"
+  [class.active]="isActive()"
+  [class.past]="isPast()"
+  [class.future]="isFuture()"
+>
+  <div class="page-inner glass">
+    <p class="eyebrow">STACK MATRIX</p>
+    <h2>Dynamic Stack</h2>
+    <div class="language-share" id="language-share" aria-live="polite">
+      @if (!languageRows().length) {
+        <p class="muted">Language share unavailable for this profile.</p>
+      } @else {
+        @for (row of languageRows(); track row.language) {
+          <div class="lang-row">
+            <span class="lang-name">{{ row.language }}</span>
+            <div class="lang-track"><div class="lang-fill" [style.width.%]="row.percentage"></div></div>
+            <span class="lang-value">{{ row.percentage }}%</span>
+          </div>
+        }
+      }
+    </div>
+    <div class="skill-cloud" id="skill-cloud">
+      @if (!skillChips().length) {
+        <span class="empty-chip">No language/topic metadata detected yet.</span>
+      } @else {
+        @for (chip of skillChips(); track chip) {
+          <span>{{ chip }}</span>
+        }
+      }
+    </div>
+    <p id="skill-summary">{{ skillSummary() }}</p>
+  </div>
+</section>

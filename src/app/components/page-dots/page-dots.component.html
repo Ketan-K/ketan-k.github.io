@@ -1,0 +1,11 @@
+<nav class="dots" aria-label="Page navigation" id="page-dots">
+  @for (page of pages(); track page.index) {
+    <button
+      type="button"
+      class="dot"
+      [class.active]="activePage() === page.index"
+      [attr.aria-label]="'Go to page ' + (page.index + 1)"
+      (click)="goToPage.emit(page.index)"
+    ></button>
+  }
+</nav>

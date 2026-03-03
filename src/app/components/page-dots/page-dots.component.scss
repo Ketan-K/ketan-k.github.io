@@ -1,0 +1,29 @@
+.dots {
+  position: fixed;
+  right: 1rem;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 5;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(137, 178, 255, 0.65);
+  background: rgba(115, 162, 255, 0.2);
+  cursor: pointer;
+}
+
+.dot.active {
+  background: var(--primary);
+  box-shadow: 0 0 20px rgba(89, 227, 255, 0.9);
+}
+
+@media (max-width: 760px) {
+  .dots {
+    right: 0.55rem;
+  }
+}
