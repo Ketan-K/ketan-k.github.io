@@ -1,11 +1,16 @@
 <nav class="dots" aria-label="Page navigation" id="page-dots">
   @for (page of pages(); track page.index) {
-    <button
-      type="button"
+    <a
+      [href]="'#' + page.id"
       class="dot"
       [class.active]="activePage() === page.index"
-      [attr.aria-label]="'Go to page ' + (page.index + 1)"
-      (click)="goToPage.emit(page.index)"
-    ></button>
+      [attr.aria-label]="'Go to ' + page.title"
+      [title]="page.title"
+      [attr.aria-current]="activePage() === page.index ? 'page' : null"
+      (click)="$event.preventDefault(); goToPage.emit(page.index)"
+    >
+      <span class="dot-indicator" aria-hidden="true"></span>
+      <span class="dot-label">{{ page.title }}</span>
+    </a>
   }
 </nav>

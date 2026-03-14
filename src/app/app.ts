@@ -47,6 +47,7 @@ export class App implements OnInit, OnDestroy, AfterViewInit {
   private readonly autoRefreshMs = 90_000;
   private readonly pageCount = 5;
   private readonly wheelThreshold = 85;
+  private readonly wheelLockMs = 950;
   private clockIntervalId?: ReturnType<typeof setInterval>;
   private countdownIntervalId?: ReturnType<typeof setInterval>;
   private autoRefreshIntervalId?: ReturnType<typeof setInterval>;
@@ -56,11 +57,11 @@ export class App implements OnInit, OnDestroy, AfterViewInit {
   private animationFrameId?: number;
 
   protected readonly pages = [
-    { index: 0, id: 'home' },
-    { index: 1, id: 'about' },
-    { index: 2, id: 'projects' },
-    { index: 3, id: 'skills' },
-    { index: 4, id: 'ai-lab' },
+    { index: 0, id: 'home', title: 'Home' },
+    { index: 1, id: 'about', title: 'About' },
+    { index: 2, id: 'projects', title: 'Projects' },
+    { index: 3, id: 'skills', title: 'Stack' },
+    { index: 4, id: 'ai-lab', title: 'AI Lab' },
   ];
 
   protected readonly currentUser = signal(this.getInitialUser());
@@ -310,6 +311,7 @@ export class App implements OnInit, OnDestroy, AfterViewInit {
   });
 
   ngOnInit(): void {
+    this.syncPageFromHash();
     this.addAiLine('AI', 'Neural assistant online. Use: set user <github-username>.');
     this.updateClock();
     this.updateRefreshCountdown();
@@ -351,6 +353,7 @@ export class App implements OnInit, OnDestroy, AfterViewInit {
 
     this.isAnimating.set(true);
     this.activePage.set(index);
+    this.updateLocationHash(index);
 
     setTimeout(() => this.isAnimating.set(false), 920);
   }
@@ -380,6 +383,10 @@ export class App implements OnInit, OnDestroy, AfterViewInit {
 
   @HostListener('window:wheel', ['$event'])
   protected onWheel(event: WheelEvent): void {
+    if (event.defaultPrevented || this.shouldPreserveInnerScroll(event)) {
+      return;
+    }
+
     const now = Date.now();
     if (now < this.wheelLockedUntil) {
       return;
@@ -402,7 +409,7 @@ export class App implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.wheelAccumulator = 0;
-    this.wheelLockedUntil = now + 950;
+    this.wheelLockedUntil = now + this.wheelLockMs;
   }
 
   @HostListener('window:keydown', ['$event'])
@@ -448,6 +455,11 @@ export class App implements OnInit, OnDestroy, AfterViewInit {
     } else {
       this.previousPage();
     }
+  }
+
+  @HostListener('window:hashchange')
+  protected onHashChange(): void {
+    this.syncPageFromHash();
   }
 
   protected formatDateTime(rawDate: string): string {
@@ -522,6 +534,83 @@ export class App implements OnInit, OnDestroy, AfterViewInit {
     }
 
     return `https://${urlOrText}`;
+  }
+
+  private shouldPreserveInnerScroll(event: WheelEvent): boolean {
+    const target = event.target;
+    if (!(target instanceof Element)) {
+      return false;
+    }
+
+    return this.hasScrollableAncestor(target, event.deltaY);
+  }
+
+  private hasScrollableAncestor(start: Element, deltaY: number): boolean {
+    let current: HTMLElement | null = start instanceof HTMLElement ? start : start.parentElement;
+
+    while (current && current !== document.body) {
+      if (this.canScrollVertically(current, deltaY)) {
+        return true;
+      }
+
+      current = current.parentElement;
+    }
+
+    return false;
+  }
+
+  private canScrollVertically(element: HTMLElement, deltaY: number): boolean {
+    const styles = window.getComputedStyle(element);
+    const overflowY = styles.overflowY;
+    const isScrollable = (overflowY === 'auto' || overflowY === 'scroll' || overflowY === 'overlay')
+      && element.scrollHeight > element.clientHeight + 1;
+
+    if (!isScrollable) {
+      return false;
+    }
+
+    if (deltaY > 0) {
+      return element.scrollTop + element.clientHeight < element.scrollHeight - 1;
+    }
+
+    if (deltaY < 0) {
+      return element.scrollTop > 1;
+    }
+
+    return false;
+  }
+
+  private syncPageFromHash(): void {
+    const index = this.getPageIndexFromHash(window.location.hash);
+    if (index === null || index === this.activePage()) {
+      return;
+    }
+
+    this.activePage.set(index);
+  }
+
+  private getPageIndexFromHash(hash: string): number | null {
+    const normalized = hash.replace(/^#/, '').trim().toLowerCase();
+    if (!normalized) {
+      return null;
+    }
+
+    const index = this.pages.findIndex((page) => page.id.toLowerCase() === normalized);
+    return index >= 0 ? index : null;
+  }
+
+  private updateLocationHash(index: number): void {
+    const page = this.pages[index];
+    if (!page) {
+      return;
+    }
+
+    const nextHash = `#${page.id}`;
+    if (window.location.hash === nextHash) {
+      return;
+    }
+
+    window.history.replaceState(null, '', nextHash);
   }
 
   private getInitialUser(): string {

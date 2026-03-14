@@ -1,180 +1,189 @@
-# VibeFolio — AI Futuristic GitHub Portfolio
+<div align="center">
 
-## Migration Status (March 2026)
+# VibeFolio
 
-This project is being migrated to Angular 21 + Tailwind + Sass.
+### ✨ AI × 3D × Futurism for live GitHub profiles
 
-- Active app source: `src/`
-- Angular entrypoint: `src/index.html`
-- Angular runtime logic: `src/app/app.ts`
-- Angular styles entrypoint: `src/styles.scss`
-- Component styles: `src/app/components/**/**/*.component.scss`
+![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Sass](https://img.shields.io/badge/Sass-Styled-CC6699?style=for-the-badge&logo=sass&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)
+![Live GitHub Data](https://img.shields.io/badge/Data-GitHub%20REST%20API-181717?style=for-the-badge&logo=github&logoColor=white)
 
-### Run Angular App
+Live GitHub portfolio built with Angular 21. VibeFolio turns public GitHub data into a cinematic multi-page interface with page flips, glass panels, animated metrics, and a lightweight AI-style command surface. 🚀
 
-```bash
-npm install
-npm start
+<img src="./vibe-folio-hero.png" alt="VibeFolio hero screen preview" width="100%" />
+
+</div>
+
+---
+
+## 📡 Signal Snapshot
+
+VibeFolio is not a static portfolio template. It behaves like a live profile console.
+
+- Load any public GitHub username from the hero input or command console 👤
+- Render About, Projects, Skills, and AI Lab from live GitHub data 🌐
+- Navigate with wheel, keys, touch, side links, query params, and `#section` fragments 🧭
+- Preserve the last selected username in local storage 💾
+- Keep the interface style consistent across different GitHub profiles 🎛️
+
+```text
+Boot target: http://localhost:4200/?user=Ketan-K#projects
 ```
 
-## Deploy to GitHub Pages (GitHub Actions)
+## 🗺️ Experience Map
 
-This repo now includes a workflow at `.github/workflows/deploy-pages.yml`.
+### 🏠 Home
 
-### One-time GitHub setup
+Launch page with username loading, live sync state, GitHub CTA, and fast entry into the portfolio flow.
 
-1. Open repository **Settings** → **Pages**.
-2. Under **Build and deployment**, set **Source** to **GitHub Actions**.
-3. Ensure your default deployment branch is `main`.
+### 🧬 About
 
-### Deploy
+Profile intelligence panel with metadata, social links, and animated stat counters.
 
-- Push to `main` to trigger deployment automatically.
-- Or run it manually from **Actions** → **Build and Deploy to GitHub Pages** → **Run workflow**.
+### 🛰️ Projects
 
-### Base URL behavior
+Repository analytics, horizontally scrollable featured repository rail, pinned-style cards, and recent public GitHub activity.
 
-- If repository is `username.github.io`, workflow builds with base href `/`.
-- Otherwise, workflow builds with base href `/<repo-name>/`.
+### ⚡ Skills
 
-Welcome to a cyberpunk-style portfolio that feels like a sci-fi interface and runs on **live GitHub data**.
+Animated stack breakdown with language share bars and a generated topic cloud from repository metadata.
 
-This site is built for `Ketan-K`, designed to host on **GitHub Pages**, and crafted with:
-- no-scroll full-screen navigation,
-- 3D page-flip transitions,
-- AI-style command console,
-- dynamic profile/project/skills rendering from GitHub API.
+### 🤖 AI Lab
 
-## Make it yours
+Local command console for profile switching, section jumps, summarization, and contact shortcuts.
 
-You can directly customize this for your own use with your GitHub profile.
-If you like this project, please mark a star and fork it.
+## 🧭 Navigation Modes
 
----
+The app supports multiple navigation paths so the experience feels like an interface, not a document.
 
-## Why this is cool
+- Mouse wheel page flips with inner-scroll protection for long panels 🖱️
+- Keyboard navigation with arrow keys, Page Up, Page Down, and Space ⌨️
+- Touch swipe navigation 📱
+- Side navigation with labeled hash links 🔗
+- Deep links via URL fragments:
+	- `#home`
+	- `#about`
+	- `#projects`
+	- `#skills`
+	- `#ai-lab`
 
-Instead of hardcoded content, this portfolio behaves like a live profile engine:
+## 🧠 Command Surface
 
-- Load **any GitHub username** instantly
-- Pull profile stats + repositories in real time
-- Auto-generate tech stack from languages/topics
-- Keep the same futuristic visual identity for every profile
+The AI Lab is a local command interpreter. It does not call an LLM.
 
-It feels like a personal website, but works like a smart dashboard.
+Supported commands:
 
----
-
-## Repository + Hosting Target
-
-- GitHub account: `Ketan-K`
-- Repository: `Ketan-K`
-- Preferred domain target: `https://ketan-k.github.io`
-
----
-
-## Feature Highlights
-
-- Fullscreen **no-scroll UX**
-- 3D **flipbook-style page transitions**
-- Keyboard/mouse/touch navigation
-- AI Console commands (e.g. `set user torvalds`)
-- Dynamic sections:
-  - Hero + About from profile metadata
-  - Live repository ranking (stars + recency)
-  - Repo analytics (total stars + forks)
-  - Pinned-style featured repositories (public-data mode)
-  - Language share visualization
-  - Dynamic stack cloud (languages + topics)
-  - Smart contact action (email if public, otherwise GitHub)
-
----
-
-## Tech Stack
-
-- Angular 21 (standalone components)
-- TypeScript
-- Sass + Tailwind CSS
-- GitHub REST API
-
----
-
-## Project Structure
-
-- `src/index.html` — Angular document shell
-- `src/app/` — standalone components, runtime logic, data service
-- `src/styles.scss` — global tokens + layout/motion foundation
-- `src/app/components/**/**/*.component.scss` — per-component styles
-- `README.md` — docs
-- `LICENSE` — MIT license
-
----
-
-## Run Locally
-
-From project root:
-
-```bash
-npm install
-npm start
-```
-
-Open in browser:
-
-- `http://localhost:4200/`
-
----
-
-## How to Customize Live
-
-### 1) Username Input (UI)
-
-On the first page, enter a GitHub username and click **Load Profile**.
-
-### 2) AI Console Commands
-
-Try commands like:
-
-- `set user Ketan-K`
 - `set user octocat`
+- `load user torvalds`
+- `switch user Ketan-K`
+- `go to home`
+- `go to about`
 - `go to projects`
+- `go to skills`
+- `go to ai`
 - `summarize profile`
 - `open github`
+- `contact`
+- `email`
 
-### 3) URL Parameter
+Example flow:
 
-You can directly open with a profile:
+```text
+> set user torvalds
+> go to projects
+> summarize profile
+```
 
-- `http://localhost:4200/?user=Ketan-K`
-- `http://localhost:4200/?user=torvalds`
+## 🎨 Visual Language
 
-The last loaded username is saved in local storage.
+The app styling is built around the same cues throughout the experience:
 
----
+- dark radial space backdrop 🌌
+- soft scanlines and drifting aura layers 🌫️
+- glass panels with animated conic highlights 💠
+- Orbitron-led display typography 🔠
+- cyan and violet signal accents 🔵
+- animated counters, bars, and panel transitions ✨
 
-## GitHub Pages Deployment (for Ketan-K)
+## 🛠️ Stack
 
-1. Push all files to repository `Ketan-K`.
-2. Open `Settings` → `Pages`.
-3. Under source, select **Deploy from a branch**.
-4. Choose branch `main` and folder `/ (root)`.
-5. Save and wait for build.
+- Angular 21 standalone components
+- TypeScript
+- Sass
+- Tailwind CSS 4
+- GitHub REST API
 
-Live URL patterns:
+## 🚀 Boot Sequence
 
-- Repo project page: `https://ketan-k.github.io/Ketan-K/`
-- User site (if repo is `ketan-k.github.io`): `https://ketan-k.github.io/`
+Install and run locally:
 
----
+```bash
+npm install
+npm start
+```
 
-## Important Notes
+Default local address:
 
-- GitHub API rate limits apply for unauthenticated requests.
-- If sync fails, retry after a short cooldown.
-- Some fields (like email) depend on what is public on GitHub profile.
+```text
+http://localhost:4200/
+```
 
----
+Other useful commands:
 
-## License
+```bash
+npm run build
+npm run test
+npm run watch
+```
 
-Released under the **MIT License**. See `LICENSE`.
+## 👤 Profile Resolution Order
+
+On startup, the active GitHub user is resolved in this order:
+
+1. `?user=<github-username>` query parameter
+2. last saved user from local storage
+3. fallback default: `Ketan-K`
+
+When a new username is loaded, the app updates the `user` query parameter and saves it locally for the next visit.
+
+## 🧱 Project Layout
+
+- `src/index.html` Angular document shell
+- `src/app/app.ts` runtime state, navigation, AI commands, and GitHub sync
+- `src/app/app.html` section composition
+- `src/app/github.service.ts` GitHub API access layer
+- `src/app/components/` standalone page and UI components
+- `src/app/directives/animate-number.directive.ts` animated numeric display directive
+- `src/styles.scss` design tokens, layout system, and global motion
+- `.github/workflows/deploy-pages.yml` GitHub Pages deployment workflow
+
+## 🚢 Deployment Uplink
+
+This repository already includes a GitHub Actions workflow for GitHub Pages.
+
+One-time setup:
+
+1. Open repository Settings > Pages.
+2. Set Source to GitHub Actions.
+3. Ensure the deployment runs from the `main` branch workflow.
+
+Deployment behavior:
+
+- Push to `main` to deploy automatically
+- Or trigger the workflow manually from the Actions tab
+- The workflow computes the correct `base-href`
+- Repositories ending with `.github.io` build with `/`
+- Other repositories build with `/<repo-name>/`
+
+## 📌 Operational Notes
+
+- GitHub API rate limits apply because requests are unauthenticated
+- Public email, blog, and social links only appear when exposed on the GitHub profile
+- Skills and featured repository views depend on GitHub repository metadata
+
+## 📄 License
+
+Released under the MIT License. See `LICENSE`.

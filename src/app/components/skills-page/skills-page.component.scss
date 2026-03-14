@@ -36,6 +36,7 @@
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(89, 227, 255, 0.9), rgba(157, 107, 255, 0.9));
   background-size: 200% 100%;
+  width: 0;
   transition: width 650ms var(--ease-spring);
   animation: chartFlow 2.8s linear infinite;
 }

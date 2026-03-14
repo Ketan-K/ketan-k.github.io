@@ -117,11 +117,25 @@ app-root {
 .page-inner {
 	width: min(980px, 92vw);
 	max-height: 86vh;
-	overflow: hidden;
+	overflow-x: hidden;
+	overflow-y: auto;
 	border-radius: 1.25rem;
 	padding: clamp(1.4rem, 2vw, 2.3rem);
 	backdrop-filter: blur(14px);
 	transform: translateZ(60px);
+}
+
+.page-inner::-webkit-scrollbar {
+	width: 8px;
+}
+
+.page-inner::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.04);
+}
+
+.page-inner::-webkit-scrollbar-thumb {
+	background: rgba(89, 227, 255, 0.28);
+	border-radius: 999px;
 }
 
 .glass {

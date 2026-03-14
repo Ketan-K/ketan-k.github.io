@@ -32,9 +32,27 @@
       </article>
     </div>
     <p class="muted" id="repo-subtitle">{{ repoSubtitle() }}</p>
-    <div id="repo-list" class="repo-list" aria-live="polite">
+    <div class="section-heading-row">
+      <h3 class="sub-heading side-scroll-title">Featured Repository Rail</h3>
+      <div class="repo-controls" aria-label="Featured repository controls">
+        <button type="button" class="repo-control" [disabled]="!canScrollReposLeft()" (click)="scrollRepos('left')">
+          Prev
+        </button>
+        <button type="button" class="repo-control" [disabled]="!canScrollReposRight()" (click)="scrollRepos('right')">
+          Next
+        </button>
+      </div>
+    </div>
+    <div
+      #repoRail
+      id="repo-list"
+      class="repo-list"
+      aria-live="polite"
+      (scroll)="onRepoScroll()"
+      (wheel)="onRepoWheel($event)"
+    >
       @if (!featuredRepos().length) {
-        <p class="muted">Repository feed is empty.</p>
+        <p class="muted repo-empty">Repository feed is empty.</p>
       } @else {
         @for (repo of featuredRepos(); track repo.html_url) {
           <article class="repo-card">
