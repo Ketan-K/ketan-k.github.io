@@ -3,6 +3,7 @@ import { Component, input, output } from '@angular/core';
 export interface DotPage {
   index: number;
   id: string;
+  title: string;
 }
 
 @Component({

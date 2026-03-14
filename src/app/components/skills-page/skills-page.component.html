@@ -16,7 +16,13 @@
         @for (row of languageRows(); track row.language) {
           <div class="lang-row">
             <span class="lang-name">{{ row.language }}</span>
-            <div class="lang-track"><div class="lang-fill" [style.width.%]="row.percentage"></div></div>
+            <div class="lang-track">
+              <div
+                class="lang-fill"
+                [style.width.%]="isActive() ? row.percentage : 0"
+                [style.transitionDelay.ms]="$index * 90"
+              ></div>
+            </div>
             <span class="lang-value">
               <span
                 [appAnimateNumber]="row.percentage"

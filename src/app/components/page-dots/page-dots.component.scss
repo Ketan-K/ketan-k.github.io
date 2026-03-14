@@ -6,24 +6,74 @@
   z-index: 5;
   display: grid;
   gap: 0.6rem;
+  justify-items: end;
 }
 
 .dot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.65rem;
+  padding: 0.5rem 0.7rem;
+  min-height: 40px;
+  width: 144px;
+  border-radius: 999px;
+  border: 1px solid rgba(137, 178, 255, 0.65);
+  background: rgba(8, 16, 34, 0.62);
+  cursor: pointer;
+  color: #dbe8ff;
+  backdrop-filter: blur(10px);
+  transition: transform var(--duration-fast) var(--ease-standard), background var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard), box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.dot-indicator {
   width: 12px;
   height: 12px;
   border-radius: 999px;
   border: 1px solid rgba(137, 178, 255, 0.65);
   background: rgba(115, 162, 255, 0.2);
-  cursor: pointer;
+  flex: 0 0 auto;
+}
+
+.dot-label {
+  flex: 1 1 auto;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-align: left;
 }
 
 .dot.active {
+  background: rgba(89, 227, 255, 0.14);
+  border-color: rgba(89, 227, 255, 0.65);
+  box-shadow: 0 0 20px rgba(89, 227, 255, 0.28);
+}
+
+.dot.active .dot-indicator {
   background: var(--primary);
   box-shadow: 0 0 20px rgba(89, 227, 255, 0.9);
+}
+
+.dot:hover {
+  transform: translateX(-4px);
+  border-color: rgba(89, 227, 255, 0.58);
 }
 
 @media (max-width: 760px) {
   .dots {
     right: 0.55rem;
+    gap: 0.45rem;
+  }
+
+  .dot {
+    padding: 0.45rem 0.55rem;
+    width: auto;
+  }
+
+  .dot-label {
+    display: none;
   }
 }

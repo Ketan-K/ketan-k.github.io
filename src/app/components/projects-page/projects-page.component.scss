@@ -1,7 +1,29 @@
 .repo-list {
   display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 34vw);
   gap: 0.8rem;
   margin: 1rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.15rem 0.1rem 0.8rem;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(89, 227, 255, 0.45) rgba(255, 255, 255, 0.06);
+}
+
+.repo-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.repo-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 999px;
+}
+
+.repo-list::-webkit-scrollbar-thumb {
+  background: rgba(89, 227, 255, 0.45);
+  border-radius: 999px;
 }
 
 .analytics-grid {
@@ -36,6 +58,39 @@
 .sub-heading {
   margin: 1rem 0 0.3rem;
   font-size: 1.05rem;
+}
+
+.section-heading-row {
+  margin-top: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.side-scroll-title {
+  margin: 0;
+}
+
+.repo-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.repo-control {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.8rem;
+}
+
+.repo-control:disabled {
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
+
+.repo-empty {
+  margin: 0;
 }
 
 .pinned-list {
@@ -95,6 +150,8 @@
   border: 1px solid rgba(119, 169, 255, 0.35);
   border-radius: 0.9rem;
   padding: 0.9rem;
+  min-height: 100%;
+  scroll-snap-align: start;
 }
 
 .repo-card h3 {
@@ -140,4 +197,15 @@
   transform: translateY(-2px);
   background: rgba(89, 227, 255, 0.18);
   box-shadow: 0 0 22px rgba(89, 227, 255, 0.26);
+}
+
+@media (max-width: 760px) {
+  .repo-list {
+    grid-auto-columns: minmax(82vw, 82vw);
+  }
+
+  .section-heading-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
