@@ -30,9 +30,12 @@ export interface SystemPrincipleNode {
   id: string;
   label: string;
   note?: string;
+  isFinal?: boolean;
 }
 
 export interface SystemPrincipleFlow {
+  type?: 'pipeline' | 'tree' | 'decision';
+  label?: string;
   nodes: SystemPrincipleNode[];
   edges: ([string, string] | [string, string, string])[];
 }

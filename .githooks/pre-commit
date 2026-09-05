@@ -5,7 +5,6 @@
 # 1. Accidental Secrets / Token Detection in Staged Diffs
 # 2. OS Artifact & Environment File Hygiene (.DS_Store, .env)
 # 3. Strict TypeScript Compilation (tsc --noEmit)
-# 4. Automatic README.md Project Structure Synchronization
 #
 
 set -e

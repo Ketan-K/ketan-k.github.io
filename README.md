@@ -25,6 +25,9 @@ npm run build
 
 # Preview production build locally
 npm run preview
+
+# Synchronize repository structure tree in README (explicit command)
+npm run sync:readme
 ```
 
 ## Tech Stack

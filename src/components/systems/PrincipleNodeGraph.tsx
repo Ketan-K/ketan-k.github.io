@@ -12,29 +12,37 @@ export const PrincipleNodeGraph: React.FC<PrincipleNodeGraphProps> = ({ flow }) 
     return null;
   }
 
-  // Detect branching vs sequential flow
+  // Detect graph topology and branching
   const outDegreeMap = new Map<string, string[]>();
+  const edgeAnnotationMap = new Map<string, string>();
+
   flow.edges.forEach((edge) => {
-    const [from, to] = edge;
+    const [from, to, annotation] = edge;
     const targets = outDegreeMap.get(from) || [];
     targets.push(to);
     outDegreeMap.set(from, targets);
+    if (annotation) {
+      edgeAnnotationMap.set(`${from}->${to}`, annotation);
+    }
   });
 
   const rootId = flow.nodes[0]?.id;
   const rootOutgoing = outDegreeMap.get(rootId) || [];
-  const isBranchingTree = rootOutgoing.length > 1;
+  const isBranchingTree = flow.type === 'tree' || (flow.type === undefined && rootOutgoing.length > 1);
+  const isDecision = flow.type === 'decision' || (flow.type === undefined && (flow.nodes.length === 2 && edgeAnnotationMap.size > 0));
 
   if (isBranchingTree) {
-    const rootNode = flow.nodes.find((n) => n.id === rootId);
-    const branchNodes = rootOutgoing
-      .map((toId) => flow.nodes.find((n) => n.id === toId))
-      .filter(Boolean);
+    const rootNode = flow.nodes.find((n) => n.id === rootId) || flow.nodes[0];
+    const branchNodes = rootOutgoing.length > 0
+      ? rootOutgoing.map((toId) => flow.nodes.find((n) => n.id === toId)).filter(Boolean)
+      : flow.nodes.slice(1);
+
+    const cardLabel = flow.label || 'CLASSIFICATION TOPOLOGY';
 
     return (
       <div className="flow-card">
         <div className="flow-card-header font-mono">
-          <span className="flow-card-label">CLASSIFICATION TOPOLOGY</span>
+          <span className="flow-card-label">{cardLabel}</span>
           <span className="flow-card-meta">{branchNodes.length} Branches</span>
         </div>
 
@@ -76,29 +84,31 @@ export const PrincipleNodeGraph: React.FC<PrincipleNodeGraphProps> = ({ flow }) 
     );
   }
 
-  // Sequential pipeline layout
-  const isDecision = flow.nodes.length === 2 && flow.edges.some((e) => Boolean(e[2]));
+  // Sequential or Decision Pipeline layout
+  const defaultLabel = isDecision ? 'DECISION GATE' : 'EXECUTION PIPELINE';
+  const cardLabel = flow.label || defaultLabel;
 
   return (
     <div className="flow-card">
       <div className="flow-card-header font-mono">
-        <span className="flow-card-label">{isDecision ? 'DECISION GATE' : 'EXECUTION PIPELINE'}</span>
+        <span className="flow-card-label">{cardLabel}</span>
         <span className="flow-card-meta">{flow.nodes.length} Stages</span>
       </div>
 
       <div className="flow-pipeline-grid">
         {flow.nodes.map((node, index) => {
           const isLast = index === flow.nodes.length - 1;
-          const edge = flow.edges.find(([from]) => from === node.id);
-          const edgeLabel = edge && edge[2];
+          const isFinal = node.isFinal ?? isLast;
+          const nextNode = flow.nodes[index + 1];
+          const edgeAnnotation = nextNode ? edgeAnnotationMap.get(`${node.id}->${nextNode.id}`) : undefined;
           const stepNumber = String(index + 1).padStart(2, '0');
 
           return (
             <div key={node.id} className="flow-step-wrapper">
-              <div className={`flow-node-box ${isLast ? 'flow-node-box-final' : ''}`}>
+              <div className={`flow-node-box ${isFinal ? 'flow-node-box-final' : ''}`}>
                 <div className="flow-node-header font-mono">
                   <span className="flow-node-index font-mono">{stepNumber}</span>
-                  {isLast && <span className="flow-node-status font-mono">STABLE</span>}
+                  {isFinal && <span className="flow-node-status font-mono">STABLE</span>}
                 </div>
                 <div className="flow-node-body">
                   <span className="flow-node-text font-mono">{node.label}</span>
@@ -113,8 +123,8 @@ export const PrincipleNodeGraph: React.FC<PrincipleNodeGraphProps> = ({ flow }) 
                     <ArrowRight size={14} className="flow-arrow-h" />
                     <ArrowDown size={14} className="flow-arrow-v" />
                   </div>
-                  {edgeLabel && (
-                    <span className="flow-connector-annotation font-mono">{edgeLabel}</span>
+                  {edgeAnnotation && (
+                    <span className="flow-connector-annotation font-mono">{edgeAnnotation}</span>
                   )}
                 </div>
               )}
