@@ -128,7 +128,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  text-decoration: none;
   transition: all var(--transition-fast);
   position: relative;
 }
@@ -143,6 +142,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .repo-title-row {
@@ -150,6 +150,7 @@
   align-items: center;
   gap: 0.5rem;
   min-width: 0;
+  flex: 1;
 }
 
 .repo-icon {
@@ -157,29 +158,49 @@
   flex-shrink: 0;
 }
 
-.repo-name {
+.repo-name-link {
   font-size: 0.875rem;
   font-weight: 700;
   color: var(--text-primary);
+  text-decoration: none;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  transition: color var(--transition-fast);
+}
+
+.repo-name-link:hover {
+  color: var(--accent-cyan, #06b6d4);
+  text-decoration: underline;
 }
 
 .repo-meta-badges {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex-shrink: 0;
 }
 
-.repo-link-icon {
-  color: var(--text-dim);
-  transition: color var(--transition-fast);
+.repo-live-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  color: var(--accent-emerald, #10b981);
 }
 
-.repo-card:hover .repo-link-icon {
-  color: var(--accent-cyan, #06b6d4);
+.live-demo-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--accent-emerald, #10b981);
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.8);
+  display: inline-block;
 }
 
 .repo-desc {
@@ -206,6 +227,13 @@
   gap: 0.5rem;
 }
 
+.repo-stats-col {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
 .repo-lang-row {
   display: flex;
   align-items: center;
@@ -213,8 +241,8 @@
 }
 
 .lang-color-dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   display: inline-block;
   flex-shrink: 0;
@@ -227,14 +255,62 @@
 .repo-metrics {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   color: var(--text-muted);
 }
 
 .repo-metric-item {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
+}
+
+.repo-actions-col {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-left: auto;
+}
+
+.repo-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.71875rem;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.repo-code-link {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.repo-code-link:hover {
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.repo-demo-link {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: var(--accent-cyan, #06b6d4);
+}
+
+.repo-demo-link:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: var(--accent-cyan, #06b6d4);
+  color: #fff;
+}
+
+.action-arrow {
+  opacity: 0.75;
 }
 
 .repos-cta {
@@ -316,6 +392,15 @@
   .repos-header-controls {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .repo-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .repo-actions-col {
+    margin-left: 0;
+    width: 100%;
+    justify-content: flex-start;
   }
   .repos-cta {
     flex-direction: column;

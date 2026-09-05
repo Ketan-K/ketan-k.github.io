@@ -8,10 +8,24 @@ export const selectedRepos: GitHubRepo[] = [
     languageColor: '#f1e05a',
     status: 'Active',
     url: 'https://github.com/Ketan-K/segmentation-lab',
+    homepage: 'https://segmentation-lab.onrender.com/',
     tags: ['WebRTC', 'AI Segmentation', 'MediaPipe', 'SAM2', 'WebGL'],
     stars: 0,
     forks: 0,
     updatedAt: 'Apr 2025'
+  },
+  {
+    name: 'webcam-preview',
+    description: 'Zero-dependency browser utility for testing and inspecting webcam feeds, media constraints, resolution modes, and digital zoom.',
+    language: 'HTML',
+    languageColor: '#e34c26',
+    status: 'Active',
+    url: 'https://github.com/Ketan-K/webcam-preview',
+    homepage: 'https://ketan-k.github.io/webcam-preview/',
+    tags: ['WebRTC', 'MediaStream', 'Camera', 'HTML5', 'Browser Utility'],
+    stars: 0,
+    forks: 0,
+    updatedAt: 'Jan 2026'
   },
   {
     name: 'unified-collaboration-platform',
@@ -44,10 +58,36 @@ export const selectedRepos: GitHubRepo[] = [
     languageColor: '#f1e05a',
     status: 'Active',
     url: 'https://github.com/Ketan-K/snap-pdf',
-    tags: ['PDF.js', 'Canvas', 'Client-side', 'Privacy-first', 'Tools'],
+    homepage: 'https://ketan-k.github.io/snap-pdf/',
+    tags: ['PDF.js', 'Canvas', 'Client-side', 'Privacy-first', 'Developer Tools'],
     stars: 0,
     forks: 0,
     updatedAt: 'Jun 2026'
+  },
+  {
+    name: 'keep-awake',
+    description: 'Lightweight, configurable background utility that prevents OS sleep during long builds and downloads via subtle mouse simulation.',
+    language: 'HTML',
+    languageColor: '#e34c26',
+    status: 'Active',
+    url: 'https://github.com/Ketan-K/keep-awake',
+    homepage: 'https://ketan-k.github.io/keep-awake/',
+    tags: ['Utility', 'Keep Awake', 'Windows Tools', 'Productivity', 'Automation'],
+    stars: 0,
+    forks: 0,
+    updatedAt: 'Jan 2026'
+  },
+  {
+    name: 'mern-interview-prep',
+    description: 'Curated MERN stack, Node.js event loop, React internals, and backend system design interview playbook with real-world patterns.',
+    language: 'JavaScript',
+    languageColor: '#f1e05a',
+    status: 'Maintained',
+    url: 'https://github.com/Ketan-K/mern-interview-prep',
+    tags: ['MERN', 'Node.js', 'React', 'System Design', 'Interview Prep'],
+    stars: 0,
+    forks: 0,
+    updatedAt: 'Feb 2026'
   },
   {
     name: 'ParallelComputing',
@@ -72,42 +112,6 @@ export const selectedRepos: GitHubRepo[] = [
     stars: 0,
     forks: 0,
     updatedAt: 'Jan 2021'
-  },
-  {
-    name: 'webcam-preview',
-    description: 'Zero-dependency browser utility for testing and inspecting webcam feeds, media constraints, resolution modes, and digital zoom.',
-    language: 'HTML',
-    languageColor: '#e34c26',
-    status: 'Active',
-    url: 'https://github.com/Ketan-K/webcam-preview',
-    tags: ['WebRTC', 'MediaStream', 'Camera', 'HTML5', 'Browser Utility'],
-    stars: 0,
-    forks: 0,
-    updatedAt: 'Jan 2026'
-  },
-  {
-    name: 'keep-awake',
-    description: 'Lightweight, configurable background utility that prevents OS sleep during long builds and downloads via subtle mouse simulation.',
-    language: 'HTML',
-    languageColor: '#e34c26',
-    status: 'Active',
-    url: 'https://github.com/Ketan-K/keep-awake',
-    tags: ['Utility', 'Keep Awake', 'Windows Tools', 'Productivity', 'Automation'],
-    stars: 0,
-    forks: 0,
-    updatedAt: 'Jan 2026'
-  },
-  {
-    name: 'mern-interview-prep',
-    description: 'Curated MERN stack, Node.js event loop, React internals, and backend system design interview playbook with real-world patterns.',
-    language: 'JavaScript',
-    languageColor: '#f1e05a',
-    status: 'Maintained',
-    url: 'https://github.com/Ketan-K/mern-interview-prep',
-    tags: ['MERN', 'Node.js', 'React', 'System Design', 'Interview Prep'],
-    stars: 0,
-    forks: 0,
-    updatedAt: 'Feb 2026'
   },
   {
     name: 'LinuxBootWinISO',

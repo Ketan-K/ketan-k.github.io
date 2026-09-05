@@ -6,6 +6,7 @@ import { aiExperiments } from '../content/ailab';
 import { engineeringNotes } from '../content/writing';
 import { Project, ExperienceItem, AiExperiment, EngineeringNote } from '../types';
 import { TechBadge } from '../components/common/TechBadge';
+import { SelectedRepos } from '../components/github/SelectedRepos';
 import './pages.css';
 
 export const HomePage: React.FC = () => {
@@ -111,6 +112,16 @@ export const HomePage: React.FC = () => {
           ))}
         </div>
       </section>
+
+      <hr className="editorial-divider" />
+
+      {/* Open Source & Working Demos */}
+      <SelectedRepos
+        defaultLimit={4}
+        showControls={true}
+        title="Public Repositories & Working Demos"
+        subtitle="Curated open source repositories, real-time WebRTC tools, and systems benchmarks with verified live deployments."
+      />
 
       <hr className="editorial-divider" />
 

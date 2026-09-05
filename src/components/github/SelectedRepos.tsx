@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGitHubRepos } from '../../hooks/useGitHubRepos';
-import { ExternalLink, Code2, RefreshCw, Star, GitFork, ChevronDown, ChevronUp } from 'lucide-react';
+import { ExternalLink, Code2, RefreshCw, Star, GitFork, ChevronDown, ChevronUp, Globe } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { TechBadge } from '../common/TechBadge';
 import './Repos.css';
@@ -14,9 +14,9 @@ interface SelectedReposProps {
 
 export const SelectedRepos: React.FC<SelectedReposProps> = ({
   showControls = true,
-  defaultLimit = 4,
-  title = 'Public Repositories',
-  subtitle = 'Real-time open source repositories, developer tools, and WebRTC experiments synchronized from GitHub.'
+  defaultLimit = 6,
+  title = 'Public Repositories & Working Demos',
+  subtitle = 'Curated open source repositories, real-time WebRTC tools, and systems benchmarks. Verified live deployments linked directly.'
 }) => {
   const [showAll, setShowAll] = useState<boolean>(false);
 
@@ -42,7 +42,7 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
         <div className="section-header">
           <div className="section-label font-mono">
             <Code2 size={14} />
-            <span>OPEN SOURCE & CODE</span>
+            <span>04 / OPEN SOURCE & LIVE DEMOS</span>
           </div>
           <h2 className="section-title">{title}</h2>
           <p className="section-subtitle">{subtitle}</p>
@@ -53,7 +53,7 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
             <div className="repos-api-status">
               <span className={isLive ? 'live-pulse-dot' : 'static-pulse-dot'} />
               <span>
-                {isLive ? 'Live GitHub Sync (Ketan-K)' : 'Cached / Static Mode'}
+                {isLive ? 'Live GitHub Sync (Ketan-K)' : 'Cached / Static Snapshot'}
                 {lastFetched && ` · ${lastFetched.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}
               </span>
             </div>
@@ -63,7 +63,7 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
               className="repos-refresh-btn"
               onClick={refetch}
               disabled={loading}
-              title="Sync latest repos from GitHub API"
+              title="Sync latest repository telemetry from GitHub REST API"
             >
               <RefreshCw size={12} className={loading ? 'spinning' : ''} />
               <span>{loading ? 'Fetching API...' : 'Sync from GitHub'}</span>
@@ -81,14 +81,14 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
                 setSelectedLanguage('all');
               }}
             >
-              All Repos ({repos.length})
+              All Curated ({repos.length})
             </button>
             <button
               type="button"
-              className={`repos-filter-chip ${filterType === 'sources' ? 'active' : ''}`}
-              onClick={() => setFilterType(filterType === 'sources' ? 'all' : 'sources')}
+              className={`repos-filter-chip ${filterType === 'featured' ? 'active' : ''}`}
+              onClick={() => setFilterType(filterType === 'featured' ? 'all' : 'featured')}
             >
-              Original Source
+              Verified Live Demos
             </button>
 
             {languages
@@ -108,7 +108,7 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
 
         {loading && repos.length === 0 ? (
           <div className="repos-grid">
-            {[1, 2, 3, 4].map((i) => (
+            {[1, 2, 3, 4, 5, 6].map((i) => (
               <div key={i} className="repo-card-skeleton">
                 <div className="skeleton-line skeleton-title" />
                 <div className="skeleton-line skeleton-desc-1" />
@@ -120,22 +120,28 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
         ) : (
           <div className="repos-grid">
             {displayedRepos.map((repo) => (
-              <a
-                key={repo.name}
-                href={repo.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="repo-card"
-              >
+              <div key={repo.name} className="repo-card">
                 <div className="repo-card-top font-mono">
                   <div className="repo-title-row">
                     <Code2 size={16} className="repo-icon" />
-                    <span className="repo-name" title={repo.name}>
+                    <a
+                      href={repo.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="repo-name-link"
+                      title={`View ${repo.name} on GitHub`}
+                    >
                       {repo.name}
-                    </span>
+                    </a>
                   </div>
                   <div className="repo-meta-badges">
-                    <ExternalLink size={14} className="repo-link-icon" />
+                    {repo.homepage && (
+                      <span className="repo-live-indicator" title="Verified public live deployment available">
+                        <span className="live-demo-dot" />
+                        <span>Live Demo</span>
+                      </span>
+                    )}
+                    <span className="badge">{repo.status}</span>
                   </div>
                 </div>
 
@@ -150,31 +156,59 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
                 )}
 
                 <div className="repo-footer font-mono">
-                  <div className="repo-lang-row">
-                    <span
-                      className="lang-color-dot"
-                      style={{ backgroundColor: repo.languageColor }}
-                    />
-                    <span className="lang-name">{repo.language}</span>
+                  <div className="repo-stats-col">
+                    <div className="repo-lang-row">
+                      <span
+                        className="lang-color-dot"
+                        style={{ backgroundColor: repo.languageColor }}
+                      />
+                      <span className="lang-name">{repo.language}</span>
+                    </div>
+
+                    <div className="repo-metrics">
+                      {typeof repo.stars === 'number' && repo.stars > 0 && (
+                        <span className="repo-metric-item" title={`${repo.stars} stars on GitHub`}>
+                          <Star size={11} />
+                          {repo.stars}
+                        </span>
+                      )}
+                      {typeof repo.forks === 'number' && repo.forks > 0 && (
+                        <span className="repo-metric-item" title={`${repo.forks} forks on GitHub`}>
+                          <GitFork size={11} />
+                          {repo.forks}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="repo-metrics">
-                    {typeof repo.stars === 'number' && repo.stars > 0 && (
-                      <span className="repo-metric-item" title={`${repo.stars} stars on GitHub`}>
-                        <Star size={12} />
-                        {repo.stars}
-                      </span>
+                  <div className="repo-actions-col">
+                    <a
+                      href={repo.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="repo-action-link repo-code-link"
+                      title={`Open ${repo.name} source code on GitHub`}
+                    >
+                      <GithubIcon size={13} />
+                      <span>Code</span>
+                    </a>
+
+                    {repo.homepage && (
+                      <a
+                        href={repo.homepage}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="repo-action-link repo-demo-link"
+                        title={`Launch verified live demo: ${repo.homepage}`}
+                      >
+                        <Globe size={13} />
+                        <span>Live Demo</span>
+                        <ExternalLink size={11} className="action-arrow" />
+                      </a>
                     )}
-                    {typeof repo.forks === 'number' && repo.forks > 0 && (
-                      <span className="repo-metric-item" title={`${repo.forks} forks on GitHub`}>
-                        <GitFork size={12} />
-                        {repo.forks}
-                      </span>
-                    )}
-                    <span className="badge">{repo.status}</span>
                   </div>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         )}

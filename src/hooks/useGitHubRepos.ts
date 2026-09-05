@@ -39,26 +39,30 @@ const LANGUAGE_COLORS: Record<string, string> = {
   Ruby: '#701516'
 };
 
-const CACHE_KEY = 'ketan_k_github_repos_v2';
+const CACHE_KEY = 'ketan_k_github_repos_v3';
 const CACHE_TTL_MS = 30 * 60 * 1000; // 30 minutes
 
 /**
- * Priority weighting for repositories to ensure the highest-impact,
- * most technically substantive projects appear at the top.
+ * Curated priority weighting to ensure highest-impact projects appear first:
+ * 1. WebRTC / Real-Time
+ * 2. Full-Stack
+ * 3. Systems / Performance
+ * 4. AI / Applied experimentation
+ * 5. Useful developer utilities
  */
 const REPO_WEIGHT_MAP: Record<string, number> = {
-  'segmentation-lab': 100, // Top 1: WebRTC + AI Background Segmentation (SAM2, MediaPipe)
-  'unified-collaboration-platform': 90, // Top 2: WebRTC Collaboration Architecture
-  'cpu-metrics-compare-tool': 80, // Top 3: Systems Telemetry & Benchmarking
-  'snap-pdf': 75, // Top 4: Client-Side PDF.js & Canvas Tool
-  'ParallelComputing': 65, // Top 5: High-Performance Scientific Computing (OpenMP/MPI)
-  'Matrix-Class': 60, // Top 6: C++ Linear Algebra Engine
-  'webcam-preview': 55, // Top 7: MediaStream & Camera Tool
-  'keep-awake': 50, // Top 8: Automation Utility
-  'mern-interview-prep': 45, // Top 9: Full-Stack Architecture Playbook
-  'LinuxBootWinISO': 40, // Top 10: Linux Automation
-  'NumericalMethods': 35,
-  'NumericalMethods-II': 30,
+  'segmentation-lab': 100, // WebRTC + AI Background Segmentation (Live Demo)
+  'webcam-preview': 95, // WebRTC + MediaStream Inspector (Live Demo)
+  'unified-collaboration-platform': 90, // WebRTC Collaboration Architecture
+  'cpu-metrics-compare-tool': 85, // Systems Telemetry & Benchmarking
+  'snap-pdf': 80, // Client-Side PDF.js & Canvas Tool (Live Demo)
+  'keep-awake': 75, // Automation Utility (Live Demo)
+  'mern-interview-prep': 70, // Full-Stack Architecture Playbook
+  'ParallelComputing': 65, // High-Performance Scientific Computing (OpenMP/MPI)
+  'Matrix-Class': 60, // C++ Linear Algebra Engine
+  'LinuxBootWinISO': 55, // Linux Shell Automation
+  'NumericalMethods': 40,
+  'NumericalMethods-II': 35,
   'moments-backend': 25,
   'moments-app': 20,
   'Angular-Demo-App': 15,
@@ -66,13 +70,20 @@ const REPO_WEIGHT_MAP: Record<string, number> = {
   'Canopus-Project': 5
 };
 
+const VERIFIED_HOMEPAGES: Record<string, string> = {
+  'segmentation-lab': 'https://segmentation-lab.onrender.com/',
+  'webcam-preview': 'https://ketan-k.github.io/webcam-preview/',
+  'snap-pdf': 'https://ketan-k.github.io/snap-pdf/',
+  'keep-awake': 'https://ketan-k.github.io/keep-awake/'
+};
+
 const REPO_DESCRIPTIONS_MAP: Record<string, string> = {
   'segmentation-lab': 'Real-time WebRTC conferencing lab benchmarking background segmentation models (SAM2, BodyPix, MediaPipe, WebGL).',
-  'snap-pdf': 'Fast, privacy-first in-browser PDF to PNG page extractor powered by PDF.js and HTML5 Canvas. Zero server uploads.',
-  'cpu-metrics-compare-tool': 'Cross-platform CPU telemetry comparison benchmark for Node.js process stats, systeminformation, and native OS counters.',
-  'unified-collaboration-platform': 'Architecture blueprint and abstractions for multi-party WebRTC video conferencing, room presence, and adaptive media signaling.',
-  'keep-awake': 'Lightweight, configurable background utility that prevents OS sleep during long builds and downloads via subtle mouse simulation.',
   'webcam-preview': 'Zero-dependency browser utility for testing and inspecting webcam feeds, media constraints, resolution modes, and digital zoom.',
+  'unified-collaboration-platform': 'Architecture blueprint and abstractions for multi-party WebRTC video conferencing, room presence, and adaptive media signaling.',
+  'cpu-metrics-compare-tool': 'Cross-platform CPU telemetry comparison benchmark for Node.js process stats, systeminformation, and native OS counters.',
+  'snap-pdf': 'Fast, privacy-first in-browser PDF to PNG page extractor powered by PDF.js and HTML5 Canvas. Zero server uploads.',
+  'keep-awake': 'Lightweight, configurable background utility that prevents OS sleep during long builds and downloads via subtle mouse simulation.',
   'mern-interview-prep': 'Curated MERN stack, Node.js event loop, React internals, and backend system design interview playbook with real-world patterns.',
   'LinuxBootWinISO': 'Shell utility automating the creation of bootable Windows UEFI USB installation drives directly from Linux.',
   'ParallelComputing': 'High-performance parallel computing implementations using OpenMP, MPI, and multi-threaded numerical algorithms in C.',
@@ -107,6 +118,22 @@ function calculateRepoStatus(repo: GitHubApiRepo): 'Active' | 'Maintained' | 'Ex
   return 'Maintained';
 }
 
+function resolveVerifiedHomepage(repoName: string, apiHomepage: string | null | undefined): string | undefined {
+  if (VERIFIED_HOMEPAGES[repoName]) {
+    return VERIFIED_HOMEPAGES[repoName];
+  }
+  if (apiHomepage && typeof apiHomepage === 'string') {
+    const trimmed = apiHomepage.trim();
+    if (trimmed.startsWith('https://') || trimmed.startsWith('http://')) {
+      // Exclude foreign or unverified demo links
+      if (!trimmed.includes('benetis.me') && !trimmed.includes('example.com')) {
+        return trimmed;
+      }
+    }
+  }
+  return undefined;
+}
+
 function transformApiRepo(repo: GitHubApiRepo): GitHubRepo {
   const language = repo.language || (repo.topics?.includes('mern') ? 'JavaScript' : 'TypeScript');
   const languageColor = LANGUAGE_COLORS[language] || '#3178c6';
@@ -137,7 +164,7 @@ function transformApiRepo(repo: GitHubApiRepo): GitHubRepo {
     forks: repo.forks_count,
     updatedAt: formatRepoDate(repo.pushed_at || repo.updated_at),
     isFork: repo.fork,
-    homepage: repo.homepage || undefined
+    homepage: resolveVerifiedHomepage(repo.name, repo.homepage)
   };
 }
 
@@ -213,8 +240,8 @@ export function useGitHubRepos(username: string = 'Ketan-K'): UseGitHubReposRetu
         throw new Error('Invalid response structure from GitHub API');
       }
 
-      // Filter out self profile repository or internal meta repos
-      const filteredApi = data.filter((r) => r.name !== 'Ketan-K' && !r.name.startsWith('.'));
+      // Filter out self profile repository or internal meta repos and unwanted forks
+      const filteredApi = data.filter((r) => r.name !== 'Ketan-K' && !r.name.startsWith('.') && !r.fork);
       const transformed = filteredApi.map(transformApiRepo);
       const prioritized = sortReposByWeight(transformed);
 
@@ -258,7 +285,7 @@ export function useGitHubRepos(username: string = 'Ketan-K'): UseGitHubReposRetu
   if (filterType === 'sources') {
     filtered = filtered.filter((r) => !r.isFork);
   } else if (filterType === 'featured') {
-    filtered = filtered.filter((r) => !r.isFork && r.status === 'Active');
+    filtered = filtered.filter((r) => !r.isFork && (r.status === 'Active' || !!r.homepage));
   }
 
   if (selectedLanguage !== 'all') {
