@@ -54,8 +54,14 @@ export const ProjectDetailPage: React.FC = () => {
       {/* Architecture Blueprint */}
       <section className="content-section">
         <h2 className="section-heading">System Topology & Data Flow</h2>
-        <div className="blueprint-box">
-          {project.architecture.diagram}
+        <div className="flow-card">
+          <div className="flow-card-header font-mono">
+            <span className="flow-card-label">DATA FLOW & SYSTEM BLUEPRINT</span>
+            <span className="flow-card-meta">{project.id}</span>
+          </div>
+          <pre className="blueprint-box" style={{ margin: 0, border: 'none', background: 'transparent', padding: 'var(--space-2) 0' }}>
+            {project.architecture.diagram}
+          </pre>
         </div>
         <div className="prose" style={{ marginBottom: 'var(--space-4)' }}>
           <p>{project.architecture.description}</p>

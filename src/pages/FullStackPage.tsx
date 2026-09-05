@@ -100,25 +100,52 @@ export const FullStackPage: React.FC = () => {
       <section className="content-section">
         <h2 className="section-heading">Microservices State Management & DB Connection Pools</h2>
         
-        <div className="blueprint-box">
-{`+-----------------------------------------------------------------------------+
-|               DISTRIBUTED EVENT-DRIVEN MICROSERVICE TOPOLOGY                |
-+-----------------------------------------------------------------------------+
-|                                                                             |
-|  [Client Web/App] ---(TLS/WSS)---> [API Gateway / Nginx Reverse Proxy]      |
-|                                                  |                          |
-|                     +----------------------------+                          |
-|                     | Rate-Limit / JWT Auth (Redis L1)                      |
-|                     v                                                       |
-|        [Service Instance A] <======> [Redis Pub/Sub & Stream Bus]           |
-|        [Service Instance B] <======>            ^                           |
-|        [Service Instance C] <======>            |                           |
-|                 |                               v                           |
-|                 +---> [PgBouncer Pool] ---> [PostgreSQL Primary]            |
-|                                                    | (Async Replication)    |
-|                                                    v                        |
-|                                             [PostgreSQL Replica]            |
-+-----------------------------------------------------------------------------+`}
+        <div className="arch-flow-card">
+          <div className="arch-flow-header font-mono">
+            <span>DISTRIBUTED MICROSERVICES & STORAGE PIPELINE</span>
+            <span>3 Invariant Tiers</span>
+          </div>
+
+          <div className="arch-tiers-grid">
+            {/* Tier 1: Ingress & Edge Auth */}
+            <div className="arch-tier-item">
+              <div className="arch-tier-label font-mono">TIER 01 · INGRESS & EDGE</div>
+              <div className="arch-tier-box">
+                <div className="arch-node-title font-mono">API Gateway & Reverse Proxy</div>
+                <div className="arch-node-desc">TLS/WSS Termination · Cloudflare Edge</div>
+                <div className="arch-subnode font-mono">
+                  <span className="arch-subnode-tag">Guard</span>
+                  <span>Redis L1 Rate-Limiter & JWT Signature Auth</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Tier 2: Microservice Compute & Event Stream */}
+            <div className="arch-tier-item">
+              <div className="arch-tier-label font-mono">TIER 02 · EVENT BUS & COMPUTE</div>
+              <div className="arch-tier-box">
+                <div className="arch-node-title font-mono">Stateless Service Workers (A · B · C)</div>
+                <div className="arch-node-desc">Express / Go Microservice Instances</div>
+                <div className="arch-subnode font-mono">
+                  <span className="arch-subnode-tag">Bus</span>
+                  <span>Redis Pub/Sub & Streams (<span className="mono">&lt; 2ms fan-out</span>)</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Tier 3: Pooling & Persistence */}
+            <div className="arch-tier-item">
+              <div className="arch-tier-label font-mono">TIER 03 · POOLING & PERSISTENCE</div>
+              <div className="arch-tier-box">
+                <div className="arch-node-title font-mono">PgBouncer Connection Pool</div>
+                <div className="arch-node-desc">Transaction Pooling · ~40 Max Physical DB Links</div>
+                <div className="arch-subnode font-mono">
+                  <span className="arch-subnode-tag">Durable</span>
+                  <span>PostgreSQL Primary ──(WAL)──&gt; Read Replica</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="insight-box">

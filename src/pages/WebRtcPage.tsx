@@ -68,16 +68,51 @@ export const WebRtcPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="blueprint-box">
-{`+-----------------------------------------------------------------------------+
-|                          WEBRTC TOPOLOGY TRADEOFFS                          |
-+-----------------------------------------------------------------------------+
-| Topology | Client Uplink | Client Downlink | Server Transcode | Latency   | Max Users |
-+----------+---------------+-----------------+------------------+-----------+-----------+
-| Mesh     | N-1 streams   | N-1 streams     | None (0 CPU)     | Lowest    | ~4-6      |
-| SFU      | 1 stream      | N-1 streams     | None (RTP Router)| ~10-20ms  | ~50-500   |
-| MCU      | 1 stream      | 1 mixed stream  | Full Transcoding | ~80-150ms | ~1000+    |
-+-----------------------------------------------------------------------------+`}
+        <div className="spec-table-container">
+          <table className="spec-table">
+            <thead>
+              <tr>
+                <th>Topology</th>
+                <th>Client Uplink</th>
+                <th>Client Downlink</th>
+                <th>Server Transcode</th>
+                <th>Latency Target</th>
+                <th>Max Users</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Mesh</strong> (Full P2P)
+                </td>
+                <td className="mono">N-1 streams</td>
+                <td className="mono">N-1 streams</td>
+                <td>None (0 CPU)</td>
+                <td>Lowest (&lt;50ms)</td>
+                <td>~4–6 participants</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>SFU</strong> (Selective Forwarding)
+                </td>
+                <td className="mono">1 simulcast stream</td>
+                <td className="mono">N-1 streams</td>
+                <td>None (RTP packet router)</td>
+                <td>~10–20ms transit</td>
+                <td>~50–500 participants</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>MCU</strong> (Multipoint Mixer)
+                </td>
+                <td className="mono">1 stream</td>
+                <td className="mono">1 mixed stream</td>
+                <td>Full CPU/GPU transcoding</td>
+                <td>~80–150ms buffer</td>
+                <td>~1,000+ viewers</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
         <div className="insight-box">
