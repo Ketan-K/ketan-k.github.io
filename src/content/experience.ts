@@ -3,21 +3,21 @@ import { ExperienceItem } from '../types';
 export const experienceHistory: ExperienceItem[] = [
   {
     company: 'Spring Computing Technologies Pvt. Ltd.',
-    role: 'Senior Software Engineer / Senior WebRTC Engineer',
+    role: 'Senior Software Engineer',
     location: 'Pune / Remote',
     period: 'Jan 2023 — Present',
     scaleMetrics: 'Global communication platform serving ~20,000 daily active users (4–5 engineer core team)',
-    tagline: 'Owning key real-time media architecture, client-side media strategy across Web and VDI/Citrix, and WebRTC network resilience.',
+    tagline: 'Owning real-time WebRTC media architecture, browser audio/video pipelines, connection resilience, and client-side media strategy.',
     achievements: [
       'Contribute to a high-scale global communication platform serving ~20,000 users per day as part of a 4–5 engineer team, owning key real-time media and reliability components.',
       'Own end-to-end delivery of enterprise media features, taking full ownership from technical investigation and architecture design through automated testing, production release, and live support.',
-      'Architect client-side media strategy across web browsers and VDI / Citrix Workspace environments, designing resilient solutions for hardware device recovery and media processing.',
+      'Architect client-side media strategy across desktop browsers and virtualized endpoints, designing resilient solutions for hardware device recovery and media processing.',
       'Improve WebRTC connection resilience through ICE Restart state machines, STUN/TURN relay fallback, adaptive bitrate/framerate throttling, substream selection, and CPU-aware controls.',
-      'Integrate Citrix Workspace SDK for VDI media offloading and Banuba / Google MediaPipe for client-side virtual backgrounds and real-time video effects.',
+      'Integrate Banuba and Google MediaPipe for client-side ML virtual backgrounds, real-time video effects, and client media offloading SDKs.',
       'Investigate and resolve complex production incidents involving audio/video synchronization, network jitter, packet loss, device behavior, and FreeSWITCH recording layouts.',
       'Drive code reviews, technical mentoring, and architecture documentation across release cycles from pre-alpha to General Availability.'
     ],
-    technologies: ['TypeScript', 'JavaScript', 'WebRTC', 'Node.js', 'Janus', 'FreeSWITCH', 'Citrix Workspace SDK', 'Google MediaPipe', 'Banuba SDK', 'STUN/TURN', 'ICE Restart', 'getStats()']
+    technologies: ['TypeScript', 'JavaScript', 'WebRTC', 'Node.js', 'Janus', 'FreeSWITCH', 'Google MediaPipe', 'Banuba SDK', 'STUN/TURN', 'ICE Restart', 'getStats()']
   },
   {
     company: 'Spring Computing Technologies Pvt. Ltd.',

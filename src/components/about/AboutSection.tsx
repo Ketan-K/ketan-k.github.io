@@ -28,7 +28,7 @@ export const AboutSection: React.FC = () => {
             </p>
 
             <p>
-              Over 6+ years in production, I have taken end-to-end technical ownership — from architecting client-side media pipelines across web and Citrix VDI environments to load-balancing Janus media clusters and scaling services for ~20,000 daily users.
+              Over 6+ years in production, I have taken end-to-end technical ownership — from architecting client-side WebRTC media pipelines and connection resilience mechanisms to load-balancing Janus media clusters and scaling services for ~20,000 daily users.
             </p>
 
             <p>

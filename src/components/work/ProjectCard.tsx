@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Project } from '../../types';
 import { ChevronDown, ChevronUp, ExternalLink, Layers, AlertTriangle, Lightbulb, Cpu, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
+import { PrincipleNodeGraph } from '../systems/PrincipleNodeGraph';
 import './Work.css';
 
 interface ProjectCardProps {
@@ -109,9 +110,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, defaultExpand
             {activeTab === 'architecture' && (
               <div className="tab-pane">
                 <p className="tab-description">{project.architecture.description}</p>
-                <div className="ascii-diagram">
-                  {project.architecture.diagram}
-                </div>
+                {project.architecture.flow ? (
+                  <PrincipleNodeGraph flow={project.architecture.flow} />
+                ) : (
+                  <div className="ascii-diagram">
+                    {project.architecture.diagram}
+                  </div>
+                )}
                 <div className="architecture-highlights">
                   <span className="highlights-title font-mono">CORE ARCHITECTURAL HIGHLIGHTS:</span>
                   <ul className="highlights-list">

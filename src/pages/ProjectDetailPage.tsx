@@ -1,8 +1,11 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { projects } from '../content/projects';
+import { systemPrinciples } from '../content/systems';
+import { aiExperiments } from '../content/ailab';
 import { Project } from '../types';
 import { TechBadge } from '../components/common/TechBadge';
+import { PrincipleNodeGraph } from '../components/systems/PrincipleNodeGraph';
 import './pages.css';
 
 export const ProjectDetailPage: React.FC = () => {
@@ -54,16 +57,20 @@ export const ProjectDetailPage: React.FC = () => {
       {/* Architecture Blueprint */}
       <section className="content-section">
         <h2 className="section-heading">System Topology & Data Flow</h2>
-        <div className="flow-card">
-          <div className="flow-card-header font-mono">
-            <span className="flow-card-label">DATA FLOW & SYSTEM BLUEPRINT</span>
-            <span className="flow-card-meta">{project.id}</span>
+        {project.architecture.flow ? (
+          <PrincipleNodeGraph flow={project.architecture.flow} />
+        ) : (
+          <div className="flow-card">
+            <div className="flow-card-header font-mono">
+              <span className="flow-card-label">DATA FLOW & SYSTEM BLUEPRINT</span>
+              <span className="flow-card-meta">{project.id}</span>
+            </div>
+            <pre className="blueprint-box" style={{ margin: 0, border: 'none', background: 'transparent', padding: 'var(--space-2) 0' }}>
+              {project.architecture.diagram}
+            </pre>
           </div>
-          <pre className="blueprint-box" style={{ margin: 0, border: 'none', background: 'transparent', padding: 'var(--space-2) 0' }}>
-            {project.architecture.diagram}
-          </pre>
-        </div>
-        <div className="prose" style={{ marginBottom: 'var(--space-4)' }}>
+        )}
+        <div className="prose" style={{ marginTop: 'var(--space-4)', marginBottom: 'var(--space-4)' }}>
           <p>{project.architecture.description}</p>
         </div>
 
@@ -120,6 +127,43 @@ export const ProjectDetailPage: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* Related Systems Principles & AI Lineage */}
+      {(() => {
+        const relatedPrinciples = systemPrinciples.filter((p) => p.grounding?.projectSlug === project.id);
+        const relatedAi = aiExperiments.filter((e) => e.relatedProjectSlug === project.id);
+
+        if (relatedPrinciples.length === 0 && relatedAi.length === 0) return null;
+
+        return (
+          <section className="content-section">
+            <h2 className="section-heading">Systems Principles & AI Extensions</h2>
+            <div className="related-links-grid">
+              {relatedPrinciples.map((p) => (
+                <Link key={p.id} to="/systems" className="related-link-card">
+                  <div className="related-card-header font-mono">
+                    <span className="related-pill">Principle {p.number}</span>
+                    <span className="row-arrow">→</span>
+                  </div>
+                  <h4 className="related-card-title">{p.title}</h4>
+                  <p className="related-card-desc">{p.subtitle}</p>
+                </Link>
+              ))}
+
+              {relatedAi.map((ai) => (
+                <Link key={ai.id} to={`/ai/${ai.id}`} className="related-link-card">
+                  <div className="related-card-header font-mono">
+                    <span className="related-pill related-pill-ai">AI Lab · {ai.status}</span>
+                    <span className="row-arrow">→</span>
+                  </div>
+                  <h4 className="related-card-title">{ai.title}</h4>
+                  <p className="related-card-desc">{ai.category}</p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
 
       {/* Navigation Footer */}
       <div className="page-nav-footer">

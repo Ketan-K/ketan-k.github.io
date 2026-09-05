@@ -57,6 +57,50 @@ export const ExperiencePage: React.FC = () => {
                 </ul>
               </div>
 
+              {/* Contextual Case Study & Systems Cross-Links */}
+              <div className="role-crosslinks-bar">
+                {role.company.includes('Spring Computing') && role.role.includes('Senior') && (
+                  <>
+                    <Link to="/work/anymeeting-webrtc-conferencing" className="role-crosslink">
+                      <span>Case Study: Intermedia AnyMeeting</span>
+                      <span className="row-arrow">↗</span>
+                    </Link>
+                    <Link to="/systems/webrtc" className="role-crosslink">
+                      <span>Systems: WebRTC Architecture & Simulators</span>
+                      <span className="row-arrow">→</span>
+                    </Link>
+                    <Link to="/ai/client-side-ml-video-effects" className="role-crosslink">
+                      <span>AI Lab: Client-Side ML Video Effects</span>
+                      <span className="row-arrow">↗</span>
+                    </Link>
+                  </>
+                )}
+                {role.company.includes('Spring Computing') && !role.role.includes('Senior') && (
+                  <>
+                    <Link to="/work/zultys-zac-unified-communications" className="role-crosslink">
+                      <span>Case Study: Zultys ZAC Unified Communications</span>
+                      <span className="row-arrow">↗</span>
+                    </Link>
+                    <Link to="/systems/full-stack" className="role-crosslink">
+                      <span>Systems: Full-Stack & Redis State</span>
+                      <span className="row-arrow">→</span>
+                    </Link>
+                  </>
+                )}
+                {role.company.includes('Humation') && (
+                  <Link to="/work/nft-auction-realtime-engine" className="role-crosslink">
+                    <span>Case Study: Real-Time Auction Engine</span>
+                    <span className="row-arrow">↗</span>
+                  </Link>
+                )}
+                {role.company.includes('OneGreenDiary') && (
+                  <Link to="/work/cloud-pos-reporting-server" className="role-crosslink">
+                    <span>Case Study: Cloud POS & Reporting Server</span>
+                    <span className="row-arrow">↗</span>
+                  </Link>
+                )}
+              </div>
+
               {/* Technologies */}
               <div className="item-tags">
                 {role.technologies.map((tech: string) => (

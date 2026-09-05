@@ -5,31 +5,47 @@ export const projects: Project[] = [
     id: 'anymeeting-webrtc-conferencing',
     number: '01',
     title: 'Intermedia AnyMeeting — High-Scale WebRTC Video Conferencing',
-    tagline: 'Production real-time communication platform serving ~20,000 daily users with adaptive bitrate, ICE Restart, VDI offloading, and ML video processing.',
-    role: 'Senior Software Engineer / Senior WebRTC Engineer',
+    tagline: 'Production real-time communication platform serving ~20,000 daily active users with adaptive bitrate, ICE Restart, client-side ML video processing, and high connection resilience.',
+    role: 'Senior Software Engineer',
     projectType: 'Production Enterprise System',
     clientOrContext: 'Spring Computing Technologies / Intermedia',
-    technologies: ['TypeScript', 'WebRTC', 'Node.js', 'Citrix Workspace SDK', 'Google MediaPipe', 'Banuba SDK', 'FreeSWITCH', 'STUN/TURN', 'ICE Restart', 'getStats()'],
+    technologies: ['TypeScript', 'WebRTC', 'Node.js', 'Google MediaPipe', 'Banuba SDK', 'FreeSWITCH', 'STUN/TURN', 'ICE Restart', 'getStats()'],
     problem:
-      'Enterprise users across corporate firewalls, unstable home networks, and virtual desktop (VDI) environments experienced connection drops, peripheral hot-swapping stalls, and high server CPU load during high-density multi-party video meetings.',
+      'Enterprise users across corporate firewalls, unstable networks, and varied endpoint environments experienced connection drops, peripheral hot-swapping stalls, and high server load during high-density multi-party video meetings.',
     architecture: {
       description:
-        'Client-side media pipeline executing adaptive bitrate controls, local VDI hardware acceleration via Citrix Workspace SDK, and ML-powered background segmentation. Negotiates ICE restarts on network handovers with automatic TURN relay failovers.',
-      diagram: `[Browser / Citrix VDI Client] ──(WebRTC Media)──> [Selective Forwarding Unit]
-             │                                              │
-      (Citrix SDK Offload)                         (FreeSWITCH Recording)
-             │                                              │
-  [Local GPU Backgrounds]                                   ▼
-(MediaPipe / Banuba WASM)                      [Composite Layout Renderer]
+        'Client-side media pipeline executing adaptive bitrate controls, client-side ML background segmentation, and hardware-accelerated video processing. Negotiates ICE restarts on network handovers with automatic TURN relay failovers.',
+      diagram: `[Browser Client Media Pipeline] ──(WebRTC Media)──> [Selective Forwarding Unit]
+             │                                                  │
+    (Hardware Acceleration)                            (FreeSWITCH Recording)
+             │                                                  │
+   [Local GPU Backgrounds]                                      ▼
+ (MediaPipe / Banuba WASM)                         [Composite Layout Renderer]
              │
       (ICE Restart Loop)
              ▼
-[STUN / TURN Relay Fallback]`,
+ [STUN / TURN Relay Fallback]`,
+      flow: {
+        label: 'WEBRTC MEDIA & RESILIENCE PIPELINE',
+        nodes: [
+          { id: 'client', label: 'Browser Client Endpoint', note: 'Hardware capture & device management' },
+          { id: 'ml-fx', label: 'Client GPU ML Segmentation', note: 'MediaPipe / Banuba WASM (<8ms)' },
+          { id: 'ice-guard', label: 'ICE Restart State Machine', note: 'STUN / TURN relay fallback' },
+          { id: 'sfu', label: 'Selective Forwarding Unit', note: 'Simulcast routing & adaptive bitrate' },
+          { id: 'rec', label: 'FreeSWITCH Composite Recording', note: 'Dynamic audio/video tile layout' }
+        ],
+        edges: [
+          ['client', 'ml-fx', 'Video capture'],
+          ['ml-fx', 'ice-guard', 'Track processing'],
+          ['ice-guard', 'sfu', 'SRTP / DTLS transport'],
+          ['sfu', 'rec', 'RTP bridge']
+        ]
+      },
       highlights: [
         'Resilient ICE Restart state machine recovering dropped peer connections in <800ms',
-        'VDI media offloading via Citrix Workspace SDK reducing server CPU load by over 60%',
         'Client-side ML virtual background segmentation via WebAssembly (Google MediaPipe & Banuba)',
-        'Adaptive bitrate and substream selection driven by real-time getStats() RTCP telemetry'
+        'Adaptive bitrate and substream selection driven by real-time getStats() RTCP telemetry',
+        'Efficient client-side hardware offloading reducing server CPU overhead across diverse endpoints'
       ]
     },
     engineeringDecisions: [
@@ -39,9 +55,9 @@ export const projects: Project[] = [
           'Constructed an automated ICE Restart state machine that detects TCP/UDP socket freezing via getStats() telemetry and renegotiates ICE candidates in background without terminating active audio/video tracks.'
       },
       {
-        title: 'VDI Media Processing Offload',
+        title: 'Adaptive Bitrate & Client Media Offloading',
         description:
-          'Leveraged Citrix Workspace SDK to offload video encoding/decoding and capture from virtualized cloud desktops directly to user endpoint hardware, resolving severe frame drop issues in enterprise virtualized environments.'
+          'Engineered client-side encoding controls and dynamic substream selection based on RTCP feedback, offloading intensive media processing and video effects to client hardware.'
       },
       {
         title: 'Hardware & Peripheral Hot-Swap Handler',
@@ -85,6 +101,22 @@ export const projects: Project[] = [
              ▼                                          ▼
    [Enterprise PBX] ◄─── Call Control ────► [Janus Media Server Cluster]
 (Park / Transfer / Bind)                     (SFU / Audio Mixing / Video)`,
+      flow: {
+        label: 'UNIFIED COMMUNICATIONS & JANUS TOPOLOGY',
+        nodes: [
+          { id: 'client', label: 'Angular Web Client', note: 'RxJS reactive streams & pre-call preview' },
+          { id: 'middleware', label: 'Node.js Middleware Cluster', note: 'WebSocket signaling & room manager' },
+          { id: 'redis-lock', label: 'Redis Distributed State', note: 'Park, transfer & device binding locks' },
+          { id: 'janus-cluster', label: 'Janus Media Server Cluster', note: 'Horizontal SFU load distribution' },
+          { id: 'pbx', label: 'Enterprise PBX Bridge', note: 'SIP telephony & call control' }
+        ],
+        edges: [
+          ['client', 'middleware', 'WSS Signaling'],
+          ['middleware', 'redis-lock', 'Atomic coordination'],
+          ['middleware', 'janus-cluster', 'SFU room allocation'],
+          ['janus-cluster', 'pbx', 'SIP audio gateway']
+        ]
+      },
       highlights: [
         'Horizontally scalable Node.js middleware managing Janus Media Server room lifecycles',
         'Integrated enterprise PBX features: Call Park, Call Transfer, Device Binding, and Presence',
@@ -137,7 +169,23 @@ export const projects: Project[] = [
                                    │                             │
                                    └──────────────┬──────────────┘
                                                   ▼
-                                       [Real-Time State Broadcast]`,
+                                        [Real-Time State Broadcast]`,
+      flow: {
+        label: 'REAL-TIME AUCTION & BIDDING PIPELINE',
+        nodes: [
+          { id: 'bidders', label: 'Bidding Client Fleet', note: 'High-concurrency browser clients' },
+          { id: 'gateway', label: 'Socket.io Event Gateway', note: 'Sub-50ms fan-out & debouncing' },
+          { id: 'coordinator', label: 'Atomic Bid Coordinator', note: 'Monotonic MongoDB sequence checks' },
+          { id: 'wallets', label: 'Crypto Wallet Engine', note: 'BTC / ETH / LTC transaction locks' },
+          { id: 'broadcast', label: 'Real-Time State Broadcast', note: 'Authoritative price state distribution' }
+        ],
+        edges: [
+          ['bidders', 'gateway', 'Socket.io push'],
+          ['gateway', 'coordinator', 'Atomic transaction'],
+          ['coordinator', 'wallets', 'Balance verification'],
+          ['coordinator', 'broadcast', 'Top-bid fanout']
+        ]
+      },
       highlights: [
         'Sub-50ms real-time auction synchronization across concurrent bidders',
         'Modularized legacy monolithic backend into clean domain-oriented services',
@@ -185,6 +233,22 @@ export const projects: Project[] = [
                                                             │
                                                             ▼
                                                    [Excel & PDF Generators]`,
+      flow: {
+        label: 'CLOUD POS & ASYNC REPORTING PIPELINE',
+        nodes: [
+          { id: 'pos', label: 'Retail POS Frontend', note: 'Angular checkout & offline caching' },
+          { id: 'api', label: 'Sails.js API Layer', note: 'Low-latency checkout transactions' },
+          { id: 'db', label: 'MySQL Primary Store', note: 'ACID transaction persistence' },
+          { id: 'workers', label: 'Background Worker Pool', note: 'Decoupled data aggregation queues' },
+          { id: 'export', label: 'Excel & PDF Generators', note: 'Streamed memory-safe reporting' }
+        ],
+        edges: [
+          ['pos', 'api', 'REST JSON'],
+          ['api', 'db', 'ACID commit'],
+          ['db', 'workers', 'Async read replicas'],
+          ['workers', 'export', 'Chunked streaming']
+        ]
+      },
       highlights: [
         'Automated background reporting server generating daily/weekly/monthly PDF & Excel sheets',
         'Licensing, feature toggles, client onboarding, and FAQ content management systems',
@@ -233,6 +297,20 @@ export const projects: Project[] = [
                                   └──────────────┬──────────────┘
                                                  ▼
                                         [MySQL Order Engine]`,
+      flow: {
+        label: 'DIRECT MARKETPLACE & GROUP BOOKING PIPELINE',
+        nodes: [
+          { id: 'consumers', label: 'Mobile Web Consumers', note: 'Group booking & WhatsApp sharing' },
+          { id: 'express-api', label: 'Node.js Express API', note: 'Area-based demand aggregation' },
+          { id: 'inv-lock', label: 'Inventory Reservation Guard', note: 'Time-limited bulk allocation locks' },
+          { id: 'db-orders', label: 'MySQL Order Engine', note: 'Transactional pool completion' }
+        ],
+        edges: [
+          ['consumers', 'express-api', 'Group demand pooling'],
+          ['express-api', 'inv-lock', 'Monotonic reservation'],
+          ['inv-lock', 'db-orders', 'ACID order commit']
+        ]
+      },
       highlights: [
         'Dynamic combo management and automated demand pooling data models',
         'Area-based customer outreach and neighborhood drop-off coordination',

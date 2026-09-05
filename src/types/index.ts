@@ -13,6 +13,7 @@ export interface Project {
   architecture: {
     description: string;
     diagram: string;
+    flow?: SystemPrincipleFlow;
     highlights: string[];
   };
   engineeringDecisions: {
@@ -40,25 +41,42 @@ export interface SystemPrincipleFlow {
   edges: ([string, string] | [string, string, string])[];
 }
 
+export interface SystemPrincipleGrounding {
+  roleContext: string;
+  projectSlug?: string;
+  projectTitle?: string;
+  systemDeepDiveUrl?: string;
+  systemDeepDiveLabel?: string;
+  technologies: string[];
+  concreteApplication: string;
+}
+
 export interface SystemPrinciple {
   id: string;
   number: string;
   title: string;
   subtitle: string;
   description: string;
+  grounding?: SystemPrincipleGrounding;
   flow: SystemPrincipleFlow;
   keyTakeaway: string;
 }
 
 export interface AiExperiment {
   id: string;
-  category: 'LLM Systems' | 'Realtime AI' | 'Developer Tools';
+  category: 'LLM Systems' | 'Realtime AI' | 'Developer Tools' | 'Computer Vision / Edge ML';
   title: string;
-  status: 'Experimental' | 'In Progress' | 'Shipped Prototype';
+  status: 'Experimental' | 'In Progress' | 'Shipped Prototype' | 'Production Feature';
+  classification: 'Professional Production Feature' | 'Shipped Prototype' | 'Active Experiment' | 'Exploration & Research';
+  foundationContext: string;
   problem: string;
   technologies: string[];
   whatHappened: string;
   whatILearned: string;
+  relatedProjectSlug?: string;
+  relatedProjectTitle?: string;
+  relatedSystemUrl?: string;
+  relatedSystemLabel?: string;
   codeUrl?: string;
   demoUrl?: string;
 }

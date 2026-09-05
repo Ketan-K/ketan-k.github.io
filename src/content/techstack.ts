@@ -105,14 +105,8 @@ export const techStackCategories: TechStackCategory[] = [
   },
   {
     category: 'MEDIA, SDKs & VIDEO ML',
-    description: 'Client-side hardware acceleration, VDI offloading, and video processing SDKs.',
+    description: 'Client-side ML video processing, WebAssembly effects, and media pipeline SDKs.',
     items: [
-      {
-        name: 'Citrix Workspace SDK',
-        context: 'Offloaded WebRTC media encoding, decoding, and capture directly to local endpoint hardware in virtualized environments.',
-        usedIn: ['Intermedia AnyMeeting (VDI Media Strategy)'],
-        experienceYears: '2+ Years'
-      },
       {
         name: 'Google MediaPipe & Banuba SDK',
         context: 'Client-side ML-powered virtual backgrounds, portrait segmentation, and real-time WebAssembly video effects.',
@@ -124,6 +118,12 @@ export const techStackCategories: TechStackCategory[] = [
         context: 'Dynamic audio/video mixing, recording layout synchronization, and composite video tile management during live calls.',
         usedIn: ['Intermedia AnyMeeting (Cloud Call Recording)'],
         experienceYears: '2+ Years'
+      },
+      {
+        name: 'Client Media Pipelines & Hardware Offload',
+        context: 'Engineered client-side WebRTC capture, device constraints, and hardware-accelerated media offloading across varied endpoints.',
+        usedIn: ['Intermedia AnyMeeting (Client Media Strategy)'],
+        experienceYears: '3+ Years'
       }
     ]
   },

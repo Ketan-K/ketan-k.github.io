@@ -77,6 +77,34 @@ export const SystemsPage: React.FC = () => {
               {/* Rendered Visual Flow Diagram */}
               <PrincipleNodeGraph flow={p.flow} />
 
+              {/* Production Grounding & Career Lineage */}
+              {p.grounding && (
+                <div className="grounding-card">
+                  <div className="grounding-header font-mono">
+                    <span className="grounding-label">GROUNDED IN PRODUCTION EXPERIENCE</span>
+                    <span className="grounding-context-tag">{p.grounding.roleContext}</span>
+                  </div>
+                  <p className="grounding-app-text">{p.grounding.concreteApplication}</p>
+
+                  <div className="grounding-footer">
+                    <div className="grounding-links">
+                      {p.grounding.projectSlug && (
+                        <Link to={`/work/${p.grounding.projectSlug}`} className="grounding-link">
+                          <span>Case Study: {p.grounding.projectTitle}</span>
+                          <span className="row-arrow">↗</span>
+                        </Link>
+                      )}
+                      {p.grounding.systemDeepDiveUrl && (
+                        <Link to={p.grounding.systemDeepDiveUrl} className="grounding-link">
+                          <span>Deep Dive: {p.grounding.systemDeepDiveLabel || 'Architecture Blueprint'}</span>
+                          <span className="row-arrow">→</span>
+                        </Link>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              )}
+
               {/* Key Takeaway Callout */}
               <div className="insight-box principle-takeaway-box">
                 <div className="takeaway-badge-wrap font-mono">
