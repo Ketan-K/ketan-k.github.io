@@ -1,0 +1,95 @@
+.backend-tabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.b-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.875rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.b-tab:hover {
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+.b-tab-active {
+  background: var(--accent-cyan-dim);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-weight: 600;
+}
+
+.blueprint-frame {
+  padding: 1.5rem;
+}
+
+.blueprint-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.blueprint-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.blueprint-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.blueprint-desc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.blueprint-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.spec-item {
+  background: var(--bg-code);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.spec-label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.05em;
+}
+
+.spec-val {
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .blueprint-specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
