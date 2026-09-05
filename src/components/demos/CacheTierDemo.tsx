@@ -91,18 +91,6 @@ export const CacheTierDemo: React.FC = () => {
 
   return (
     <div className="demo-card">
-      <div className="demo-header">
-        <div className="demo-title-group">
-          <span className="demo-code font-mono">DEMO D</span>
-          <h4 className="demo-title">Multi-Tier Caching & Latency Profiling</h4>
-        </div>
-        <span className="badge badge-simulated">SIMULATED BENCHMARK</span>
-      </div>
-
-      <p className="demo-explainer">
-        Simulate tiered cache resolution (L1 In-Process Memory → L2 Redis → PostgreSQL Primary) and observe the dramatic delta in response latency.
-      </p>
-
       {/* Interactive Cache Layers Visual */}
       <div className="cache-layers-grid">
         <div className={`cache-tier-box ${isL1Cached ? 'cache-tier-active' : ''}`}>

@@ -95,18 +95,6 @@ export const RealtimeEventStreamDemo: React.FC = () => {
 
   return (
     <div className="demo-card">
-      <div className="demo-header">
-        <div className="demo-title-group">
-          <span className="demo-code font-mono">DEMO B</span>
-          <h4 className="demo-title">Realtime Architecture & Event Bus Simulator</h4>
-        </div>
-        <span className="badge badge-simulated">SIMULATED WEBSOCKET CLUSTER</span>
-      </div>
-
-      <p className="demo-explainer">
-        Simulates bidirectional WebSocket event propagation through a Redis Pub/Sub cluster backplane with delta throttling.
-      </p>
-
       {/* Cluster Topology Visual */}
       <div className="rt-topology-diagram font-mono">
         <div className="rt-node">Client A</div>

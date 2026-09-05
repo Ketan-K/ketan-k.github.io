@@ -42,7 +42,7 @@ export const FullStackPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Interactive Demo A: Request Lifecycle */}
+      {/* Interactive Request Lifecycle */}
       <section className="content-section">
         <h2 className="section-heading">Microsecond Request Lifecycle & Middleware Trace</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
@@ -50,17 +50,13 @@ export const FullStackPage: React.FC = () => {
         </p>
 
         <div className="demo-embed-wrapper">
-          <div className="demo-embed-header">
-            <span className="demo-embed-title">Demo A · Distributed Request Lifecycle Trace</span>
-            <span className="demo-embed-badge">LIVE SIMULATOR</span>
-          </div>
           <RequestLifecycleDemo />
         </div>
       </section>
 
       <hr className="editorial-divider" />
 
-      {/* Interactive Demo B: Real-Time Event Bus */}
+      {/* Interactive Real-Time Event Bus */}
       <section className="content-section">
         <h2 className="section-heading">High-Throughput Redis Event Stream & Pub/Sub Fan-Out</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
@@ -68,17 +64,13 @@ export const FullStackPage: React.FC = () => {
         </p>
 
         <div className="demo-embed-wrapper">
-          <div className="demo-embed-header">
-            <span className="demo-embed-title">Demo B · Real-Time Event Bus & Fan-Out Simulator</span>
-            <span className="demo-embed-badge">LIVE SIMULATOR</span>
-          </div>
           <RealtimeEventStreamDemo />
         </div>
       </section>
 
       <hr className="editorial-divider" />
 
-      {/* Interactive Demo D: Multi-Tier Caching */}
+      {/* Interactive Multi-Tier Caching */}
       <section className="content-section">
         <h2 className="section-heading">Tiered Caching Topology & Invalidation Mechanics</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
@@ -86,10 +78,6 @@ export const FullStackPage: React.FC = () => {
         </p>
 
         <div className="demo-embed-wrapper">
-          <div className="demo-embed-header">
-            <span className="demo-embed-title">Demo D · Tiered Caching & Cache-Aside Invalidation</span>
-            <span className="demo-embed-badge">LIVE SIMULATOR</span>
-          </div>
           <CacheTierDemo />
         </div>
       </section>

@@ -76,17 +76,6 @@ export const ResilienceDemo: React.FC = () => {
 
   return (
     <div className="demo-card">
-      <div className="demo-header">
-        <div className="demo-title-group">
-          <span className="demo-code font-mono">DEMO F</span>
-          <h4 className="demo-title">Failure Resilience & Offline Queue State Machine</h4>
-        </div>
-        <span className="badge badge-simulated">SIMULATED FAULT INJECTION</span>
-      </div>
-
-      <p className="demo-explainer">
-        Inject simulated network degradation and severed connections to observe how the client-side state machine buffers mutations and gracefully recovers.
-      </p>
 
       {/* Condition Switcher */}
       <div className="resilience-condition-bar font-mono">

@@ -125,18 +125,6 @@ export const AiStreamingDemo: React.FC = () => {
 
   return (
     <div className="demo-card">
-      <div className="demo-header">
-        <div className="demo-title-group">
-          <span className="demo-code font-mono">DEMO E</span>
-          <h4 className="demo-title">AI Token Streaming & TTFT Telemetry Profiler</h4>
-        </div>
-        <span className="badge badge-simulated">SIMULATED STREAM ENGINE</span>
-      </div>
-
-      <p className="demo-explainer">
-        Simulate an end-to-end streaming LLM inference pipeline. Profiles Time-to-First-Token (TTFT) and progressive token delivery over chunked SSE.
-      </p>
-
       {/* Preset Prompt Selector */}
       <div className="stream-preset-bar font-mono">
         <span className="preset-label">PROMPT PRESET:</span>

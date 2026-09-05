@@ -85,18 +85,6 @@ export const RequestLifecycleDemo: React.FC = () => {
 
   return (
     <div className="demo-card">
-      <div className="demo-header">
-        <div className="demo-title-group">
-          <span className="demo-code font-mono">DEMO A</span>
-          <h4 className="demo-title">Request Lifecycle & Pipeline Inspection</h4>
-        </div>
-        <span className="badge badge-simulated">SIMULATED EXECUTION</span>
-      </div>
-
-      <p className="demo-explainer">
-        Step through the lifecycle of a secure API request from client execution down to database persistence and cache resolution.
-      </p>
-
       {/* Interactive Step Bar */}
       <div className="pipeline-steps-bar">
         {stages.map((stage, idx) => (

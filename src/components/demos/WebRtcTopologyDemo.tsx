@@ -59,18 +59,6 @@ export const WebRtcTopologyDemo: React.FC = () => {
 
   return (
     <div className="demo-card">
-      <div className="demo-header">
-        <div className="demo-title-group">
-          <span className="demo-code font-mono">DEMO C</span>
-          <h4 className="demo-title">WebRTC ICE & NAT Traversal Topology</h4>
-        </div>
-        <span className="badge badge-simulated">SIMULATED NETWORK STATS</span>
-      </div>
-
-      <p className="demo-explainer">
-        Simulate different WebRTC NAT traversal candidates (Host, Server Reflexive, and Relay) and inspect the impact on round-trip latency and throughput.
-      </p>
-
       {/* Path Selector Tabs */}
       <div className="webrtc-mode-selector font-mono">
         <button

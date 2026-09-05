@@ -41,7 +41,7 @@ export const WebRtcPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Interactive Demo C: WebRTC ICE Topology */}
+      {/* Interactive WebRTC ICE Topology */}
       <section className="content-section">
         <h2 className="section-heading">ICE Candidate Gathering & Routing Simulator</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
@@ -49,10 +49,6 @@ export const WebRtcPage: React.FC = () => {
         </p>
 
         <div className="demo-embed-wrapper">
-          <div className="demo-embed-header">
-            <span className="demo-embed-title">Demo C · WebRTC ICE Topology & Traversal Engine</span>
-            <span className="demo-embed-badge">LIVE SIMULATOR</span>
-          </div>
           <WebRtcTopologyDemo />
         </div>
       </section>
@@ -124,7 +120,7 @@ export const WebRtcPage: React.FC = () => {
 
       <hr className="editorial-divider" />
 
-      {/* Interactive Demo F: Network Resilience & Packet Recovery */}
+      {/* Interactive Network Resilience & Packet Recovery */}
       <section className="content-section">
         <h2 className="section-heading">Network Resilience & Packet Loss Recovery</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
@@ -132,10 +128,6 @@ export const WebRtcPage: React.FC = () => {
         </p>
 
         <div className="demo-embed-wrapper">
-          <div className="demo-embed-header">
-            <span className="demo-embed-title">Demo F · Network Resilience & Packet Loss Engine</span>
-            <span className="demo-embed-badge">LIVE SIMULATOR</span>
-          </div>
           <ResilienceDemo />
         </div>
       </section>

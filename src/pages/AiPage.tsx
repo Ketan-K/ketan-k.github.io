@@ -21,7 +21,7 @@ export const AiPage: React.FC = () => {
         </p>
       </header>
 
-      {/* Interactive Demo E: AI Token Streaming Profiler */}
+      {/* Interactive LLM Token Streaming Profiler */}
       <section className="content-section">
         <h2 className="section-heading">LLM Token Streaming Profiler & TTFT Benchmark</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
@@ -29,10 +29,6 @@ export const AiPage: React.FC = () => {
         </p>
 
         <div className="demo-embed-wrapper">
-          <div className="demo-embed-header">
-            <span className="demo-embed-title">Demo E · LLM Token Streaming Profiler</span>
-            <span className="demo-embed-badge">LIVE SIMULATOR</span>
-          </div>
           <AiStreamingDemo />
         </div>
       </section>
