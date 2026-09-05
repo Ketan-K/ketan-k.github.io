@@ -26,6 +26,61 @@
   color: var(--text-secondary);
 }
 
+.about-education-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-medium);
+  margin-top: 0.5rem;
+}
+
+.edu-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.edu-icon {
+  color: var(--accent-cyan);
+}
+
+.edu-body {
+  padding: 1.25rem;
+}
+
+.edu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.edu-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edu-degree {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.edu-year {
+  font-size: 0.8125rem;
+  color: var(--accent-cyan);
+}
+
+.edu-institution {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.edu-focus {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 0.35rem;
+}
+
 .about-resume-box {
   margin-top: 0.5rem;
   background: var(--bg-secondary);

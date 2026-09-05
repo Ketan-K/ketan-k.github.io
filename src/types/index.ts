@@ -4,6 +4,8 @@ export interface Project {
   title: string;
   tagline: string;
   role: string;
+  projectType: 'Production Enterprise System' | 'Production Client Application' | 'Production Backend Service';
+  clientOrContext: string;
   technologies: string[];
   githubUrl?: string;
   demoUrl?: string;
@@ -55,6 +57,15 @@ export interface ExperienceItem {
   tagline: string;
   achievements: string[];
   technologies: string[];
+  scaleMetrics?: string;
+}
+
+export interface EducationItem {
+  degree: string;
+  institution: string;
+  year: string;
+  location: string;
+  focus: string;
 }
 
 export interface TechStackCategory {
@@ -63,6 +74,8 @@ export interface TechStackCategory {
   items: {
     name: string;
     context: string;
+    usedIn: string[];
+    experienceYears?: string;
   }[];
 }
 

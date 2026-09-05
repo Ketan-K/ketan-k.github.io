@@ -1,5 +1,6 @@
 import React from 'react';
-import { User, Sparkles, Network, Cpu, FileText, Download, ExternalLink } from 'lucide-react';
+import { User, Sparkles, Network, Cpu, FileText, Download, ExternalLink, GraduationCap } from 'lucide-react';
+import { educationHistory } from '../../content/education';
 import './About.css';
 
 export const AboutSection: React.FC = () => {
@@ -11,38 +12,61 @@ export const AboutSection: React.FC = () => {
         <div className="section-header">
           <div className="section-label font-mono">
             <User size={14} />
-            <span>11 / ABOUT & PHILOSOPHY</span>
+            <span>11 / ABOUT & EDUCATION</span>
           </div>
           <h2 className="section-title">About Ketan Katore</h2>
           <p className="section-subtitle">
-            Engineering philosophy, background, and current technical interests.
+            Engineering philosophy, formal academic foundation in scientific computing, and active technical roadmap.
           </p>
         </div>
 
         <div className="about-grid">
-          {/* Main Statement */}
+          {/* Main Statement & Education */}
           <div className="about-main-text">
             <p className="about-lead">
-              I am a full-stack engineer focused on building real-time products and the distributed systems behind them.
+              I am a Senior Software Engineer focused on designing, scaling, and operating real-time communication platforms, WebRTC media topologies, and resilient backend systems.
             </p>
 
             <p>
-              Over the past 5+ years, I have architected and operated production software across the entire stack — specializing in low-latency WebRTC topologies, WebSocket clusters, resilient API gateways, and modern web application frontends.
+              Over 6+ years in production, I have taken end-to-end technical ownership — from architecting client-side media pipelines across web and Citrix VDI environments to load-balancing Janus media clusters and scaling services for ~20,000 daily users.
             </p>
 
             <p>
               I believe that software architecture should be driven by measurable operational constraints rather than vanity complexity. The best systems are fast, debuggable, resilient under network failure, and clear to reason about.
             </p>
 
+            {/* Academic Education Box */}
+            <div className="about-education-box tech-frame">
+              <div className="tech-frame-header">
+                <div className="edu-header-left font-mono">
+                  <GraduationCap size={15} className="edu-icon" />
+                  <span>ACADEMIC FOUNDATION</span>
+                </div>
+                <span className="badge badge-cyan font-mono">POSTGRADUATE DEGREE</span>
+              </div>
+              <div className="tech-frame-body edu-body">
+                {educationHistory.map((edu, idx) => (
+                  <div key={idx} className="edu-item">
+                    <div className="edu-title-row font-mono">
+                      <h4 className="edu-degree">{edu.degree}</h4>
+                      <span className="edu-year">{edu.year}</span>
+                    </div>
+                    <div className="edu-institution font-mono">{edu.institution} — {edu.location}</div>
+                    <p className="edu-focus">{edu.focus}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             {/* Canonical Resume Action Block */}
             <div className="about-resume-box tech-frame">
               <div className="resume-box-header font-mono">
                 <span className="resume-title">CANONICAL CURRICULUM VITAE</span>
-                <span className="badge badge-cyan">PDF · 74 KB</span>
+                <span className="badge badge-cyan">ORIGINAL PDF · 74 KB</span>
               </div>
               <div className="resume-box-body">
                 <p className="resume-desc">
-                  Detailed career history, architectural milestones, verified technologies, and educational background.
+                  Official 2-page summary containing verified employment history, enterprise platform scale, responsibilities, and technical competencies.
                 </p>
                 <div className="resume-actions-row">
                   <a
@@ -83,7 +107,7 @@ export const AboutSection: React.FC = () => {
                 <Network size={15} className="focus-item-icon" />
                 <div className="focus-item-text">
                   <span className="focus-title">Sub-500ms WebRTC AI Voice Agents</span>
-                  <span className="focus-sub">Full-duplex audio with real-time interruption handling</span>
+                  <span className="focus-sub">Full-duplex audio with real-time interruption handling and client-side VAD</span>
                 </div>
               </div>
 

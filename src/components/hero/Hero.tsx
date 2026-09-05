@@ -15,9 +15,9 @@ export const Hero: React.FC = () => {
           <div className="hero-meta font-mono">
             <span className="hero-meta-name">KETAN KATORE</span>
             <span className="hero-meta-divider">/</span>
-            <span className="hero-meta-title">FULL-STACK ENGINEER</span>
+            <span className="hero-meta-title">SENIOR SOFTWARE ENGINEER</span>
             <span className="hero-meta-divider">/</span>
-            <span className="hero-meta-exp">5+ YEARS EXP</span>
+            <span className="hero-meta-exp">6+ YEARS EXPERIENCE</span>
           </div>
 
           <h1 className="hero-headline">
@@ -27,26 +27,28 @@ export const Hero: React.FC = () => {
 
           <div className="hero-subtext">
             <p className="hero-summary">
-              Architecting low-latency communication engines, resilient distributed backend services, and streaming AI interfaces from first principles.
+              Specializing in high-scale WebRTC architectures (~20,000 DAU), distributed backend services, and robust full-stack applications with deep resilience engineering.
             </p>
           </div>
 
           <div className="hero-focus-tags">
-            <span className="focus-tag font-mono">Web</span>
-            <span className="focus-bullet">·</span>
-            <span className="focus-tag font-mono">Backend</span>
-            <span className="focus-bullet">·</span>
             <span className="focus-tag font-mono">WebRTC</span>
             <span className="focus-bullet">·</span>
-            <span className="focus-tag font-mono">Real-Time</span>
+            <span className="focus-tag font-mono">Real-Time Systems</span>
             <span className="focus-bullet">·</span>
-            <span className="focus-tag font-mono">AI</span>
+            <span className="focus-tag font-mono">TypeScript</span>
+            <span className="focus-bullet">·</span>
+            <span className="focus-tag font-mono">Node.js</span>
+            <span className="focus-bullet">·</span>
+            <span className="focus-tag font-mono">Angular / React</span>
+            <span className="focus-bullet">·</span>
+            <span className="focus-tag font-mono">Distributed Backends</span>
           </div>
 
           {/* Direct Actions & Resume Controls */}
           <div className="hero-actions">
             <a
-              href="https://github.com/ketan-k"
+              href="https://github.com/Ketan-K"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
@@ -57,7 +59,7 @@ export const Hero: React.FC = () => {
             </a>
 
             <a
-              href="https://linkedin.com/in/ketankatore"
+              href="https://linkedin.com/in/ketan-k"
               target="_blank"
               rel="noopener noreferrer"
               className="btn"
@@ -68,7 +70,7 @@ export const Hero: React.FC = () => {
             </a>
 
             <a
-              href="mailto:ketankatore7@gmail.com"
+              href="mailto:ketankatore.9@gmail.com"
               className="btn"
               aria-label="Send email to Ketan Katore"
             >

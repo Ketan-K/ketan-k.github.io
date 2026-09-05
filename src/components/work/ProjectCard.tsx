@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Project } from '../../types';
-import { ChevronDown, ChevronUp, ExternalLink, Layers, AlertTriangle, Lightbulb, Cpu, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, ExternalLink, Layers, AlertTriangle, Lightbulb, Cpu, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import './Work.css';
 
@@ -22,8 +22,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, defaultExpand
         <div className="project-summary-block">
           <div className="project-title-row">
             <h3 className="project-title">{project.title}</h3>
+            <div className="project-type-badge font-mono">
+              <ShieldCheck size={11} className="badge-icon-verified" />
+              <span>{project.projectType}</span>
+            </div>
             <div className="project-role-badge font-mono">{project.role}</div>
           </div>
+
+          <div className="project-context-row font-mono">
+            <span className="context-label">CONTEXT:</span>
+            <span className="context-val">{project.clientOrContext}</span>
+          </div>
+
           <p className="project-tagline">{project.tagline}</p>
 
           <div className="project-tech-tags">

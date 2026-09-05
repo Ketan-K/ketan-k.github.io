@@ -1,6 +1,6 @@
 import React from 'react';
 import { experienceHistory } from '../../content/experience';
-import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
+import { Briefcase, Calendar, MapPin, CheckCircle2, Activity } from 'lucide-react';
 import './Experience.css';
 
 export const ExperienceTimeline: React.FC = () => {
@@ -12,9 +12,9 @@ export const ExperienceTimeline: React.FC = () => {
             <Briefcase size={14} />
             <span>07 / PROFESSIONAL EXPERIENCE</span>
           </div>
-          <h2 className="section-title">5+ Years of Production Engineering</h2>
+          <h2 className="section-title">6+ Years of Production Engineering</h2>
           <p className="section-subtitle">
-            A track record of designing, scaling, and maintaining mission-critical real-time applications and cloud infrastructure.
+            A comprehensive track record of designing, scaling, and maintaining mission-critical real-time applications, media streaming platforms, and distributed cloud services.
           </p>
         </div>
 
@@ -45,10 +45,17 @@ export const ExperienceTimeline: React.FC = () => {
                   </div>
                 </div>
 
+                {exp.scaleMetrics && (
+                  <div className="exp-scale-badge font-mono">
+                    <Activity size={13} className="scale-icon" />
+                    <span>{exp.scaleMetrics}</span>
+                  </div>
+                )}
+
                 <p className="exp-tagline">{exp.tagline}</p>
 
                 <div className="exp-achievements-list">
-                  <span className="achievements-heading font-mono">KEY TECHNICAL CONTRIBUTIONS:</span>
+                  <span className="achievements-heading font-mono">KEY TECHNICAL CONTRIBUTIONS & OWNERSHIP:</span>
                   <ul className="achievements-items">
                     {exp.achievements.map((ach, aIdx) => (
                       <li key={aIdx}>

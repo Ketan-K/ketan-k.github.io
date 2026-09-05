@@ -17,10 +17,10 @@ export const Footer: React.FC = () => {
           <div className="footer-brand">
             <Terminal size={16} className="footer-brand-icon" />
             <span className="footer-brand-title">Ketan Katore</span>
-            <span className="footer-brand-role">— Full-Stack & Real-Time Systems</span>
+            <span className="footer-brand-role">— Senior Software Engineer (Real-Time & Full-Stack)</span>
           </div>
           <p className="footer-tagline">
-            Engineered with React 19, TypeScript, and modern CSS. Fast, accessible, zero bloat.
+            Engineered with React 19, TypeScript, and modern CSS. Fast, accessible, and grounded in production evidence.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
             <span>Resume</span>
           </a>
           <a
-            href="https://github.com/ketan-k"
+            href="https://github.com/Ketan-K"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-link"
@@ -46,7 +46,7 @@ export const Footer: React.FC = () => {
             <span>GitHub</span>
           </a>
           <a
-            href="https://linkedin.com/in/ketankatore"
+            href="https://linkedin.com/in/ketan-k"
             target="_blank"
             rel="noopener noreferrer"
             className="footer-link"
@@ -56,7 +56,7 @@ export const Footer: React.FC = () => {
             <span>LinkedIn</span>
           </a>
           <a
-            href="mailto:ketankatore7@gmail.com"
+            href="mailto:ketankatore.9@gmail.com"
             className="footer-link"
             aria-label="Email Ketan Katore"
           >

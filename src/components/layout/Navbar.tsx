@@ -16,11 +16,12 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { label: 'Work', href: '#work' },
+    { label: 'Experience', href: '#experience' },
     { label: 'Demos', href: '#demos' },
     { label: 'Systems', href: '#systems' },
     { label: 'WebRTC', href: '#webrtc' },
     { label: 'AI Lab', href: '#ailab' },
-    { label: 'Experience', href: '#experience' },
+    { label: 'Stack', href: '#stack' },
     { label: 'Writing', href: '#writing' },
     { label: 'About', href: '#about' },
   ];
@@ -32,7 +33,7 @@ export const Navbar: React.FC = () => {
         <a href="#" className="navbar-brand">
           <Terminal size={17} className="navbar-brand-icon" />
           <span className="navbar-brand-name">Ketan Katore</span>
-          <span className="navbar-brand-role">Full-Stack</span>
+          <span className="navbar-brand-role">Senior Software Engineer</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -55,7 +56,7 @@ export const Navbar: React.FC = () => {
             <span className="status-text">OPEN TO REMOTE OPPORTUNITIES</span>
           </div>
           <a
-            href="mailto:ketankatore7@gmail.com"
+            href="mailto:ketankatore.9@gmail.com"
             className="btn btn-primary btn-sm"
           >
             Contact
@@ -94,7 +95,7 @@ export const Navbar: React.FC = () => {
           </nav>
           <div className="mobile-drawer-footer">
             <a
-              href="mailto:ketankatore7@gmail.com"
+              href="mailto:ketankatore.9@gmail.com"
               className="btn btn-primary"
               style={{ width: '100%' }}
             >

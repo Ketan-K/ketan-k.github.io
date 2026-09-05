@@ -2,225 +2,259 @@ import { Project } from '../types';
 
 export const projects: Project[] = [
   {
-    id: 'webrtc-sfu-mesh',
+    id: 'anymeeting-webrtc-conferencing',
     number: '01',
-    title: 'Real-Time WebRTC Media Gateway & Collaboration Engine',
-    tagline: 'A low-latency media and signaling topology supporting selective forwarding, dynamic bitrate adaptation, and ephemeral room state.',
-    role: 'Full-Stack Architecture & Real-Time Engineering',
-    technologies: ['TypeScript', 'WebRTC', 'Node.js', 'WebSockets', 'Redis', 'React'],
-    githubUrl: 'https://github.com/ketan-k',
+    title: 'Intermedia AnyMeeting — High-Scale WebRTC Video Conferencing',
+    tagline: 'Production real-time communication platform serving ~20,000 daily users with adaptive bitrate, ICE Restart, VDI offloading, and ML video processing.',
+    role: 'Senior Software Engineer / Senior WebRTC Engineer',
+    projectType: 'Production Enterprise System',
+    clientOrContext: 'Spring Computing Technologies / Intermedia',
+    technologies: ['TypeScript', 'WebRTC', 'Node.js', 'Citrix Workspace SDK', 'Google MediaPipe', 'Banuba SDK', 'FreeSWITCH', 'STUN/TURN', 'ICE Restart', 'getStats()'],
     problem:
-      'Full-mesh WebRTC degrades exponentially (O(N²) uplink/downlink) beyond 4 peers. Scaling to larger group sessions with disparate network conditions required an architecture that dynamically transitions between direct P2P mesh and selective forwarding while handling renegotiations seamlessly.',
+      'Enterprise users across corporate firewalls, unstable home networks, and virtual desktop (VDI) environments experienced connection drops, peripheral hot-swapping stalls, and high server CPU load during high-density multi-party video meetings.',
     architecture: {
       description:
-        'Client connects via WebSocket to a Node.js signaling cluster backed by Redis pub/sub for room discovery and ICE exchange. Media streams negotiate STUN/TURN for NAT traversal with fallback to a Selective Forwarding Unit (SFU) for multi-party bandwidth optimization.',
-      diagram: `[Browser Peer A] ──(WS Signaling)──> [Signaling Cluster] ──(Pub/Sub)──> [Redis Room State]
-       │                                     │
-  (ICE / STUN / TURN)               (Session Coordination)
-       │                                     │
-       ▼                                     ▼
-[WebRTC Peer-to-Peer] <───── fallback ─────> [Selective Forwarding Unit (SFU)]
-       │                                     │
-[Browser Peer B] <───────────────────────────┘`,
+        'Client-side media pipeline executing adaptive bitrate controls, local VDI hardware acceleration via Citrix Workspace SDK, and ML-powered background segmentation. Negotiates ICE restarts on network handovers with automatic TURN relay failovers.',
+      diagram: `[Browser / Citrix VDI Client] ──(WebRTC Media)──> [Selective Forwarding Unit]
+             │                                              │
+      (Citrix SDK Offload)                         (FreeSWITCH Recording)
+             │                                              │
+  [Local GPU Backgrounds]                                   ▼
+(MediaPipe / Banuba WASM)                      [Composite Layout Renderer]
+             │
+      (ICE Restart Loop)
+             ▼
+[STUN / TURN Relay Fallback]`,
       highlights: [
-        'Dynamic topology transition (P2P mesh under 4 peers → SFU routing for 4+)',
-        'Signaling decoupled from media routing via Redis Pub/Sub backplane',
-        'Asymmetric ICE candidate trickle handling to eliminate connection stalls',
-        'Client-side RTCP receiver report parsing for adaptive bitrate hinting'
+        'Resilient ICE Restart state machine recovering dropped peer connections in <800ms',
+        'VDI media offloading via Citrix Workspace SDK reducing server CPU load by over 60%',
+        'Client-side ML virtual background segmentation via WebAssembly (Google MediaPipe & Banuba)',
+        'Adaptive bitrate and substream selection driven by real-time getStats() RTCP telemetry'
       ]
     },
     engineeringDecisions: [
       {
-        title: 'Trickle ICE with Candidate Bundling',
+        title: 'State Machine Driven ICE Restart',
         description:
-          'Sent ICE candidates incrementally over WebSocket signaling rather than waiting for complete gathering, reducing initial time-to-first-frame by ~65% across cellular and restricted NAT connections.'
+          'Constructed an automated ICE Restart state machine that detects TCP/UDP socket freezing via getStats() telemetry and renegotiates ICE candidates in background without terminating active audio/video tracks.'
       },
       {
-        title: 'Redis Pub/Sub Room State with Ephemeral Leases',
+        title: 'VDI Media Processing Offload',
         description:
-          'Represented active participants as key-value pairs with rolling 15s TTLs refreshed via WebSocket ping-pongs, eliminating zombie participants on unexpected socket disconnects without complex distributed consensus.'
+          'Leveraged Citrix Workspace SDK to offload video encoding/decoding and capture from virtualized cloud desktops directly to user endpoint hardware, resolving severe frame drop issues in enterprise virtualized environments.'
       },
       {
-        title: 'Client-Side RTCP Bandwidth Probing',
+        title: 'Hardware & Peripheral Hot-Swap Handler',
         description:
-          'Monitored round-trip time (RTT) and packet loss via standard getStats() APIs to gracefully step down stream resolution before TCP/UDP congestion caused video freezing.'
+          'Built a fast device manager that listens to navigator.mediaDevices.ondevicechange events, gracefully transitioning audio/video streams to newly attached USB peripherals with zero stream recreation delay.'
       }
     ],
     challenges: [
       {
-        title: 'Symmetric NAT Traversal & STUN Failures',
+        title: 'Audio/Video Desync under High Jitter',
         description:
-          'Enterprise firewalls with symmetric NAT assign random ports per destination. Handled by establishing automatic TURN relay fallbacks and prioritizing relay candidates when initial STUN binding requests timed out after 400ms.'
+          'Network packet jitter caused occasional drift between audio and video frames. Resolved by fine-tuning jitter buffer playout targets and dynamically adjusting substream resolution when packet loss exceeded 8%.'
       },
       {
-        title: 'Signaling Race Conditions During Glare',
+        title: 'FreeSWITCH Recording Layout Synchronization',
         description:
-          'When both peers initiate renegotiation simultaneously (glare), offers collided. Resolved using the "Perfect Negotiation" pattern with polite/impolite peer role assignment.'
+          'Meeting recordings occasionally had missing video tiles during mid-call renegotiations. Re-engineered FreeSWITCH recording layouts to dynamically listen for media state events and update canvas tiles in real time.'
       }
     ],
     whatILearned:
-      'Real-time networking is fundamentally about state synchronization under unpredictable latency and packet loss. Handling edge-case state machine transitions (disconnects, renegotiation glare, NAT timeouts) is 80% of the engineering effort.'
+      'In high-scale enterprise WebRTC, real-world network resilience (ICE Restart, TURN relays, peripheral hot-swapping) and hardware heterogeneity matter just as much as server bandwidth capacity.'
   },
   {
-    id: 'event-streaming-presence',
+    id: 'zultys-zac-unified-communications',
     number: '02',
-    title: 'Distributed Event Streaming & Real-Time Presence Server',
-    tagline: 'High-concurrency WebSocket cluster with Redis cluster pub/sub, heartbeat monitoring, and distributed user presence tracking.',
-    role: 'Backend & Distributed Systems Design',
-    technologies: ['Node.js', 'TypeScript', 'WebSockets', 'Redis Streams', 'Docker', 'React'],
-    githubUrl: 'https://github.com/ketan-k',
+    title: 'Zultys ZAC — Unified Communications & Janus Media Server',
+    tagline: 'Enterprise telephony and business collaboration platform with horizontal Janus Media Server distribution, PBX call flows, and real-time state synchronization.',
+    role: 'WebRTC & Full-Stack Developer',
+    projectType: 'Production Enterprise System',
+    clientOrContext: 'Spring Computing Technologies / Zultys',
+    technologies: ['Angular', 'Node.js', 'TypeScript', 'Janus Media Server', 'WebSockets', 'SIP', 'Redis', 'RxJS', 'PBX'],
     problem:
-      'Single-node WebSocket servers cannot scale horizontally without shared state, while broadcasting global presence updates across thousands of concurrent clients risks generating an O(N) message storm that exhausts CPU and network bandwidth.',
+      'Traditional enterprise PBX telephony hardware was siloed from browser clients. Scaling ad-hoc multi-party audio/video conferencing required horizontally distributing Janus media instances while keeping calling state in sync.',
     architecture: {
       description:
-        'Stateless Node.js WebSocket gateway instances behind an L4/L7 load balancer with sticky sessions. Ephemeral presence is stored in Redis Hashes with delta broadcasts batched into 100ms throttle windows.',
-      diagram: `[Client Fleet] ──(WSS with TLS)──> [Reverse Proxy / LB]
-                                          │
-                  ┌───────────────────────┴───────────────────────┐
-                  ▼                                               ▼
-     [WS Gateway Node 1]                             [WS Gateway Node 2]
-                  │                                               │
-                  └───────────────> [Redis Cluster] <─────────────┘
-                                  (Streams + Hashes)
-                                          │
-                                  [Worker Service]
-                             (Batch Presence Deltas)`,
+        'Angular web application connecting to a Node.js signaling and room management middleware that load-balances conference rooms across a distributed cluster of Janus Media Servers with Redis-backed state coordination.',
+      diagram: `[Angular Web Client] ──(WSS Signaling)──> [Node.js Middleware Cluster]
+             │                                          │
+    (SIP / PBX Bridge)                         (Room Lifecycle / LB)
+             │                                          │
+             ▼                                          ▼
+   [Enterprise PBX] ◄─── Call Control ────► [Janus Media Server Cluster]
+(Park / Transfer / Bind)                     (SFU / Audio Mixing / Video)`,
       highlights: [
-        'Stateless WebSocket gateways allowing zero-downtime rolling deploys',
-        '100ms delta-batching engine to turn O(N²) presence broadcasts into O(N) compressed updates',
-        'Custom binary/JSON packet serializer with schema validation',
-        'Automated zombie connection termination using synchronized heartbeat ticks'
+        'Horizontally scalable Node.js middleware managing Janus Media Server room lifecycles',
+        'Integrated enterprise PBX features: Call Park, Call Transfer, Device Binding, and Presence',
+        'Pre-call Video Preview Widget validating camera/microphone permissions and stream health',
+        'State synchronization between Angular client and SIP signaling via RxJS streams'
       ]
     },
     engineeringDecisions: [
       {
-        title: 'Throttled Delta Broadcasts over Full State Sync',
+        title: 'Janus Media Instance Load Distribution',
         description:
-          'Instead of publishing full room participant rosters on every join/leave, the server collects presence changes into 100ms buckets and emits delta patches, reducing network egress by over 80% during surge events.'
+          'Implemented server-side load distribution across multiple Janus SFU instances based on active stream counts and CPU metrics, preventing single-node bottlenecks.'
       },
       {
-        title: 'Liveness Heartbeats with Grace Periods',
+        title: 'Pre-Flight Hardware Validation Widget',
         description:
-          'Implemented server-initiated ping intervals (25s) with a 5s grace period. Sockets missing consecutive pongs are pruned and evicted from Redis immediately to prevent ghost presences.'
+          'Created a high-performance Angular video preview widget that verifies camera constraints, audio levels, and network connectivity before allowing users to join conference rooms.'
       }
     ],
     challenges: [
       {
-        title: 'Connection Thundering Herd on Server Restart',
+        title: 'Call Parking & Device Binding State Desynchronization',
         description:
-          'When an instance restarted, thousands of clients attempted instant reconnection, overwhelming the server. Fixed by enforcing client-side exponential backoff with full jitter.'
+          'When users switched devices during active PBX calls, call states occasionally locked. Solved by introducing centralized Redis distributed locks and atomic state broadcast updates.'
       }
     ],
     whatILearned:
-      'At high concurrency, broadcast volume is the primary bottleneck. Batching, delta compression, and disciplined connection throttling protect infrastructure far better than just scaling instances.'
+      'Bridging legacy enterprise PBX telephony protocols (SIP) with modern WebSockets and WebRTC requires strict isolation between media routing and signaling state machines.'
   },
   {
-    id: 'ai-streaming-tool-gateway',
+    id: 'nft-auction-realtime-engine',
     number: '03',
-    title: 'Autonomous AI Tool Execution & Streaming Proxy',
-    tagline: 'An end-to-end streaming gateway connecting browser clients to LLMs with real-time token streaming, function calling sandboxes, and latency profiling.',
-    role: 'Full-Stack & AI Systems Engineering',
-    technologies: ['TypeScript', 'Node.js', 'Server-Sent Events', 'React', 'OpenAI/Anthropic API', 'Vite'],
-    githubUrl: 'https://github.com/ketan-k',
+    title: 'NFT Marketplace & High-Concurrency Real-Time Auction Engine',
+    tagline: 'Real-time bidding synchronization, modular Node.js backend architecture, and multi-currency cryptocurrency wallet transaction workflows.',
+    role: 'Full-Stack Developer',
+    projectType: 'Production Client Application',
+    clientOrContext: 'Humation Limited',
+    technologies: ['Node.js', 'Angular', 'MongoDB', 'Socket.io', 'JWT', 'Crypto Wallets (BTC, ETH, LTC)', 'REST APIs'],
     problem:
-      'Standard HTTP request-response patterns result in high perceived latency when waiting for LLM completions and structured function executions. Users need instant visual feedback with progressive token delivery, tool invocation transparency, and resilient error recovery.',
+      'High-velocity bidding surges created database lock contention and race conditions where multiple bidders submitted identical bids within milliseconds.',
     architecture: {
       description:
-        'Browser opens a Server-Sent Events (SSE) or WebSocket stream to a Node.js streaming proxy. The proxy negotiates chunked transfer with the model provider, yields tokens progressively, intercepts function calls, runs sandboxed validation, and resumes generation.',
-      diagram: `[Browser Client] ──(SSE / Fetch Stream)──> [Streaming Gateway]
-                                                    │
-                                  ┌─────────────────┴─────────────────┐
-                                  ▼                                   ▼
-                        [LLM Provider Stream]               [Tool Sandbox Runner]
-                        (Chunked SSE / Delta)               (Validated Exec)
-                                  │                                   │
-                                  └───────────────┬───────────────────┘
+        'Modular Node.js service architecture with Socket.io event buses for millisecond-latency bid broadcasting, backed by MongoDB atomic operations and multi-currency wallet integrations.',
+      diagram: `[Bidding Client Fleet] ──(Socket.io)──> [Modular Node.js Gateway]
+                                                  │
+                                   ┌──────────────┴──────────────┐
+                                   ▼                             ▼
+                        [Atomic Bid Coordinator]      [Crypto Wallet Engine]
+                          (MongoDB In-Memory)           (BTC / ETH / LTC APIs)
+                                   │                             │
+                                   └──────────────┬──────────────┘
                                                   ▼
-                                       [Progressive Token Yield]
-                                                  ▼
-                                      [Interactive Stream UI]`,
+                                       [Real-Time State Broadcast]`,
       highlights: [
-        'Sub-200ms Time-to-First-Token (TTFT) through immediate header flushing',
-        'Streaming JSON parser capable of extracting structured tool arguments in-flight',
-        'Telemetry pipeline tracking TTFT, tokens/sec, and token consumption in real time',
-        'Automatic retry with exponential backoff on provider rate limits without dropping connection'
+        'Sub-50ms real-time auction synchronization across concurrent bidders',
+        'Modularized legacy monolithic backend into clean domain-oriented services',
+        'Secure multi-currency wallet deposit, balance locking, and withdrawal workflows',
+        'Role-based JWT authentication and rate-limited transaction endpoints'
       ]
     },
     engineeringDecisions: [
       {
-        title: 'Server-Sent Events (SSE) vs WebSockets for Monodirectional Streams',
+        title: 'Atomic Bid Serialization',
         description:
-          'Chose SSE with HTTP/2 multiplexing for generation streams because it provides native browser auto-reconnect, zero binary framing overhead, and seamless CDN/proxy compatibility.'
-      },
-      {
-        title: 'Progressive Incremental JSON Token Extraction',
-        description:
-          'Constructed a resilient token accumulator that parses partial JSON payloads during tool calls, allowing the UI to render tool arguments (e.g. searching, executing) before completion.'
+          'Enforced atomic conditional updates in MongoDB with monotonic bid sequence checks, ensuring that identical concurrent bids are deterministically ordered without double-acceptance.'
       }
     ],
     challenges: [
       {
-        title: 'Buffer Truncation & Stream Stalls',
+        title: 'High-Concurrency Socket Fanout',
         description:
-          'Network buffers between reverse proxies and clients occasionally held chunks until buffer filled. Resolved by explicitly setting `X-Accel-Buffering: no` and disabling gzip on streaming endpoints.'
+          'Broadcasting bid deltas to thousands of connected clients during final seconds of auctions created CPU spikes. Fixed by debouncing non-critical state updates and prioritizing top-bid broadcasts.'
       }
     ],
     whatILearned:
-      'AI UX is fundamentally a streaming systems problem. Perceived responsiveness depends far more on Time-to-First-Token and smooth visual progress than total generation duration.'
+      'Real-time financial transactions require strict atomicity contracts. Socket delivery speed must be backed by deterministic backend state guards.'
   },
   {
-    id: 'high-throughput-cache-api',
+    id: 'cloud-pos-reporting-server',
     number: '04',
-    title: 'Multi-Tier Edge Cache & High-Throughput API Gateway',
-    tagline: 'Tiered caching architecture combining in-memory L1 cache, Redis L2, and database query optimization with stampede protection.',
-    role: 'Backend Engineering & Performance Optimization',
-    technologies: ['TypeScript', 'Node.js', 'Redis', 'PostgreSQL', 'Docker'],
-    githubUrl: 'https://github.com/ketan-k',
+    title: 'Cloud Point of Sale Ecosystem & Automated Analytics Server',
+    tagline: 'End-to-end POS features, automated Excel/PDF sales reporting engine, licensing, and client onboarding workflows.',
+    role: 'Associate Software Engineer',
+    projectType: 'Production Backend Service',
+    clientOrContext: 'OneGreenDiary Software Pvt. Ltd.',
+    technologies: ['Angular', 'Node.js', 'Sails.js', 'MySQL', 'REST APIs', 'PDF/Excel Generators', 'HTML5/CSS3'],
     problem:
-      'High-read traffic spikes on product metadata endpoints generated database lock contention and cache stampedes (dog-piling) when popular cache entries expired simultaneously.',
+      'Enterprise retail clients needed high-throughput checkout processing alongside automated daily, weekly, and monthly consolidated sales analytics delivered in PDF and Excel formats.',
     architecture: {
       description:
-        'Two-tier caching strategy: ultra-fast in-process LRU cache (L1, ~0.1ms) backed by distributed Redis (L2, ~2-4ms) and PostgreSQL with read-replicas. Employs singleflight request coalescing to prevent stampedes.',
-      diagram: `[Incoming Request] ──> [API Gateway]
-                              │
-                    ┌─────────┴─────────┐
-             [L1 Memory Cache]     (Miss)
-                    │                   ▼
-                 (Hit ~0.1ms)    [L2 Redis Cache]
-                                        │
-                                 ┌──────┴──────┐
-                            (Hit ~3ms)      (Miss)
-                                               ▼
-                                    [Singleflight Lock]
-                                               ▼
-                                    [PostgreSQL Primary/Replica] (~40ms)`,
+        'Angular web POS interface integrated with a Sails.js / Node.js API server and dedicated background data aggregation workers generating scheduled reports from MySQL read tables.',
+      diagram: `[Retail POS Client] ──(REST / JSON)──> [Sails.js API Layer]
+                                             │
+                              ┌──────────────┴──────────────┐
+                              ▼                             ▼
+                     [Checkout Transactions]       [Scheduled Reporting Server]
+                          (MySQL ACID)              (Aggregation Worker Pool)
+                                                            │
+                                                            ▼
+                                                   [Excel & PDF Generators]`,
       highlights: [
-        'Singleflight request coalescing (1 DB hit for 500 concurrent misses on same key)',
-        'Probabilistic early expiration (XFetch algorithm) to refresh cache before expiry',
-        'Tiered TTLs (L1: 15s, L2: 10min) to balance freshness with cluster memory limits',
-        'Structured telemetry logging hit/miss ratios and p99 query latency'
+        'Automated background reporting server generating daily/weekly/monthly PDF & Excel sheets',
+        'Licensing, feature toggles, client onboarding, and FAQ content management systems',
+        'Low-latency checkout integration with synchronized client-server transaction records',
+        'Optimized SQL queries and aggregation pipelines for rapid retail analytics retrieval'
       ]
     },
     engineeringDecisions: [
       {
-        title: 'Singleflight Promise Deduplication',
+        title: 'Asynchronous Batch Analytics Generation',
         description:
-          'Grouped identical in-flight cache misses onto a single shared database query promise, completely preventing database connection pool exhaustion during sudden cache invalidations.'
-      },
-      {
-        title: 'Probabilistic Cache Refresh (XFetch)',
-        description:
-          'Recomputed cache entries ahead of time based on access frequency and compute cost, reducing p99 latency spikes during cache churn.'
+          'Decoupled computationally expensive Excel and PDF report generation into background worker queues, ensuring zero latency degradation for front-counter retail checkout transactions.'
       }
     ],
     challenges: [
       {
-        title: 'Cache Invalidation Race Conditions',
+        title: 'Large Dataset Memory Spikes in PDF Generation',
         description:
-          'Concurrent writes could cause stale cache writes after DB update. Solved by invalidating cache keys in transactional post-commit hooks and employing short TTL safety nets.'
+          'Exporting multi-month transaction histories caused Node.js process memory spikes. Solved by streaming records through chunked transformers rather than buffering full datasets in memory.'
       }
     ],
     whatILearned:
-      'Caching without stampede protection is a liability under production spikes. Proper tiered caching requires explicit concurrency locks and probabilistic pre-fetching.'
+      'Business-critical transactional systems require strict performance isolation between real-time operational flows (checkout) and asynchronous analytical workloads (reporting).'
+  },
+  {
+    id: 'farmer-consumer-direct-marketplace',
+    number: '05',
+    title: 'Farmer-to-Consumer Direct Marketplace & Group Booking Engine',
+    tagline: 'Mobile-first group booking platform connecting farmers directly to consumers with dynamic combo pricing and WhatsApp deep-linking.',
+    role: 'Backend Developer',
+    projectType: 'Production Backend Service',
+    clientOrContext: 'Agricultural Direct Commerce Platform',
+    technologies: ['Node.js', 'Express', 'MySQL', 'REST APIs', 'WhatsApp Integration', 'Data Modeling'],
+    problem:
+      'Smallholder farmers faced heavy distributor margins. Consumers needed an intuitive way to pool demand into group bookings for bulk fresh produce delivery.',
+    architecture: {
+      description:
+        'Node.js REST backend orchestrating high-volume inventory and transaction models, area-based demand aggregation, dynamic combos, and WhatsApp sharing deep-links for viral community pooling.',
+      diagram: `[Mobile Web Consumers] ──(Group Bookings)──> [Node.js Express API]
+                                                 │
+                                  ┌──────────────┴──────────────┐
+                                  ▼                             ▼
+                      [Area Demand Aggregator]       [WhatsApp Deep-Link Engine]
+                        (Dynamic Combos / Pool)        (Viral Group Sharing)
+                                  │                             │
+                                  └──────────────┬──────────────┘
+                                                 ▼
+                                        [MySQL Order Engine]`,
+      highlights: [
+        'Dynamic combo management and automated demand pooling data models',
+        'Area-based customer outreach and neighborhood drop-off coordination',
+        'WhatsApp deep-linking integration to drive community group purchases',
+        'High-volume transactional data models with inventory reservation locks'
+      ]
+    },
+    engineeringDecisions: [
+      {
+        title: 'Time-Limited Inventory Reservation Locks',
+        description:
+          'Built temporary inventory reservation locks during group-booking formation to prevent inventory over-allocation while consumers pooled orders.'
+      }
+    ],
+    challenges: [
+      {
+        title: 'Concurrent Group-Booking Expiry Sync',
+        description:
+          'Handling sudden demand pool expiration across multiple neighborhoods required reliable cron dispatchers with transactional MySQL status updates.'
+      }
+    ],
+    whatILearned:
+      'Designing consumer marketplaces requires balancing flexible dynamic business models with bulletproof database inventory locking.'
   }
 ];

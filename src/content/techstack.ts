@@ -3,69 +3,176 @@ import { TechStackCategory } from '../types';
 export const techStackCategories: TechStackCategory[] = [
   {
     category: 'LANGUAGES',
-    description: 'Strongly typed and modern JavaScript ecosystems.',
+    description: 'Strongly typed and modern JavaScript ecosystems used across production applications.',
     items: [
-      { name: 'TypeScript', context: 'Primary language across frontend, backend, and distributed services.' },
-      { name: 'JavaScript (ESNext)', context: 'Deep knowledge of event loop, microtasks, Web Workers, and DOM engines.' },
-      { name: 'SQL', context: 'Relational query optimization, indexing strategies, transactions, and migrations.' },
-      { name: 'HTML5 / CSS3', context: 'Semantic markup, accessibility (ARIA), modern CSS layouts, responsive architecture.' }
+      {
+        name: 'TypeScript',
+        context: 'Primary language across enterprise WebRTC clients, Node.js backend services, and interactive frontend systems.',
+        usedIn: ['Intermedia AnyMeeting', 'Spring Computing Technologies', 'AI Streaming Profiler', 'Janus Middleware'],
+        experienceYears: '4+ Years'
+      },
+      {
+        name: 'JavaScript (ES6+)',
+        context: 'Deep expertise in asynchronous programming, event loop mechanics, Web Workers, and DOM engine performance.',
+        usedIn: ['Spring Computing', 'Humation Limited', 'OneGreenDiary', 'Core Real-Time Systems'],
+        experienceYears: '6+ Years'
+      },
+      {
+        name: 'HTML5 & CSS3 (SASS / LESS)',
+        context: 'Modern CSS layouts, design tokens, accessible ARIA components, responsive viewport architectures.',
+        usedIn: ['Enterprise Telephony UI', 'Cloud POS Frontend', 'AnyMeeting Video Controls'],
+        experienceYears: '6+ Years'
+      }
     ]
   },
   {
-    category: 'REALTIME & NETWORKING',
-    description: 'Core specialty in low-latency communication and protocols.',
+    category: 'REAL-TIME & COMMUNICATIONS',
+    description: 'Core engineering specialty in media streaming, signaling, and protocol design.',
     items: [
-      { name: 'WebRTC', context: 'Signaling, ICE/STUN/TURN, RTCPeerConnection, DataChannels, media tracks, SFU basics.' },
-      { name: 'WebSockets (ws)', context: 'High-concurrency servers, heartbeat liveness, protocol framing, multiplexing.' },
-      { name: 'Server-Sent Events', context: 'Progressive token streaming, HTTP/2 multiplexing, auto-reconnection.' },
-      { name: 'TCP / UDP / HTTP/2 / HTTP/3', context: 'Transport characteristics, congestion control, packet loss recovery.' }
+      {
+        name: 'WebRTC',
+        context: 'RTCPeerConnection, ICE Restart, SDP offer/answer negotiation, MediaStreams, device management, getStats() telemetry.',
+        usedIn: ['Intermedia AnyMeeting', 'Zultys ZAC', 'Interactive WebRTC Demos'],
+        experienceYears: '5+ Years'
+      },
+      {
+        name: 'Media Servers (Janus, SFU / MCU)',
+        context: 'Room lifecycle management, horizontal media cluster load distribution, selective forwarding, and audio mixing.',
+        usedIn: ['Zultys UC Telephony', 'Janus Middleware Engine'],
+        experienceYears: '3+ Years'
+      },
+      {
+        name: 'WebSockets & Socket.io',
+        context: 'High-concurrency bidirectional messaging, heartbeat keepalives, real-time presence tracking, and auction synchronization.',
+        usedIn: ['Spring Computing UC', 'Humation NFT Auction Engine', 'Realtime Event Bus Demo'],
+        experienceYears: '5+ Years'
+      },
+      {
+        name: 'Networking Protocols (SIP, RTP/RTCP, STUN/TURN, ICE, TCP/UDP)',
+        context: 'Enterprise PBX SIP bridges, SRTP encryption, NAT hole punching, TURN relay fallbacks, jitter analysis.',
+        usedIn: ['Intermedia AnyMeeting', 'Zultys PBX Integration', 'WebRTC Protocol Map'],
+        experienceYears: '5+ Years'
+      }
     ]
   },
   {
-    category: 'FRONTEND',
-    description: 'Component architecture, state machines, and modern rendering.',
+    category: 'FRONTEND FRAMEWORKS & STATE',
+    description: 'Modern component architectures, reactive streams, and state synchronization.',
     items: [
-      { name: 'React 19 / 18', context: 'Concurrent rendering, custom hooks, context architecture, optimistic mutations.' },
-      { name: 'Vite / Build Tooling', context: 'ESM bundling, tree-shaking, code-splitting, asset optimization.' },
-      { name: 'Modern CSS & Systems', context: 'Design tokens, CSS variables, container queries, CSS modules, minimal overhead.' },
-      { name: 'Browser Performance', context: 'Core Web Vitals, memory profiling, frame rate budgeting, layout shift prevention.' }
+      {
+        name: 'Angular & RxJS',
+        context: 'Enterprise single-page application architectures, observable streams, state synchronization with real-time backends.',
+        usedIn: ['Zultys ZAC Unified Communications', 'Cloud POS Ecosystem', 'NFT Bidding Platform'],
+        experienceYears: '4+ Years'
+      },
+      {
+        name: 'React & Next.js',
+        context: 'Concurrent rendering, modern hooks, Vite tooling, optimistic UI state machines, and streaming interfaces.',
+        usedIn: ['Personal Portfolio', 'AI Systems Lab', 'Client Real-Time Interfaces'],
+        experienceYears: '3+ Years'
+      },
+      {
+        name: 'State Management & Synchronization',
+        context: 'RxJS BehaviorSubjects, optimistic mutations, client-side delta buffering, and real-time state reconciliation.',
+        usedIn: ['AnyMeeting Device State', 'Zultys PBX Calling State', 'Failure Resilience State Machine'],
+        experienceYears: '5+ Years'
+      }
     ]
   },
   {
-    category: 'BACKEND & SERVERS',
-    description: 'Scalable service architectures, API design, and asynchronous workers.',
+    category: 'BACKEND & MICROSERVICES',
+    description: 'Scalable service architectures, API gateway design, and enterprise middleware.',
     items: [
-      { name: 'Node.js', context: 'Event loop tuning, stream pipelines, worker threads, async I/O.' },
-      { name: 'Express / Fastify', context: 'High-throughput REST APIs, middleware pipelines, error handling.' },
-      { name: 'API Gateway Design', context: 'Authentication, rate limiting, request validation, CORS, reverse proxying.' },
-      { name: 'Async Task Queues', context: 'Job workers, retry policies, backpressure handling, DLQs.' }
+      {
+        name: 'Node.js (Express.js, Sails.js)',
+        context: 'High-throughput REST APIs, asynchronous stream pipelines, media middleware, microservices architecture.',
+        usedIn: ['Spring Computing Technologies', 'Humation Limited', 'OneGreenDiary', 'Farmer Marketplace'],
+        experienceYears: '6+ Years'
+      },
+      {
+        name: 'REST APIs & Microservices',
+        context: 'Domain-driven service boundaries, rate-limiting gateways, JWT/OAuth2 authentication, CORS, and request schemas.',
+        usedIn: ['Cloud POS APIs', 'Humation Financial Services', 'Janus Room Management'],
+        experienceYears: '6+ Years'
+      },
+      {
+        name: 'Security & Auth (JWT, OAuth2)',
+        context: 'Stateless cryptographically signed tokens, refresh token rotation with breach revocation, role-based access control.',
+        usedIn: ['Enterprise Calling Auth', 'NFT Wallet Gateways', 'API Gateway Blueprints'],
+        experienceYears: '5+ Years'
+      }
     ]
   },
   {
-    category: 'DATA & STORAGE',
-    description: 'Durable and ephemeral state storage layers.',
+    category: 'MEDIA, SDKs & VIDEO ML',
+    description: 'Client-side hardware acceleration, VDI offloading, and video processing SDKs.',
     items: [
-      { name: 'Redis', context: 'Pub/Sub, in-memory caching, TTL key leases, distributed locks, presence sets.' },
-      { name: 'PostgreSQL', context: 'Relational schema design, ACID transactions, indexing, query profiling.' },
-      { name: 'Tiered Caching', context: 'In-memory LRU L1, Redis L2, singleflight coalescing, cache stampede mitigation.' }
+      {
+        name: 'Citrix Workspace SDK',
+        context: 'Offloaded WebRTC media encoding, decoding, and capture directly to local endpoint hardware in virtualized environments.',
+        usedIn: ['Intermedia AnyMeeting (VDI Media Strategy)'],
+        experienceYears: '2+ Years'
+      },
+      {
+        name: 'Google MediaPipe & Banuba SDK',
+        context: 'Client-side ML-powered virtual backgrounds, portrait segmentation, and real-time WebAssembly video effects.',
+        usedIn: ['Intermedia AnyMeeting (Client-Side Video FX)'],
+        experienceYears: '2+ Years'
+      },
+      {
+        name: 'FreeSWITCH Recording Layouts',
+        context: 'Dynamic audio/video mixing, recording layout synchronization, and composite video tile management during live calls.',
+        usedIn: ['Intermedia AnyMeeting (Cloud Call Recording)'],
+        experienceYears: '2+ Years'
+      }
     ]
   },
   {
-    category: 'AI & LLM SYSTEMS',
-    description: 'Real-time integrations, streaming pipelines, and tool orchestration.',
+    category: 'DATABASES & DATA PIPELINES',
+    description: 'Relational, in-memory, and document stores with sharding and query optimization.',
     items: [
-      { name: 'LLM Streaming APIs', context: 'Chunked SSE consumption, sub-200ms TTFT pipelines, client telemetry.' },
-      { name: 'Function / Tool Calling', context: 'Structured JSON schema enforcement, incremental stream parsing, sandboxing.' },
-      { name: 'Local Models & RAG', context: 'Ollama, vector embeddings, chunking strategies, retrieval evaluation.' }
+      {
+        name: 'Redis',
+        context: 'Pub/Sub event backplanes, ephemeral presence tracking with TTL leases, distributed locking, and L2 caching.',
+        usedIn: ['Spring Computing Real-Time Layer', 'Zultys PBX Coordination', 'Tiered Cache Demo'],
+        experienceYears: '4+ Years'
+      },
+      {
+        name: 'PostgreSQL & MySQL',
+        context: 'ACID transactional schemas, relational indexing strategies, connection pool management, and query plan profiling.',
+        usedIn: ['OneGreenDiary POS Server', 'Farmer Direct Marketplace', 'Enterprise User DBs'],
+        experienceYears: '5+ Years'
+      },
+      {
+        name: 'MongoDB',
+        context: 'Document schema design, aggregation pipelines, atomic monotonic updates for high-concurrency bidding.',
+        usedIn: ['Humation NFT Platform', 'Session State Stores'],
+        experienceYears: '3+ Years'
+      }
     ]
   },
   {
-    category: 'INFRASTRUCTURE & DEV',
-    description: 'Containerization, CI/CD, and developer workflows.',
+    category: 'ENGINEERING, TESTING & CI/CD',
+    description: 'System design, testing rigor, automated delivery, and production operations.',
     items: [
-      { name: 'Docker', context: 'Multi-stage container builds, local orchestration, service isolation.' },
-      { name: 'Git & GitHub Actions', context: 'Automated CI/CD pipelines, release management, code review workflows.' },
-      { name: 'Observability & Debugging', context: 'Structured JSON logging, telemetry tracing, Chrome DevTools, Wireshark.' }
+      {
+        name: 'System Design & Architecture',
+        context: 'Designing fault-tolerant real-time topologies, state machines, and horizontal scaling strategies.',
+        usedIn: ['Spring Computing Platform (~20k DAU)', 'Janus Cluster Balancing'],
+        experienceYears: '6+ Years'
+      },
+      {
+        name: 'Testing (Unit, Integration, E2E)',
+        context: 'Automated test suites, network fault simulations, WebRTC getStats() verification, regression prevention.',
+        usedIn: ['Spring Computing Core Modules', 'OneGreenDiary POS Pipelines'],
+        experienceYears: '5+ Years'
+      },
+      {
+        name: 'Git, GitHub, CI/CD & JIRA',
+        context: 'Automated build and deployment pipelines, structured branching, technical code reviews, agile delivery.',
+        usedIn: ['Production Release Cycles (Pre-Alpha to GA)', 'GitHub Actions Workflows'],
+        experienceYears: '6+ Years'
+      }
     ]
   }
 ];

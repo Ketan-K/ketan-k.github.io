@@ -33,6 +33,19 @@
   max-width: 680px;
 }
 
+.contact-location {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+}
+
+.location-icon {
+  color: var(--accent-cyan);
+}
+
 .contact-channels {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

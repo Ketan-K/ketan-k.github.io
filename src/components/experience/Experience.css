@@ -76,6 +76,23 @@
   color: var(--accent-cyan);
 }
 
+.exp-scale-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.65rem;
+  background: var(--accent-cyan-dim);
+  border: 1px solid var(--accent-cyan-border);
+  border-radius: var(--radius-sm);
+  color: var(--accent-cyan);
+  width: fit-content;
+}
+
+.scale-icon {
+  color: var(--accent-cyan);
+}
+
 .exp-meta-badges {
   display: flex;
   align-items: center;
