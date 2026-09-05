@@ -65,19 +65,28 @@ export const AboutPage: React.FC = () => {
 
       <hr className="editorial-divider" />
 
-      {/* Tech Stack Matrix */}
+      {/* Technical Skills & Tooling */}
       <section className="content-section">
         <h2 className="section-heading">Technical Skills & Tooling</h2>
+        <p className="prose">
+          Domain expertise, real-time protocols, backend runtimes, and distributed infrastructure applied across production systems.
+        </p>
 
-        <div className="skills-category-grid">
+        <div className="skills-spec-list">
           {techStackCategories.map((cat: TechStackCategory, idx: number) => (
-            <div key={idx} className="skill-category-card">
-              <h3 className="skill-category-title">
-                {cat.category}
-              </h3>
-              <div className="item-tags">
-                {cat.items.map((s) => (
-                  <TechBadge key={s.name} name={s.name} />
+            <div key={idx} className="skills-spec-row">
+              <div className="skills-spec-category">
+                <span className="skills-spec-name">{cat.category}</span>
+                <span className="skills-spec-count">{cat.items.length} tools</span>
+              </div>
+              <div className="skills-spec-items">
+                {cat.items.map((item, iIdx) => (
+                  <div key={iIdx} className="skills-spec-item">
+                    <TechBadge name={item.name} />
+                    {item.experienceYears && (
+                      <span className="skills-spec-exp">({item.experienceYears})</span>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
