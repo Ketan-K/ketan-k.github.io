@@ -1,41 +1,54 @@
 import React from 'react';
+import { HashRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { ThemeProvider } from './context/ThemeContext';
+import { ScrollToTop } from './components/common/ScrollToTop';
 import { Navbar } from './components/layout/Navbar';
 import { Footer } from './components/layout/Footer';
-import { Hero } from './components/hero/Hero';
-import { SelectedWork } from './components/work/SelectedWork';
-import { DemosSection } from './components/demos/DemosSection';
-import { SystemsSection } from './components/systems/SystemsSection';
-import { WebRtcDeepDive } from './components/webrtc/WebRtcDeepDive';
-import { AiLabSection } from './components/ailab/AiLabSection';
-import { BackendDesignSection } from './components/backend/BackendDesignSection';
-import { ExperienceTimeline } from './components/experience/ExperienceTimeline';
-import { TechStackGrid } from './components/stack/TechStackGrid';
-import { EngineeringNotes } from './components/writing/EngineeringNotes';
-import { SelectedRepos } from './components/github/SelectedRepos';
-import { AboutSection } from './components/about/AboutSection';
-import { ContactSection } from './components/contact/ContactSection';
+
+// Pages
+import { HomePage } from './pages/HomePage';
+import { WorkPage } from './pages/WorkPage';
+import { ProjectDetailPage } from './pages/ProjectDetailPage';
+import { ExperiencePage } from './pages/ExperiencePage';
+import { SystemsPage } from './pages/SystemsPage';
+import { WebRtcPage } from './pages/WebRtcPage';
+import { FullStackPage } from './pages/FullStackPage';
+import { AiPage } from './pages/AiPage';
+import { AiExperimentDetailPage } from './pages/AiExperimentDetailPage';
+import { WritingPage } from './pages/WritingPage';
+import { ArticleDetailPage } from './pages/ArticleDetailPage';
+import { AboutPage } from './pages/AboutPage';
+import { ResumePage } from './pages/ResumePage';
 
 export const App: React.FC = () => {
   return (
-    <div className="portfolio-app">
-      <Navbar />
-      <main id="main-content">
-        <Hero />
-        <SelectedWork />
-        <DemosSection />
-        <SystemsSection />
-        <WebRtcDeepDive />
-        <AiLabSection />
-        <BackendDesignSection />
-        <ExperienceTimeline />
-        <TechStackGrid />
-        <EngineeringNotes />
-        <SelectedRepos />
-        <AboutSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
+    <ThemeProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="portfolio-app">
+          <Navbar />
+          <main id="main-content">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/work" element={<WorkPage />} />
+              <Route path="/work/:id" element={<ProjectDetailPage />} />
+              <Route path="/experience" element={<ExperiencePage />} />
+              <Route path="/systems" element={<SystemsPage />} />
+              <Route path="/systems/webrtc" element={<WebRtcPage />} />
+              <Route path="/systems/full-stack" element={<FullStackPage />} />
+              <Route path="/ai" element={<AiPage />} />
+              <Route path="/ai/:id" element={<AiExperimentDetailPage />} />
+              <Route path="/writing" element={<WritingPage />} />
+              <Route path="/writing/:id" element={<ArticleDetailPage />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/resume" element={<ResumePage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 };
 

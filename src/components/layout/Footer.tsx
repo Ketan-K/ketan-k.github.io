@@ -1,5 +1,5 @@
 import React from 'react';
-import { Terminal, Mail, ArrowUp, FileText } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { GithubIcon, LinkedinIcon } from '../common/Icons';
 import './Footer.css';
 
@@ -8,33 +8,31 @@ export const Footer: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const resumeUrl = './resume/Ketan-Katore-Resume.pdf';
-
   return (
     <footer className="footer">
-      <div className="container footer-inner">
+      <div className="footer-inner">
         <div className="footer-meta">
           <div className="footer-brand">
-            <Terminal size={16} className="footer-brand-icon" />
             <span className="footer-brand-title">Ketan Katore</span>
-            <span className="footer-brand-role">— Senior Software Engineer (Real-Time & Full-Stack)</span>
+            <span className="footer-brand-role">· Full-Stack & Real-Time Engineer</span>
           </div>
           <p className="footer-tagline">
-            Engineered with React 19, TypeScript, and modern CSS. Fast, accessible, and grounded in production evidence.
+            Pune, India · 6+ Years Experience · M.Sc. Scientific Computing
           </p>
         </div>
 
+        <div className="footer-nav">
+          <Link to="/" className="footer-link">Home</Link>
+          <Link to="/work" className="footer-link">Work</Link>
+          <Link to="/experience" className="footer-link">Experience</Link>
+          <Link to="/systems" className="footer-link">Systems</Link>
+          <Link to="/ai" className="footer-link">AI Lab</Link>
+          <Link to="/writing" className="footer-link">Writing</Link>
+          <Link to="/about" className="footer-link">About</Link>
+          <Link to="/resume" className="footer-link">Resume</Link>
+        </div>
+
         <div className="footer-links">
-          <a
-            href={resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="footer-link"
-            aria-label="View Resume PDF in new tab"
-          >
-            <FileText size={14} />
-            <span>Resume</span>
-          </a>
           <a
             href="https://github.com/Ketan-K"
             target="_blank"
@@ -60,7 +58,6 @@ export const Footer: React.FC = () => {
             className="footer-link"
             aria-label="Email Ketan Katore"
           >
-            <Mail size={14} />
             <span>Email</span>
           </a>
           <button
@@ -68,8 +65,7 @@ export const Footer: React.FC = () => {
             className="footer-top-btn"
             aria-label="Scroll to top of page"
           >
-            <ArrowUp size={14} />
-            <span>Top</span>
+            ↑ Top
           </button>
         </div>
       </div>
