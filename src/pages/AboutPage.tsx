@@ -5,6 +5,7 @@ import { techStackCategories } from '../content/techstack';
 import { selectedRepos } from '../content/repos';
 import { GithubIcon, LinkedinIcon } from '../components/common/Icons';
 import { EducationItem, TechStackCategory, GitHubRepo } from '../types';
+import { TechBadge } from '../components/common/TechBadge';
 import './pages.css';
 
 export const AboutPage: React.FC = () => {
@@ -76,9 +77,7 @@ export const AboutPage: React.FC = () => {
               </h3>
               <div className="item-tags">
                 {cat.items.map((s) => (
-                  <span key={s.name} className="badge" title={s.experienceYears}>
-                    {s.name}
-                  </span>
+                  <TechBadge key={s.name} name={s.name} />
                 ))}
               </div>
             </div>
@@ -105,7 +104,7 @@ export const AboutPage: React.FC = () => {
               <div className="item-summary">{repo.description}</div>
               <div className="item-tags">
                 {repo.tags.map((t: string) => (
-                  <span key={t} className="badge">{t}</span>
+                  <TechBadge key={t} name={t} />
                 ))}
               </div>
             </a>

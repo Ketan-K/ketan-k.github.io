@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { projects } from '../content/projects';
 import { Project } from '../types';
+import { TechBadge } from '../components/common/TechBadge';
 import './pages.css';
 
 export const ProjectDetailPage: React.FC = () => {
@@ -109,7 +110,7 @@ export const ProjectDetailPage: React.FC = () => {
         <h2 className="section-heading">Technologies</h2>
         <div className="item-tags">
           {project.technologies.map((tech: string) => (
-            <span key={tech} className="badge badge-accent">{tech}</span>
+            <TechBadge key={tech} name={tech} variant="accent" />
           ))}
         </div>
       </section>

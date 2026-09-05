@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { engineeringNotes } from '../content/writing';
 import { EngineeringNote } from '../types';
+import { TechBadge } from '../components/common/TechBadge';
 import './pages.css';
 
 export const WritingPage: React.FC = () => {
@@ -33,7 +34,7 @@ export const WritingPage: React.FC = () => {
             <div className="item-summary">{article.summary}</div>
             <div className="item-tags">
               {article.tags.map((t: string) => (
-                <span key={t} className="badge">{t}</span>
+                <TechBadge key={t} name={t} />
               ))}
             </div>
           </Link>

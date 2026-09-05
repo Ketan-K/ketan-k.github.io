@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../content/projects';
 import { Project } from '../types';
+import { TechBadge } from '../components/common/TechBadge';
 import './pages.css';
 
 export const WorkPage: React.FC = () => {
@@ -36,7 +37,7 @@ export const WorkPage: React.FC = () => {
             onClick={() => setSelectedTag(tag)}
             className={`tag-btn ${selectedTag === tag ? 'tag-btn-active' : ''}`}
           >
-            {tag}
+            {tag === 'all' ? 'All Systems' : tag}
           </button>
         ))}
       </div>
@@ -60,7 +61,7 @@ export const WorkPage: React.FC = () => {
             <div className="item-tags" style={{ marginTop: 'var(--space-2)' }}>
               <span className="badge badge-accent">{p.role}</span>
               {p.technologies.map((t: string) => (
-                <span key={t} className="badge">{t}</span>
+                <TechBadge key={t} name={t} />
               ))}
             </div>
           </Link>

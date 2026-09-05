@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { engineeringNotes } from '../content/writing';
 import { EngineeringNote } from '../types';
+import { TechBadge } from '../components/common/TechBadge';
 import './pages.css';
 
 export const ArticleDetailPage: React.FC = () => {
@@ -68,7 +69,7 @@ export const ArticleDetailPage: React.FC = () => {
 
         <div className="item-tags" style={{ marginTop: 'var(--space-6)' }}>
           {article.tags.map((t: string) => (
-            <span key={t} className="badge badge-accent">{t}</span>
+            <TechBadge key={t} name={t} variant="accent" />
           ))}
         </div>
       </article>

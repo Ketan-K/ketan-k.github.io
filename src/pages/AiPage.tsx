@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { aiExperiments } from '../content/ailab';
 import { AiExperiment } from '../types';
 import { AiStreamingDemo } from '../components/demos/AiStreamingDemo';
+import { TechBadge } from '../components/common/TechBadge';
 import './pages.css';
 
 export const AiPage: React.FC = () => {
@@ -56,7 +57,7 @@ export const AiPage: React.FC = () => {
 
               <div className="item-tags" style={{ marginTop: 'var(--space-2)' }}>
                 {exp.technologies.map((t: string) => (
-                  <span key={t} className="badge">{t}</span>
+                  <TechBadge key={t} name={t} />
                 ))}
               </div>
             </Link>

@@ -5,6 +5,7 @@ import { experienceHistory } from '../content/experience';
 import { aiExperiments } from '../content/ailab';
 import { engineeringNotes } from '../content/writing';
 import { Project, ExperienceItem, AiExperiment, EngineeringNote } from '../types';
+import { TechBadge } from '../components/common/TechBadge';
 import './pages.css';
 
 export const HomePage: React.FC = () => {
@@ -103,7 +104,7 @@ export const HomePage: React.FC = () => {
               <div className="item-tags">
                 <span className="badge badge-accent">{p.role}</span>
                 {p.technologies.slice(0, 3).map((t: string) => (
-                  <span key={t} className="badge">{t}</span>
+                  <TechBadge key={t} name={t} />
                 ))}
               </div>
             </Link>
@@ -165,7 +166,7 @@ export const HomePage: React.FC = () => {
               <div className="item-summary">{exp.problem}</div>
               <div className="item-tags">
                 {exp.technologies.slice(0, 3).map((t: string) => (
-                  <span key={t} className="badge">{t}</span>
+                  <TechBadge key={t} name={t} />
                 ))}
               </div>
             </Link>

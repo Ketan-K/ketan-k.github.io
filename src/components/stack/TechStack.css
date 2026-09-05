@@ -55,11 +55,11 @@
 
 .item-exp-badge {
   font-size: 0.6875rem;
-  padding: 0.1rem 0.4rem;
-  background: rgba(56, 189, 248, 0.08);
-  border: 1px solid var(--accent-cyan-border);
-  border-radius: var(--radius-sm);
-  color: var(--accent-cyan);
+  padding: 0.15rem 0.5rem;
+  background: var(--accent-subtle);
+  border: 1px solid var(--accent-border);
+  border-radius: var(--radius-full);
+  color: var(--accent);
 }
 
 .item-context {
@@ -94,8 +94,8 @@
 .proof-pill {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  padding: 0.1rem 0.35rem;
+  border-radius: var(--radius-full);
+  padding: 0.12rem 0.5rem;
   color: var(--text-muted);
 }
 

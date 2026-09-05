@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { experienceHistory } from '../content/experience';
 import { educationHistory } from '../content/education';
 import { ExperienceItem, EducationItem } from '../types';
+import { TechBadge } from '../components/common/TechBadge';
 import './pages.css';
 
 export const ExperiencePage: React.FC = () => {
@@ -59,7 +60,7 @@ export const ExperiencePage: React.FC = () => {
               {/* Technologies */}
               <div className="item-tags">
                 {role.technologies.map((tech: string) => (
-                  <span key={tech} className="badge">{tech}</span>
+                  <TechBadge key={tech} name={tech} />
                 ))}
               </div>
             </div>
