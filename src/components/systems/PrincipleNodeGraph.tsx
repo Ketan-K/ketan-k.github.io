@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowDown } from 'lucide-react';
+import { ArrowRight, ArrowDown } from 'lucide-react';
 import { SystemPrincipleFlow } from '../../types';
 import './PrincipleNodeGraph.css';
 
@@ -12,7 +12,7 @@ export const PrincipleNodeGraph: React.FC<PrincipleNodeGraphProps> = ({ flow }) 
     return null;
   }
 
-  // Detect if there is a single root node that branches into multiple children
+  // Detect branching vs sequential flow
   const outDegreeMap = new Map<string, string[]>();
   flow.edges.forEach((edge) => {
     const [from, to] = edge;
@@ -32,26 +32,40 @@ export const PrincipleNodeGraph: React.FC<PrincipleNodeGraphProps> = ({ flow }) 
       .filter(Boolean);
 
     return (
-      <div className="flow-diagram-container">
-        <div className="flow-tree-layout">
+      <div className="flow-card">
+        <div className="flow-card-header font-mono">
+          <span className="flow-card-label">CLASSIFICATION TOPOLOGY</span>
+          <span className="flow-card-meta">{branchNodes.length} Branches</span>
+        </div>
+
+        <div className="flow-tree-wrapper">
           {rootNode && (
-            <div className="flow-tree-root">
-              <span className="flow-node-title font-mono">{rootNode.label}</span>
-              {rootNode.note && <span className="flow-node-note">{rootNode.note}</span>}
+            <div className="flow-tree-root-node">
+              <span className="flow-node-index font-mono">ROOT</span>
+              <span className="flow-node-text font-mono">{rootNode.label}</span>
             </div>
           )}
-          <div className="flow-tree-branches">
+
+          <div className="flow-tree-rail">
             {branchNodes.map((node, index) => {
               if (!node) return null;
               const isLast = index === branchNodes.length - 1;
               return (
-                <div key={node.id} className="flow-branch-row">
-                  <span className="flow-branch-connector font-mono" aria-hidden="true">
-                    {isLast ? '└──' : '├──'}
-                  </span>
-                  <div className="flow-branch-node">
-                    <span className="flow-node-title font-mono">{node.label}</span>
-                    {node.note && <span className="flow-node-note font-mono">{node.note}</span>}
+                <div key={node.id} className="flow-tree-branch-item">
+                  <div className="flow-branch-line" aria-hidden="true">
+                    <span className="branch-glyph font-mono">{isLast ? '└──' : '├──'}</span>
+                  </div>
+                  <div className="flow-branch-content">
+                    <div className="flow-branch-primary">
+                      <span className="flow-node-index font-mono">{`0${index + 1}`}</span>
+                      <span className="flow-node-text font-mono">{node.label}</span>
+                    </div>
+                    {node.note && (
+                      <div className="flow-branch-secondary">
+                        <ArrowRight size={12} className="flow-branch-arrow" />
+                        <span className="flow-branch-target font-mono">{node.note}</span>
+                      </div>
+                    )}
                   </div>
                 </div>
               );
@@ -62,31 +76,49 @@ export const PrincipleNodeGraph: React.FC<PrincipleNodeGraphProps> = ({ flow }) 
     );
   }
 
-  // Standard sequential / linear flow
+  // Sequential pipeline layout
+  const isDecision = flow.nodes.length === 2 && flow.edges.some((e) => Boolean(e[2]));
+
   return (
-    <div className="flow-diagram-container">
-      <div className="flow-sequence-layout">
+    <div className="flow-card">
+      <div className="flow-card-header font-mono">
+        <span className="flow-card-label">{isDecision ? 'DECISION GATE' : 'EXECUTION PIPELINE'}</span>
+        <span className="flow-card-meta">{flow.nodes.length} Stages</span>
+      </div>
+
+      <div className="flow-pipeline-grid">
         {flow.nodes.map((node, index) => {
           const isLast = index === flow.nodes.length - 1;
           const edge = flow.edges.find(([from]) => from === node.id);
           const edgeLabel = edge && edge[2];
+          const stepNumber = String(index + 1).padStart(2, '0');
 
           return (
-            <React.Fragment key={node.id}>
-              <div className="flow-sequence-node">
-                <div className="flow-node-content">
-                  <span className="flow-node-title font-mono">{node.label}</span>
+            <div key={node.id} className="flow-step-wrapper">
+              <div className={`flow-node-box ${isLast ? 'flow-node-box-final' : ''}`}>
+                <div className="flow-node-header font-mono">
+                  <span className="flow-node-index font-mono">{stepNumber}</span>
+                  {isLast && <span className="flow-node-status font-mono">STABLE</span>}
+                </div>
+                <div className="flow-node-body">
+                  <span className="flow-node-text font-mono">{node.label}</span>
                   {node.note && <span className="flow-node-note">{node.note}</span>}
                 </div>
               </div>
 
               {!isLast && (
-                <div className="flow-connector">
-                  <ArrowDown size={14} className="flow-arrow-icon" />
-                  {edgeLabel && <span className="flow-edge-label font-mono">{edgeLabel}</span>}
+                <div className="flow-connector-track">
+                  <div className="flow-connector-line" />
+                  <div className="flow-connector-arrow">
+                    <ArrowRight size={14} className="flow-arrow-h" />
+                    <ArrowDown size={14} className="flow-arrow-v" />
+                  </div>
+                  {edgeLabel && (
+                    <span className="flow-connector-annotation font-mono">{edgeLabel}</span>
+                  )}
                 </div>
               )}
-            </React.Fragment>
+            </div>
           );
         })}
       </div>
