@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGitHubRepos } from '../../hooks/useGitHubRepos';
-import { ExternalLink, Code2, RefreshCw, Star, GitFork, ChevronDown, ChevronUp, Globe } from 'lucide-react';
+import { RefreshCw, ExternalLink, Globe } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { TechBadge } from '../common/TechBadge';
 import './Repos.css';
@@ -14,9 +14,9 @@ interface SelectedReposProps {
 
 export const SelectedRepos: React.FC<SelectedReposProps> = ({
   showControls = true,
-  defaultLimit = 6,
-  title = 'Public Repositories & Working Demos',
-  subtitle = 'Curated open source repositories, real-time WebRTC tools, and systems benchmarks. Verified live deployments linked directly.'
+  defaultLimit = 4,
+  title = 'Open Source & Live Demos',
+  subtitle = 'Curated public repositories, real-time WebRTC utilities, and performance benchmarks with verified public deployments.'
 }) => {
   const [showAll, setShowAll] = useState<boolean>(false);
 
@@ -37,58 +37,69 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
   const hasMore = repos.length > defaultLimit;
 
   return (
-    <section className="section" id="github">
-      <div className="container">
-        <div className="section-header">
-          <div className="section-label font-mono">
-            <Code2 size={14} />
-            <span>04 / OPEN SOURCE & LIVE DEMOS</span>
-          </div>
-          <h2 className="section-title">{title}</h2>
-          <p className="section-subtitle">{subtitle}</p>
+    <section className="content-section" id="github">
+      <div className="section-header-row">
+        <h2 className="section-heading" style={{ margin: 0 }}>{title}</h2>
+        <div className="repo-header-actions">
+          <a
+            href="https://github.com/Ketan-K"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-subtle"
+            title="Open Ketan-K GitHub profile"
+          >
+            GitHub (@Ketan-K) →
+          </a>
         </div>
+      </div>
 
-        {showControls && (
-          <div className="repos-header-controls">
-            <div className="repos-api-status">
-              <span className={isLive ? 'live-pulse-dot' : 'static-pulse-dot'} />
-              <span>
-                {isLive ? 'Live GitHub Sync (Ketan-K)' : 'Cached / Static Snapshot'}
-                {lastFetched && ` · ${lastFetched.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}
-              </span>
-            </div>
+      {subtitle && (
+        <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
+          {subtitle}
+        </p>
+      )}
 
+      {showControls && (
+        <div className="repo-controls-row">
+          {/* Telemetry Status Bar */}
+          <div className="repo-telemetry-badge font-mono">
+            <span className={isLive ? 'telemetry-dot-live' : 'telemetry-dot-cached'} />
+            <span>
+              {isLive ? 'Live API Sync' : 'Static Snapshot'}
+              {lastFetched && ` · ${lastFetched.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}
+            </span>
             <button
               type="button"
-              className="repos-refresh-btn"
+              className="repo-refresh-icon-btn"
               onClick={refetch}
               disabled={loading}
-              title="Sync latest repository telemetry from GitHub REST API"
+              title="Refresh telemetry from GitHub REST API"
+              aria-label="Refresh telemetry from GitHub REST API"
             >
-              <RefreshCw size={12} className={loading ? 'spinning' : ''} />
-              <span>{loading ? 'Fetching API...' : 'Sync from GitHub'}</span>
+              <RefreshCw size={11} className={loading ? 'spinning' : ''} />
             </button>
           </div>
-        )}
 
-        {showControls && (
-          <div className="repos-filter-bar">
+          {/* Tag Filter Pills */}
+          <div className="tag-filter-bar" style={{ marginBottom: 0 }}>
             <button
               type="button"
-              className={`repos-filter-chip ${filterType === 'all' && selectedLanguage === 'all' ? 'active' : ''}`}
+              className={`tag-btn ${filterType === 'all' && selectedLanguage === 'all' ? 'tag-btn-active' : ''}`}
               onClick={() => {
                 setFilterType('all');
                 setSelectedLanguage('all');
               }}
             >
-              All Curated ({repos.length})
+              All Repos ({repos.length})
             </button>
+
             <button
               type="button"
-              className={`repos-filter-chip ${filterType === 'featured' ? 'active' : ''}`}
+              className={`tag-btn ${filterType === 'featured' ? 'tag-btn-active' : ''}`}
               onClick={() => setFilterType(filterType === 'featured' ? 'all' : 'featured')}
             >
-              Verified Live Demos
+              <span className="live-pill-dot" />
+              Verified Demos
             </button>
 
             {languages
@@ -97,154 +108,117 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
                 <button
                   key={lang}
                   type="button"
-                  className={`repos-filter-chip ${selectedLanguage === lang ? 'active' : ''}`}
+                  className={`tag-btn ${selectedLanguage === lang ? 'tag-btn-active' : ''}`}
                   onClick={() => setSelectedLanguage(selectedLanguage === lang ? 'all' : lang)}
                 >
                   {lang}
                 </button>
               ))}
           </div>
-        )}
-
-        {loading && repos.length === 0 ? (
-          <div className="repos-grid">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="repo-card-skeleton">
-                <div className="skeleton-line skeleton-title" />
-                <div className="skeleton-line skeleton-desc-1" />
-                <div className="skeleton-line skeleton-desc-2" />
-                <div className="skeleton-line skeleton-footer" />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="repos-grid">
-            {displayedRepos.map((repo) => (
-              <div key={repo.name} className="repo-card">
-                <div className="repo-card-top font-mono">
-                  <div className="repo-title-row">
-                    <Code2 size={16} className="repo-icon" />
-                    <a
-                      href={repo.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="repo-name-link"
-                      title={`View ${repo.name} on GitHub`}
-                    >
-                      {repo.name}
-                    </a>
-                  </div>
-                  <div className="repo-meta-badges">
-                    {repo.homepage && (
-                      <span className="repo-live-indicator" title="Verified public live deployment available">
-                        <span className="live-demo-dot" />
-                        <span>Live Demo</span>
-                      </span>
-                    )}
-                    <span className="badge">{repo.status}</span>
-                  </div>
-                </div>
-
-                <p className="repo-desc">{repo.description}</p>
-
-                {repo.tags && repo.tags.length > 0 && (
-                  <div className="repo-tags-row">
-                    {repo.tags.slice(0, 4).map((t) => (
-                      <TechBadge key={t} name={t} />
-                    ))}
-                  </div>
-                )}
-
-                <div className="repo-footer font-mono">
-                  <div className="repo-stats-col">
-                    <div className="repo-lang-row">
-                      <span
-                        className="lang-color-dot"
-                        style={{ backgroundColor: repo.languageColor }}
-                      />
-                      <span className="lang-name">{repo.language}</span>
-                    </div>
-
-                    <div className="repo-metrics">
-                      {typeof repo.stars === 'number' && repo.stars > 0 && (
-                        <span className="repo-metric-item" title={`${repo.stars} stars on GitHub`}>
-                          <Star size={11} />
-                          {repo.stars}
-                        </span>
-                      )}
-                      {typeof repo.forks === 'number' && repo.forks > 0 && (
-                        <span className="repo-metric-item" title={`${repo.forks} forks on GitHub`}>
-                          <GitFork size={11} />
-                          {repo.forks}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="repo-actions-col">
-                    <a
-                      href={repo.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="repo-action-link repo-code-link"
-                      title={`Open ${repo.name} source code on GitHub`}
-                    >
-                      <GithubIcon size={13} />
-                      <span>Code</span>
-                    </a>
-
-                    {repo.homepage && (
-                      <a
-                        href={repo.homepage}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="repo-action-link repo-demo-link"
-                        title={`Launch verified live demo: ${repo.homepage}`}
-                      >
-                        <Globe size={13} />
-                        <span>Live Demo</span>
-                        <ExternalLink size={11} className="action-arrow" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        <div className="repos-cta">
-          {hasMore && (
-            <button
-              type="button"
-              className="repos-toggle-btn"
-              onClick={() => setShowAll((prev) => !prev)}
-            >
-              {showAll ? (
-                <>
-                  <ChevronUp size={14} />
-                  <span>Show Top {defaultLimit} Only</span>
-                </>
-              ) : (
-                <>
-                  <ChevronDown size={14} />
-                  <span>Show All ({repos.length} Repositories)</span>
-                </>
-              )}
-            </button>
-          )}
-
-          <a
-            href="https://github.com/Ketan-K"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
-            <GithubIcon size={15} />
-            <span>GitHub Profile (@Ketan-K)</span>
-          </a>
         </div>
+      )}
+
+      {/* Repository Items List */}
+      <div className="item-list" style={{ marginTop: 'var(--space-4)' }}>
+        {loading && repos.length === 0 ? (
+          [1, 2, 3, 4].map((i) => (
+            <div key={i} className="item-row skeleton-row">
+              <div className="skeleton-line" style={{ width: '40%', height: '14px', marginBottom: '8px' }} />
+              <div className="skeleton-line" style={{ width: '85%', height: '12px', marginBottom: '6px' }} />
+              <div className="skeleton-line" style={{ width: '30%', height: '10px' }} />
+            </div>
+          ))
+        ) : (
+          displayedRepos.map((repo) => (
+            <div key={repo.name} className="item-row repo-item-row">
+              <div className="item-row-header">
+                <div className="repo-title-cluster">
+                  <a
+                    href={repo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="item-title font-mono repo-link-title"
+                    title={`View ${repo.name} on GitHub`}
+                  >
+                    {repo.name}
+                    <GithubIcon size={13} className="repo-gh-mark" />
+                  </a>
+
+                  {repo.homepage && (
+                    <span className="repo-live-tag font-mono" title="Verified live web deployment">
+                      <span className="live-demo-dot" />
+                      Live Demo
+                    </span>
+                  )}
+                </div>
+
+                <div className="item-meta">
+                  <span
+                    className="repo-lang-indicator"
+                    style={{ '--lang-color': repo.languageColor } as React.CSSProperties}
+                  >
+                    {repo.language}
+                  </span>
+                  <span>·</span>
+                  <span>{repo.status}</span>
+                </div>
+              </div>
+
+              <div className="item-summary">{repo.description}</div>
+
+              <div className="repo-row-bottom">
+                <div className="item-tags">
+                  {repo.tags.map((t) => (
+                    <TechBadge key={t} name={t} />
+                  ))}
+                </div>
+
+                <div className="repo-actions-inline font-mono">
+                  <a
+                    href={repo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="repo-inline-btn"
+                    title={`Open source code for ${repo.name} on GitHub`}
+                  >
+                    <GithubIcon size={12} />
+                    <span>Code</span>
+                    <ExternalLink size={10} />
+                  </a>
+
+                  {repo.homepage && (
+                    <a
+                      href={repo.homepage}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="repo-inline-btn repo-inline-btn-demo"
+                      title={`Launch working live demo: ${repo.homepage}`}
+                    >
+                      <Globe size={12} />
+                      <span>Live Demo</span>
+                      <ExternalLink size={10} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
+
+      {/* Footer / Show More */}
+      {hasMore && (
+        <div className="repo-show-more-row">
+          <button
+            type="button"
+            className="link-subtle"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            onClick={() => setShowAll((prev) => !prev)}
+          >
+            {showAll ? '↑ Show Fewer Repositories' : `↓ Show All Repositories (${repos.length})`}
+          </button>
+        </div>
+      )}
     </section>
   );
 };
