@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { educationHistory } from '../content/education';
 import { techStackCategories } from '../content/techstack';
-import { selectedRepos } from '../content/repos';
+import { useGitHubRepos } from '../hooks/useGitHubRepos';
+import { RefreshCw, Star, GitFork, ChevronDown, ChevronUp } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '../components/common/Icons';
 import { EducationItem, TechStackCategory, GitHubRepo } from '../types';
 import { TechBadge } from '../components/common/TechBadge';
 import './pages.css';
 
 export const AboutPage: React.FC = () => {
+  const { repos, loading, isLive, lastFetched, refetch } = useGitHubRepos('Ketan-K');
+  const [showAllRepos, setShowAllRepos] = useState<boolean>(false);
+  const defaultRepoLimit = 4;
+  const displayedRepos = showAllRepos ? repos : repos.slice(0, defaultRepoLimit);
+  const hasMore = repos.length > defaultRepoLimit;
+
   return (
     <div className="page-container">
       <header className="page-header">
@@ -98,27 +105,89 @@ export const AboutPage: React.FC = () => {
 
       {/* Open Source Repositories */}
       <section className="content-section">
-        <h2 className="section-heading">Public Repositories</h2>
+        <div className="section-header-row" style={{ marginBottom: 'var(--space-3)' }}>
+          <h2 className="section-heading" style={{ margin: 0 }}>Public Repositories</h2>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.75rem' }}>
+            <span style={{ fontSize: 'var(--text-xs)', fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+              <span className={isLive ? 'live-pulse-dot' : 'static-pulse-dot'} />
+              {isLive ? 'Live GitHub Sync' : 'Static Fallback'}
+              {lastFetched && ` · ${lastFetched.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}
+            </span>
+            <button
+              type="button"
+              onClick={refetch}
+              disabled={loading}
+              className="repos-refresh-btn"
+              title="Sync latest repos from GitHub"
+            >
+              <RefreshCw size={11} className={loading ? 'spinning' : ''} />
+              <span>{loading ? 'Syncing...' : 'Sync'}</span>
+            </button>
+          </div>
+        </div>
+        <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
+          Live repositories, developer tools, and WebRTC experiments synced directly from GitHub.
+        </p>
 
         <div className="item-list">
-          {selectedRepos.map((repo: GitHubRepo) => (
+          {displayedRepos.map((repo: GitHubRepo) => (
             <a key={repo.name} href={repo.url} target="_blank" rel="noopener noreferrer" className="item-row">
               <div className="item-row-header">
                 <span className="item-title">
                   {repo.name}
                   <span className="row-arrow">↗</span>
                 </span>
-                <span className="item-meta">{repo.language} · {repo.status}</span>
+                <span className="item-meta" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem' }}>
+                    <span className="lang-color-dot" style={{ backgroundColor: repo.languageColor }} />
+                    {repo.language}
+                  </span>
+                  {typeof repo.stars === 'number' && repo.stars > 0 && (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
+                      <Star size={11} /> {repo.stars}
+                    </span>
+                  )}
+                  {typeof repo.forks === 'number' && repo.forks > 0 && (
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.2rem' }}>
+                      <GitFork size={11} /> {repo.forks}
+                    </span>
+                  )}
+                  <span>· {repo.status}</span>
+                </span>
               </div>
               <div className="item-summary">{repo.description}</div>
-              <div className="item-tags">
-                {repo.tags.map((t: string) => (
-                  <TechBadge key={t} name={t} />
-                ))}
-              </div>
+              {repo.tags && repo.tags.length > 0 && (
+                <div className="item-tags">
+                  {repo.tags.map((t: string) => (
+                    <TechBadge key={t} name={t} />
+                  ))}
+                </div>
+              )}
             </a>
           ))}
         </div>
+
+        {hasMore && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 'var(--space-4)' }}>
+            <button
+              type="button"
+              className="repos-toggle-btn"
+              onClick={() => setShowAllRepos((prev) => !prev)}
+            >
+              {showAllRepos ? (
+                <>
+                  <ChevronUp size={14} />
+                  <span>Show Top {defaultRepoLimit} Only</span>
+                </>
+              ) : (
+                <>
+                  <ChevronDown size={14} />
+                  <span>Show All ({repos.length} Repositories)</span>
+                </>
+              )}
+            </button>
+          </div>
+        )}
       </section>
 
       <hr className="editorial-divider" />

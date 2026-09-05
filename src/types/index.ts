@@ -94,9 +94,14 @@ export interface GitHubRepo {
   description: string;
   language: string;
   languageColor: string;
-  status: 'Active' | 'Maintained' | 'Experimental';
+  status: 'Active' | 'Maintained' | 'Experimental' | 'Archived';
   url: string;
   tags: string[];
+  stars?: number;
+  forks?: number;
+  updatedAt?: string;
+  isFork?: boolean;
+  homepage?: string;
 }
 
 export interface SystemNode {

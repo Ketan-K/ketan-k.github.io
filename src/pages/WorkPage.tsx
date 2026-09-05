@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { projects } from '../content/projects';
 import { Project } from '../types';
 import { TechBadge } from '../components/common/TechBadge';
+import { SelectedRepos } from '../components/github/SelectedRepos';
 import './pages.css';
 
 export const WorkPage: React.FC = () => {
@@ -67,6 +68,15 @@ export const WorkPage: React.FC = () => {
           </Link>
         ))}
       </div>
+
+      <hr className="editorial-divider" />
+
+      {/* Open Source Repositories live from GitHub */}
+      <SelectedRepos
+        title="Open Source Repositories"
+        subtitle="Live codebases, utilities, and WebRTC experiments synced directly from GitHub (@Ketan-K)."
+      />
     </div>
   );
 };
+
