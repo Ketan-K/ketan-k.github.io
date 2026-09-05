@@ -41,7 +41,7 @@ export const AiExperimentDetailPage: React.FC = () => {
       {/* What Happened */}
       <section className="content-section">
         <div className="section-label">Implementation & Findings</div>
-        <h2 className="section-heading">What Happened & Experimental Results</h2>
+        <h2 className="section-heading">Experimental Results & Architecture</h2>
         <div className="prose">
           <p>{exp.whatHappened}</p>
         </div>

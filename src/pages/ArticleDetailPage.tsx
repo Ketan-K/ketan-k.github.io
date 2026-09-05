@@ -45,7 +45,7 @@ export const ArticleDetailPage: React.FC = () => {
       </header>
 
       {/* Article Content */}
-      <article className="content-section prose" style={{ maxWidth: '680px' }}>
+      <article className="content-section prose" style={{ maxWidth: '68ch' }}>
         <p>
           {article.summary}
         </p>

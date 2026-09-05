@@ -11,18 +11,28 @@ export const Footer: React.FC = () => {
   return (
     <footer className="footer">
       <div className="footer-inner">
-        <div className="footer-meta">
-          <div className="footer-brand">
-            <span className="footer-brand-title">Ketan Katore</span>
-            <span className="footer-brand-role">· Full-Stack & Real-Time Engineer</span>
+        <div className="footer-top-row">
+          <div className="footer-meta">
+            <div className="footer-brand">
+              <span className="footer-brand-title">Ketan Katore</span>
+              <span className="footer-brand-role">· Full-Stack & Real-Time Engineer</span>
+            </div>
+            <p className="footer-tagline">
+              Pune, India · 6+ Years Experience · M.Sc. Scientific Computing
+            </p>
           </div>
-          <p className="footer-tagline">
-            Pune, India · 6+ Years Experience · M.Sc. Scientific Computing
-          </p>
+
+          <button
+            onClick={scrollToTop}
+            className="footer-top-btn"
+            aria-label="Scroll to top of page"
+          >
+            ↑ Top
+          </button>
         </div>
 
         <div className="footer-nav">
-          <Link to="/" className="footer-link">Home</Link>
+          <Link to="/" className="footer-link">Index</Link>
           <Link to="/work" className="footer-link">Work</Link>
           <Link to="/experience" className="footer-link">Experience</Link>
           <Link to="/systems" className="footer-link">Systems</Link>
@@ -37,36 +47,29 @@ export const Footer: React.FC = () => {
             href="https://github.com/Ketan-K"
             target="_blank"
             rel="noopener noreferrer"
-            className="footer-link"
+            className="footer-social-link"
             aria-label="GitHub profile"
           >
-            <GithubIcon size={14} />
+            <GithubIcon size={13} />
             <span>GitHub</span>
           </a>
           <a
             href="https://linkedin.com/in/ketan-k"
             target="_blank"
             rel="noopener noreferrer"
-            className="footer-link"
+            className="footer-social-link"
             aria-label="LinkedIn profile"
           >
-            <LinkedinIcon size={14} />
+            <LinkedinIcon size={13} />
             <span>LinkedIn</span>
           </a>
           <a
             href="mailto:ketankatore.9@gmail.com"
-            className="footer-link"
+            className="footer-social-link"
             aria-label="Email Ketan Katore"
           >
-            <span>Email</span>
+            <span>ketankatore.9@gmail.com</span>
           </a>
-          <button
-            onClick={scrollToTop}
-            className="footer-top-btn"
-            aria-label="Scroll to top of page"
-          >
-            ↑ Top
-          </button>
         </div>
       </div>
     </footer>

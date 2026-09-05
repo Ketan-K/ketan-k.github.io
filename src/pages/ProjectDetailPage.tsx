@@ -45,7 +45,7 @@ export const ProjectDetailPage: React.FC = () => {
       {/* Problem & Motivation */}
       <section className="content-section">
         <div className="section-label">Context & Problem</div>
-        <h2 className="section-heading">The Challenge</h2>
+        <h2 className="section-heading">The Engineering Challenge</h2>
         <div className="prose">
           <p>{project.problem}</p>
         </div>

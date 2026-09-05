@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import { useTheme } from '../../context/ThemeContext';
-import { Sun, Moon, Laptop, Menu, X } from 'lucide-react';
+import { Sun, Moon, Menu, X } from 'lucide-react';
 import './Navbar.css';
 
 export const Navbar: React.FC = () => {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { resolvedTheme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [themeMenuOpen, setThemeMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     { label: 'Work', path: '/work' },
@@ -22,12 +27,12 @@ export const Navbar: React.FC = () => {
     <header className="navbar">
       <div className="container navbar-inner">
         {/* Brand identity */}
-        <Link to="/" className="navbar-brand">
+        <Link to="/" className="navbar-brand" onClick={() => setMobileMenuOpen(false)}>
           <span className="navbar-name">Ketan Katore</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="navbar-nav desktop-only" aria-label="Main Navigation">
+        <nav className="navbar-nav desktop-nav" aria-label="Main Navigation">
           <ul className="navbar-links">
             {navLinks.map((link) => (
               <li key={link.path}>
@@ -44,101 +49,62 @@ export const Navbar: React.FC = () => {
           </ul>
         </nav>
 
-        {/* Theme Control & Mobile Menu Toggle */}
+        {/* Controls: Theme Toggle & Mobile Menu Toggle */}
         <div className="navbar-right">
-          {/* Theme Selector Button & Dropdown */}
-          <div className="theme-selector-wrap">
-            <button
-              type="button"
-              className="theme-toggle-btn"
-              onClick={() => setThemeMenuOpen(!themeMenuOpen)}
-              aria-label={`Toggle theme (currently ${theme})`}
-              title={`Theme: ${theme}`}
-            >
-              {theme === 'system' ? (
-                <Laptop size={15} />
-              ) : resolvedTheme === 'dark' ? (
-                <Moon size={15} />
-              ) : (
-                <Sun size={15} />
-              )}
-            </button>
-
-            {themeMenuOpen && (
-              <>
-                <div
-                  className="theme-backdrop"
-                  onClick={() => setThemeMenuOpen(false)}
-                />
-                <div className="theme-dropdown font-mono">
-                  <button
-                    type="button"
-                    className={`theme-option ${theme === 'system' ? 'theme-option-active' : ''}`}
-                    onClick={() => {
-                      setTheme('system');
-                      setThemeMenuOpen(false);
-                    }}
-                  >
-                    <Laptop size={13} />
-                    <span>System</span>
-                  </button>
-                  <button
-                    type="button"
-                    className={`theme-option ${theme === 'light' ? 'theme-option-active' : ''}`}
-                    onClick={() => {
-                      setTheme('light');
-                      setThemeMenuOpen(false);
-                    }}
-                  >
-                    <Sun size={13} />
-                    <span>Light</span>
-                  </button>
-                  <button
-                    type="button"
-                    className={`theme-option ${theme === 'dark' ? 'theme-option-active' : ''}`}
-                    onClick={() => {
-                      setTheme('dark');
-                      setThemeMenuOpen(false);
-                    }}
-                  >
-                    <Moon size={13} />
-                    <span>Dark</span>
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
-
-          {/* Mobile menu trigger */}
+          {/* Direct Theme Toggle Button */}
           <button
             type="button"
-            className="mobile-toggle mobile-only"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
+            className="theme-toggle-btn"
+            onClick={toggleTheme}
+            aria-label={resolvedTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            title={resolvedTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+          >
+            {resolvedTheme === 'dark' ? (
+              <Sun size={15} />
+            ) : (
+              <Moon size={15} />
+            )}
+          </button>
+
+          {/* Mobile Menu Toggle Button */}
+          <button
+            type="button"
+            className={`mobile-toggle ${mobileMenuOpen ? 'mobile-toggle-active' : ''}`}
+            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            aria-label={mobileMenuOpen ? 'Close Navigation Menu' : 'Open Navigation Menu'}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-drawer"
           >
             {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      {/* Mobile Drawer & Backdrop */}
       {mobileMenuOpen && (
-        <div className="mobile-drawer mobile-only">
-          <nav className="mobile-drawer-nav font-mono">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.path}
-                to={link.path}
-                className={({ isActive }) =>
-                  `mobile-nav-link ${isActive ? 'mobile-nav-link-active' : ''}`
-                }
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </nav>
-        </div>
+        <>
+          <div
+            className="mobile-backdrop"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
+          />
+          <div id="mobile-nav-drawer" className="mobile-drawer">
+            <nav className="mobile-drawer-nav font-mono" aria-label="Mobile Navigation">
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.path}
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `mobile-nav-link ${isActive ? 'mobile-nav-link-active' : ''}`
+                  }
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+        </>
       )}
     </header>
   );

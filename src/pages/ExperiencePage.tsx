@@ -41,7 +41,7 @@ export const ExperiencePage: React.FC = () => {
 
               {role.scaleMetrics && (
                 <div style={{ marginBottom: 'var(--space-4)' }}>
-                  <div className="badge badge-accent" style={{ fontSize: 'var(--text-xs)' }}>
+                  <div className="badge badge-accent">
                     Scale: {role.scaleMetrics}
                   </div>
                 </div>

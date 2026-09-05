@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import './pages.css';
 
 export const ResumePage: React.FC = () => {
-  const resumeUrl = './resume/Ketan-Katore-Resume.pdf';
+  const resumePdfUrl = './resume/Ketan-Katore-Resume.pdf';
+  // Open parameters: Fit horizontally (FitH), hide side navigation panes (navpanes=0)
+  const resumeEmbedUrl = `${resumePdfUrl}#view=FitH&navpanes=0&toolbar=0`;
 
   return (
     <div className="page-container">
@@ -23,14 +25,14 @@ export const ResumePage: React.FC = () => {
 
           <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
             <a
-              href={resumeUrl}
+              href={resumePdfUrl}
               download="Ketan-Katore-Resume.pdf"
               className="btn btn-primary"
             >
               Download PDF
             </a>
             <a
-              href={resumeUrl}
+              href={resumePdfUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-outline"
@@ -41,27 +43,20 @@ export const ResumePage: React.FC = () => {
         </div>
       </header>
 
-      {/* PDF Viewer Embed */}
+      {/* PDF Viewer Embed with Fit Horizontal and Hidden Navigation Pane */}
       <div className="resume-viewer-container">
-        <object
-          data={resumeUrl}
-          type="application/pdf"
+        <iframe
+          src={resumeEmbedUrl}
+          title="Ketan Katore Resume PDF"
           className="resume-frame"
-          aria-label="Ketan Katore Resume PDF"
         >
-          <div style={{ padding: 'var(--space-6)', textAlign: 'center' }}>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--space-3)' }}>
-              Your browser does not support embedded PDF viewing.
-            </p>
-            <a
-              href={resumeUrl}
-              download="Ketan-Katore-Resume.pdf"
-              className="btn btn-primary"
-            >
-              Download Resume · PDF
+          <p style={{ color: 'var(--text-secondary)', padding: 'var(--space-8)', textAlign: 'center' }}>
+            Your browser does not support embedded PDF viewing.{' '}
+            <a href={resumePdfUrl} download="Ketan-Katore-Resume.pdf" className="link-subtle">
+              Download PDF directly
             </a>
-          </div>
-        </object>
+          </p>
+        </iframe>
       </div>
     </div>
   );

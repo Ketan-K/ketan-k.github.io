@@ -134,11 +134,11 @@ export const AboutPage: React.FC = () => {
             ketankatore.9@gmail.com
           </a>
           <a href="https://github.com/Ketan-K" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <GithubIcon size={14} />
+            <GithubIcon size={13} />
             GitHub
           </a>
           <a href="https://linkedin.com/in/ketan-k" target="_blank" rel="noopener noreferrer" className="btn btn-outline" style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-            <LinkedinIcon size={14} />
+            <LinkedinIcon size={13} />
             LinkedIn
           </a>
           <Link to="/resume" className="btn btn-ghost">

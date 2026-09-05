@@ -7,6 +7,7 @@ interface ThemeContextType {
   theme: ThemeMode;
   resolvedTheme: ResolvedTheme;
   setTheme: (theme: ThemeMode) => void;
+  toggleTheme: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -43,8 +44,15 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setThemeState(newTheme);
   };
 
+  const toggleTheme = () => {
+    setThemeState((prev) => {
+      const current = prev === 'system' ? systemPreference : prev;
+      return current === 'dark' ? 'light' : 'dark';
+    });
+  };
+
   return (
-    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, resolvedTheme, setTheme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
   );

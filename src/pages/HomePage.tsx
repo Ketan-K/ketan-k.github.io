@@ -19,14 +19,14 @@ export const HomePage: React.FC = () => {
         <div className="page-breadcrumb">
           <span>Ketan Katore</span>
           <span>/</span>
-          <span>Full-Stack & Real-Time Engineer</span>
+          <span>Full-Stack & Real-Time Systems Engineer</span>
         </div>
         <h1 className="home-headline">
-          Building resilient real-time systems, WebRTC backends, and full-stack architectures.
+          Building resilient real-time media systems, WebRTC platforms, and distributed backends.
         </h1>
         <p className="home-subheadline">
-          Senior Full-Stack Engineer with 6+ years designing mission-critical communications,
-          distributed event systems, high-concurrency microservices, and AI-driven platforms.
+          Senior Full-Stack Engineer with 6+ years architecting low-latency communication engines,
+          distributed event streams, high-concurrency microservices, and experimental AI platforms.
         </p>
         <div className="home-actions">
           <Link to="/work" className="btn btn-primary">
@@ -51,7 +51,7 @@ export const HomePage: React.FC = () => {
         <div className="section-label">Engineering Focus</div>
         <h2 className="section-heading">Systems & Architecture</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
-          Deep technical explorations, architecture RFCs, and live interactive simulators for WebRTC and full-stack distributed systems.
+          Technical explorations, protocol specifications, and interactive simulators for real-time media and distributed backend architectures.
         </p>
 
         <div className="subsystem-grid">
@@ -59,7 +59,7 @@ export const HomePage: React.FC = () => {
             <div>
               <h3>WebRTC & Real-Time Media</h3>
               <p>
-                ICE candidate routing, SFU vs MCU topology models, jitter buffers, adaptive bitrate, and packet loss recovery simulators.
+                ICE candidate routing, SFU vs MCU topology models, jitter buffers, adaptive bitrate algorithms, and packet loss recovery mechanisms.
               </p>
             </div>
             <span className="action-link">Explore WebRTC Deep Dive →</span>
@@ -67,7 +67,7 @@ export const HomePage: React.FC = () => {
 
           <Link to="/systems/full-stack" className="subsystem-card">
             <div>
-              <h3>Full-Stack & Backend Systems</h3>
+              <h3>Full-Stack & Distributed Backend</h3>
               <p>
                 Request lifecycle pipelines, high-throughput Redis event buses, multi-tier caching architectures, and concurrency benchmarks.
               </p>

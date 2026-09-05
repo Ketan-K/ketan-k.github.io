@@ -1,7 +1,7 @@
 .footer {
   border-top: 1px solid var(--border-subtle);
   background-color: var(--bg-primary);
-  padding: var(--space-8) 0 var(--space-12);
+  padding: var(--space-10) 0 var(--space-16);
   margin-top: auto;
 }
 
@@ -15,10 +15,18 @@
   width: 100%;
 }
 
+.footer-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
 .footer-meta {
   display: flex;
   flex-direction: column;
-  gap: var(--space-1);
+  gap: 2px;
 }
 
 .footer-brand {
@@ -31,6 +39,7 @@
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--text-primary);
+  letter-spacing: -0.015em;
 }
 
 .footer-brand-role {
@@ -42,12 +51,13 @@
   font-size: var(--text-xs);
   font-family: var(--font-mono);
   color: var(--text-muted);
+  margin-top: 2px;
 }
 
 .footer-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-4);
+  gap: var(--space-4) var(--space-6);
 }
 
 .footer-nav .footer-link {
@@ -63,46 +73,45 @@
 .footer-nav .footer-link:hover {
   color: var(--accent);
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
 }
 
 .footer-links {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--space-4);
+  gap: var(--space-5);
   padding-top: var(--space-4);
   border-top: 1px solid var(--border-subtle);
 }
 
-.footer-links .footer-link {
+.footer-social-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   font-size: var(--text-xs);
   font-family: var(--font-mono);
-  color: var(--text-secondary);
-  font-weight: 500;
+  color: var(--text-muted);
+  font-weight: 400;
   text-decoration: none;
   cursor: pointer;
   transition: color var(--transition-fast);
 }
 
-.footer-links .footer-link:hover {
-  color: var(--accent);
+.footer-social-link:hover {
+  color: var(--text-primary);
 }
 
 .footer-top-btn {
-  margin-left: auto;
   font-size: var(--text-xs);
   font-family: var(--font-mono);
-  color: var(--text-secondary);
+  color: var(--text-muted);
   font-weight: 500;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-medium);
+  background: transparent;
+  border: 1px solid var(--border-subtle);
   cursor: pointer;
-  padding: 4px 10px;
-  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
   transition: all var(--transition-fast);
 }
 

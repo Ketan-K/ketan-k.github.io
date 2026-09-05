@@ -115,47 +115,49 @@ export const WebRtcPage: React.FC = () => {
         <div className="section-label">Specifications</div>
         <h2 className="section-heading">IETF / W3C Protocol Standards</h2>
 
-        <table className="spec-table">
-          <thead>
-            <tr>
-              <th>Protocol / RFC</th>
-              <th>Layer</th>
-              <th>Purpose in WebRTC</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td className="mono">RFC 8829 (JSEP)</td>
-              <td>Signaling / State</td>
-              <td>Javascript Session Establishment Protocol for Offer/Answer SDP state machine.</td>
-            </tr>
-            <tr>
-              <td className="mono">RFC 8445 (ICE)</td>
-              <td>Connectivity</td>
-              <td>Interactive Connectivity Establishment across NATs and firewalls.</td>
-            </tr>
-            <tr>
-              <td className="mono">RFC 3711 (SRTP)</td>
-              <td>Media Security</td>
-              <td>Secure Real-Time Transport Protocol providing payload encryption and replay protection.</td>
-            </tr>
-            <tr>
-              <td className="mono">RFC 5764 (DTLS-SRTP)</td>
-              <td>Key Exchange</td>
-              <td>Datagram TLS handshake over UDP for deriving SRTP master keys without out-of-band signaling.</td>
-            </tr>
-            <tr>
-              <td className="mono">RFC 4585 (AVPF)</td>
-              <td>RTCP Feedback</td>
-              <td>Extended RTP feedback profiles enabling NACK, PLI, and FIR feedback in &lt; 50ms.</td>
-            </tr>
-            <tr>
-              <td className="mono">RFC 8888 (Congestion)</td>
-              <td>Bandwidth Estimation</td>
-              <td>RTP Control Protocol (RTCP) feedback for Congestion Control (Google Congestion Control).</td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="spec-table-container">
+          <table className="spec-table">
+            <thead>
+              <tr>
+                <th>Protocol / RFC</th>
+                <th>Layer</th>
+                <th>Purpose in WebRTC</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="mono">RFC 8829 (JSEP)</td>
+                <td>Signaling / State</td>
+                <td>Javascript Session Establishment Protocol for Offer/Answer SDP state machine.</td>
+              </tr>
+              <tr>
+                <td className="mono">RFC 8445 (ICE)</td>
+                <td>Connectivity</td>
+                <td>Interactive Connectivity Establishment across NATs and firewalls.</td>
+              </tr>
+              <tr>
+                <td className="mono">RFC 3711 (SRTP)</td>
+                <td>Media Security</td>
+                <td>Secure Real-Time Transport Protocol providing payload encryption and replay protection.</td>
+              </tr>
+              <tr>
+                <td className="mono">RFC 5764 (DTLS-SRTP)</td>
+                <td>Key Exchange</td>
+                <td>Datagram TLS handshake over UDP for deriving SRTP master keys without out-of-band signaling.</td>
+              </tr>
+              <tr>
+                <td className="mono">RFC 4585 (AVPF)</td>
+                <td>RTCP Feedback</td>
+                <td>Extended RTP feedback profiles enabling NACK, PLI, and FIR feedback in &lt; 50ms.</td>
+              </tr>
+              <tr>
+                <td className="mono">RFC 8888 (Congestion)</td>
+                <td>Bandwidth Estimation</td>
+                <td>RTP Control Protocol (RTCP) feedback for Congestion Control (Google Congestion Control).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </section>
 
       {/* Navigation Footer */}
