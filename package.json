@@ -2,6 +2,14 @@
   "name": "ketan-katore-portfolio",
   "private": true,
   "version": "1.0.0",
+  "description": "Personal engineering portfolio and system architecture showcase for Ketan Katore",
+  "author": "Ketan Katore <https://github.com/Ketan-K>",
+  "license": "MIT",
+  "homepage": "https://ketan-k.github.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ketan-K/ketan-k.github.io.git"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",
