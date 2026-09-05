@@ -14,7 +14,10 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "sync:readme": "node scripts/sync-readme.js",
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "dependencies": {
     "lucide-react": "^1.16.0",

@@ -39,8 +39,27 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
   return (
     <section className="content-section" id="github">
       <div className="section-header-row">
-        <h2 className="section-heading" style={{ margin: 0 }}>{title}</h2>
+        <div className="repo-section-title-wrap">
+          <h2 className="section-heading" style={{ margin: 0 }}>{title}</h2>
+          {isLive && (
+            <span className="repo-live-sync-indicator font-mono" title={`Synced from GitHub API at ${lastFetched?.toLocaleTimeString()}`}>
+              <span className="telemetry-dot-live" />
+              <span>Live Sync</span>
+            </span>
+          )}
+        </div>
+
         <div className="repo-header-actions">
+          <button
+            type="button"
+            className="repo-sync-btn font-mono"
+            onClick={refetch}
+            disabled={loading}
+            title="Sync latest metadata from GitHub REST API"
+          >
+            <RefreshCw size={11} className={loading ? 'spinning' : ''} />
+            <span>{loading ? 'Syncing...' : 'Sync'}</span>
+          </button>
           <a
             href="https://github.com/Ketan-K"
             target="_blank"
@@ -60,66 +79,44 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
       )}
 
       {showControls && (
-        <div className="repo-controls-row">
-          {/* Telemetry Status Bar */}
-          <div className="repo-telemetry-badge font-mono">
-            <span className={isLive ? 'telemetry-dot-live' : 'telemetry-dot-cached'} />
-            <span>
-              {isLive ? 'Live API Sync' : 'Static Snapshot'}
-              {lastFetched && ` · ${lastFetched.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`}
-            </span>
-            <button
-              type="button"
-              className="repo-refresh-icon-btn"
-              onClick={refetch}
-              disabled={loading}
-              title="Refresh telemetry from GitHub REST API"
-              aria-label="Refresh telemetry from GitHub REST API"
-            >
-              <RefreshCw size={11} className={loading ? 'spinning' : ''} />
-            </button>
-          </div>
+        <div className="tag-filter-bar repo-filter-bar">
+          <button
+            type="button"
+            className={`tag-btn ${filterType === 'all' && selectedLanguage === 'all' ? 'tag-btn-active' : ''}`}
+            onClick={() => {
+              setFilterType('all');
+              setSelectedLanguage('all');
+            }}
+          >
+            All Repos ({repos.length})
+          </button>
 
-          {/* Tag Filter Pills */}
-          <div className="tag-filter-bar" style={{ marginBottom: 0 }}>
-            <button
-              type="button"
-              className={`tag-btn ${filterType === 'all' && selectedLanguage === 'all' ? 'tag-btn-active' : ''}`}
-              onClick={() => {
-                setFilterType('all');
-                setSelectedLanguage('all');
-              }}
-            >
-              All Repos ({repos.length})
-            </button>
+          <button
+            type="button"
+            className={`tag-btn ${filterType === 'featured' ? 'tag-btn-active' : ''}`}
+            onClick={() => setFilterType(filterType === 'featured' ? 'all' : 'featured')}
+          >
+            <span className="live-pill-dot" />
+            Verified Demos
+          </button>
 
-            <button
-              type="button"
-              className={`tag-btn ${filterType === 'featured' ? 'tag-btn-active' : ''}`}
-              onClick={() => setFilterType(filterType === 'featured' ? 'all' : 'featured')}
-            >
-              <span className="live-pill-dot" />
-              Verified Demos
-            </button>
-
-            {languages
-              .filter((l) => l !== 'all')
-              .map((lang) => (
-                <button
-                  key={lang}
-                  type="button"
-                  className={`tag-btn ${selectedLanguage === lang ? 'tag-btn-active' : ''}`}
-                  onClick={() => setSelectedLanguage(selectedLanguage === lang ? 'all' : lang)}
-                >
-                  {lang}
-                </button>
-              ))}
-          </div>
+          {languages
+            .filter((l) => l !== 'all')
+            .map((lang) => (
+              <button
+                key={lang}
+                type="button"
+                className={`tag-btn ${selectedLanguage === lang ? 'tag-btn-active' : ''}`}
+                onClick={() => setSelectedLanguage(selectedLanguage === lang ? 'all' : lang)}
+              >
+                {lang}
+              </button>
+            ))}
         </div>
       )}
 
       {/* Repository Items List */}
-      <div className="item-list" style={{ marginTop: 'var(--space-4)' }}>
+      <div className="item-list" style={{ marginTop: 'var(--space-2)' }}>
         {loading && repos.length === 0 ? (
           [1, 2, 3, 4].map((i) => (
             <div key={i} className="item-row skeleton-row">

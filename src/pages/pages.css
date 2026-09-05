@@ -663,6 +663,112 @@
   letter-spacing: 0.04em;
 }
 
+/* System Principles Detailed Block */
+.system-principle-block {
+  padding: var(--space-8) 0;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.system-principle-block:first-child {
+  padding-top: 0;
+}
+
+.principle-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.principle-title-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.principle-num-pill {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-subtle);
+  border: 1px solid var(--accent-border);
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.05em;
+}
+
+.principle-title {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.015em;
+}
+
+.principle-subtitle-tag {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.principle-prose {
+  font-size: var(--text-base);
+  line-height: 1.68;
+  color: var(--text-secondary);
+  max-width: 72ch;
+  margin: var(--space-1) 0 var(--space-2);
+}
+
+.principle-diagram-wrapper {
+  margin: var(--space-3) 0;
+}
+
+.diagram-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-2);
+}
+
+.principle-takeaway-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+}
+
+.takeaway-badge-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.takeaway-icon {
+  color: var(--status-emerald);
+}
+
+.takeaway-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--status-emerald);
+  letter-spacing: 0.05em;
+}
+
+.takeaway-text {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  line-height: 1.55;
+  font-weight: 500;
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   .page-container {
     padding: var(--space-6) var(--container-pad) var(--space-16);
@@ -693,3 +799,4 @@
     height: 520px;
   }
 }
+

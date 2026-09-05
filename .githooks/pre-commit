@@ -1,0 +1,88 @@
+#!/bin/sh
+#
+# Native Git Pre-Commit Hook (Zero Dependencies)
+# Checks:
+# 1. Accidental Secrets / Token Detection in Staged Diffs
+# 2. OS Artifact & Environment File Hygiene (.DS_Store, .env)
+# 3. Strict TypeScript Compilation (tsc --noEmit)
+# 4. Automatic README.md Project Structure Synchronization
+#
+
+set -e
+
+echo "🔍 Running pre-commit checks..."
+
+# -----------------------------------------------------------------------------
+# 1. Check for staged sensitive files & OS artifacts
+# -----------------------------------------------------------------------------
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR)
+
+if [ -z "$STAGED_FILES" ]; then
+  exit 0
+fi
+
+# Prevent committing .env files or OS metadata
+for FILE in $STAGED_FILES; do
+  case "$FILE" in
+    .env*|*.env)
+      echo "❌ [Pre-Commit] Blocked commit: Attempting to commit environment file: $FILE"
+      echo "   Remove it with: git reset HEAD $FILE"
+      exit 1
+      ;;
+    *.DS_Store|*Thumbs.db)
+      echo "❌ [Pre-Commit] Blocked commit: Attempting to commit OS artifact: $FILE"
+      echo "   Remove it with: git rm --cached $FILE"
+      exit 1
+      ;;
+  esac
+done
+
+# -----------------------------------------------------------------------------
+# 2. Lightweight Secret & Credential Scan on Staged Diff
+# -----------------------------------------------------------------------------
+STAGED_DIFF=$(git diff --cached -U0)
+
+# Secret patterns to detect:
+# - AWS Access Keys (AKIA...)
+# - GitHub Tokens (ghp_, gho_, ghu_, ghs_, github_pat_)
+# - PEM/OpenSSH Private Keys
+# - Stripe Live Keys (sk_live_...)
+# - Google API Keys (AIzaSy...)
+# - Generic high-risk auth tokens / passwords
+SECRET_PATTERN='(AKIA[0-9A-Z]{16}|gh[posu]_[0-9a-zA-Z]{36}|github_pat_[0-9a-zA-Z_]{82}|-----BEGIN[ A-Z0-9_-]*PRIVATE KEY-----|sk_live_[0-9a-zA-Z]{24}|AIzaSy[0-9A-Za-z_-]{33}|xox[baprs]-[0-9a-zA-Z]{10,48})'
+
+if echo "$STAGED_DIFF" | grep -Eq "$SECRET_PATTERN"; then
+  echo "❌ [Pre-Commit] High-severity secret/token detected in staged diff!"
+  echo "   Matches one of: AWS Key, GitHub Token, Private Key, Stripe Live Key, Google Key."
+  echo "   Please remove the sensitive credential before committing."
+  exit 1
+fi
+
+# -----------------------------------------------------------------------------
+# 3. TypeScript Type-Checking (tsc --noEmit)
+# -----------------------------------------------------------------------------
+STAGED_TS=$(echo "$STAGED_FILES" | grep -E '\.(ts|tsx)$' || true)
+
+if [ -n "$STAGED_TS" ]; then
+  echo "⚡ Checking TypeScript types on staged source files..."
+  if ! npx tsc --noEmit; then
+    echo "❌ [Pre-Commit] TypeScript type-check failed. Fix compilation errors before committing."
+    exit 1
+  fi
+  echo "✓ TypeScript type-check passed."
+fi
+
+# -----------------------------------------------------------------------------
+# 4. Synchronize README.md Project Structure
+# -----------------------------------------------------------------------------
+if [ -f "scripts/sync-readme.js" ]; then
+  echo "📖 Synchronizing README.md project structure..."
+  node scripts/sync-readme.js
+  if ! git diff --quiet README.md; then
+    git add README.md
+    echo "✓ README.md updated and staged."
+  fi
+fi
+
+echo "✓ All pre-commit checks passed cleanly."
+exit 0

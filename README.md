@@ -22,6 +22,7 @@ Hosted at: **[https://ketan-k.github.io/](https://ketan-k.github.io/)**
   - **Tiered Caching & Singleflight**: Visual demonstration of L1 (in-memory), L2 (Redis), and DB querying with mutex-based request coalescing.
   - **AI Token Streaming**: Benchmarks TTFT (Time-To-First-Token), tokens-per-second, and SSE chunk parsing across prompt complexities.
   - **System Resilience Cascade**: Interactive simulation of breaker states (Closed, Open, Half-Open), exponential backoff retry policies, and fallback degradation.
+- **In-Place Visual Node Graphs**: Clean, monochrome editorial node graphs representing real-time failover cascades, state classification trees, observability rails, and optimistic reconciliation loops.
 - **Dynamic GitHub Repository Sync**: Live public repo telemetry via GitHub REST API with graceful fallback to typed snapshot data.
 - **Zero Heavyweight UI Bloat**: Custom lightweight CSS design system with CSS custom properties, responsive typography, and full Dark/Light theme switching.
 - **CI/CD Deployment**: Automated static site build and deployment to GitHub Pages via GitHub Actions.
@@ -47,28 +48,32 @@ Hosted at: **[https://ketan-k.github.io/](https://ketan-k.github.io/)**
 ketan-k.github.io/
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml          # GitHub Actions deployment workflow
+│       └── deploy.yml              # GitHub Actions deployment workflow
+├── .githooks/
+│   └── pre-commit                  # Native Git pre-commit hook (zero dependencies)
 ├── public/
 │   └── resume/
-│       └── Ketan-Katore-Resume.pdf
+│       └── Ketan-Katore-Resume.pdf # Downloadable resume PDF
+├── scripts/
+│   └── sync-readme.js          # Repository structure synchronization tool
 ├── src/
-│   ├── components/             # Reusable UI & interactive visualizers
-│   │   ├── about/              # Bio and credentials
-│   │   ├── ailab/              # AI experiments and LLM benchmarks
-│   │   ├── backend/            # Backend architecture diagrams
-│   │   ├── common/             # Badges, icons, scroll helpers
-│   │   ├── contact/            # Contact channels and links
-│   │   ├── demos/              # Interactive architecture sandboxes
-│   │   ├── experience/         # Career timeline and achievements
-│   │   ├── github/             # Live GitHub repositories grid
-│   │   ├── hero/               # Hero landing section & interactive pipeline
-│   │   ├── layout/             # Navigation and footer
-│   │   ├── stack/              # Categorized tech stack grid
-│   │   ├── systems/            # Architectural principles and case studies
-│   │   ├── webrtc/             # WebRTC media deep-dives
-│   │   ├── work/               # Featured projects and case studies
-│   │   └── writing/            # Technical notes and whitepapers
-│   ├── content/                # Structured, typed portfolio data
+│   ├── components/                 # Reusable UI & architectural diagrams
+│   │   ├── about/                  # Bio and credentials
+│   │   ├── ailab/                  # AI experiments and LLM benchmarks
+│   │   ├── backend/                # Backend architecture diagrams
+│   │   ├── common/                 # Badges, icons, scroll helpers
+│   │   ├── contact/                # Contact channels and links
+│   │   ├── demos/                  # Interactive architecture sandboxes
+│   │   ├── experience/             # Career timeline and achievements
+│   │   ├── github/                 # Live GitHub repositories & verified demos
+│   │   ├── hero/                   # Hero landing section & interactive pipeline
+│   │   ├── layout/                 # Navigation and footer
+│   │   ├── stack/                  # Categorized tech stack grid
+│   │   ├── systems/                # Architectural principles & visual node graphs
+│   │   ├── webrtc/                 # WebRTC media deep-dives & topology
+│   │   ├── work/                   # Featured projects and case studies
+│   │   └── writing/                # Technical notes and whitepapers
+│   ├── content/                    # Structured, typed portfolio data
 │   │   ├── ailab.ts
 │   │   ├── education.ts
 │   │   ├── experience.ts
@@ -78,17 +83,17 @@ ketan-k.github.io/
 │   │   ├── techstack.ts
 │   │   └── writing.ts
 │   ├── context/
-│   │   └── ThemeContext.tsx    # Light/Dark mode state management
+│   │   └── ThemeContext.tsx        # Light/Dark mode state management
 │   ├── hooks/
-│   │   └── useGitHubRepos.ts   # Live GitHub repository fetcher with caching
-│   ├── pages/                  # Routed page views
+│   │   └── useGitHubRepos.ts       # Live GitHub repository fetcher with caching
+│   ├── pages/                      # Routed page views
 │   ├── styles/
-│   │   └── index.css           # Core design system tokens and utilities
+│   │   └── index.css               # Core design system tokens and utilities
 │   ├── types/
-│   │   └── index.ts            # Global TypeScript interface definitions
-│   ├── App.tsx                 # Root application component & routing
-│   └── main.tsx                # Application entry point
-├── index.html                  # HTML template with SEO & Open Graph meta
+│   │   └── index.ts                # Global TypeScript interface definitions
+│   ├── App.tsx                     # Root application component & routing
+│   └── main.tsx                    # Application entry point
+├── index.html                      # HTML template with SEO & Open Graph meta
 ├── package.json
 ├── tsconfig.json
 └── vite.config.ts
@@ -110,7 +115,7 @@ ketan-k.github.io/
 git clone https://github.com/Ketan-K/ketan-k.github.io.git
 cd ketan-k.github.io
 
-# Install dependencies
+# Install dependencies (automatically sets up native git hooks)
 npm install
 ```
 
@@ -135,6 +140,38 @@ Built static assets will be output to the `dist/` directory.
 
 ```bash
 npm run preview
+```
+
+---
+
+## Git Pre-Commit Hook & Repository Hygiene
+
+This repository includes a **zero-dependency, native Git pre-commit hook** located at [`.githooks/pre-commit`](.githooks/pre-commit).
+
+### What It Checks
+
+1. **Secret & Credential Prevention**: Scans staged diffs for high-risk tokens (AWS Keys, GitHub PATs/tokens, Private Keys, Stripe Live Keys, Google API keys) and prevents accidental commits of `.env` files.
+2. **OS Metadata Prevention**: Blocks committing `.DS_Store`, `Thumbs.db`, or temporary editor artifacts.
+3. **Strict TypeScript Compilation**: Executes `tsc --noEmit` whenever `.ts` or `.tsx` files are staged, blocking commits with type errors.
+4. **Automatic README Synchronization**: Runs `scripts/sync-readme.js` to automatically verify and synchronize the `## Project Structure` tree in `README.md` upon commit.
+
+### Enabling the Hook After Cloning
+
+The hook is automatically configured upon running `npm install` via the npm `prepare` lifecycle script. You can also configure it manually:
+
+```bash
+# Point Git to repository-tracked hooks
+git config core.hooksPath .githooks
+```
+
+### Running Checks Manually
+
+```bash
+# Run TypeScript compilation check
+npm run typecheck
+
+# Run pre-commit script directly
+.githooks/pre-commit
 ```
 
 ---

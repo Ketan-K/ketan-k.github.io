@@ -3,69 +3,62 @@
    Clean Typographic List Layout · Design Token Aligned · Dark/Light Cohesive
    ========================================================================== */
 
+.repo-section-title-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.repo-live-sync-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: 1px 6px;
+  border-radius: var(--radius-xs);
+}
+
+.telemetry-dot-live {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--status-emerald);
+  box-shadow: 0 0 5px rgba(16, 185, 129, 0.7);
+  display: inline-block;
+}
+
 .repo-header-actions {
   display: flex;
   align-items: center;
   gap: var(--space-3);
 }
 
-.repo-controls-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-4);
-  margin-bottom: var(--space-2);
-}
-
-.repo-telemetry-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: var(--text-xs);
-  color: var(--text-muted);
+.repo-sync-btn {
   background: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
-  padding: 0.22rem 0.55rem;
+  color: var(--text-secondary);
+  font-size: var(--text-xs);
+  padding: 0.2rem 0.55rem;
   border-radius: var(--radius-xs);
-}
-
-.telemetry-dot-live {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--status-emerald);
-  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
-  display: inline-block;
-}
-
-.telemetry-dot-cached {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--text-dim);
-  display: inline-block;
-}
-
-.repo-refresh-icon-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
   cursor: pointer;
-  padding: 2px;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  transition: color var(--transition-fast);
+  gap: 0.3rem;
+  transition: all var(--transition-fast);
 }
 
-.repo-refresh-icon-btn:hover:not(:disabled) {
+.repo-sync-btn:hover:not(:disabled) {
+  background: var(--bg-hover);
+  border-color: var(--border-strong);
   color: var(--text-primary);
 }
 
-.repo-refresh-icon-btn:disabled {
-  opacity: 0.4;
+.repo-sync-btn:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
@@ -76,6 +69,11 @@
 @keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.repo-filter-bar {
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
 .live-pill-dot {
@@ -240,10 +238,6 @@
 }
 
 @media (max-width: 640px) {
-  .repo-controls-row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
   .repo-row-bottom {
     flex-direction: column;
     align-items: flex-start;
