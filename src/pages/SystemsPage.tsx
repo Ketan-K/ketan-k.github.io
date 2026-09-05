@@ -50,9 +50,9 @@ export const SystemsPage: React.FC = () => {
       {/* Core Architectural Principles */}
       <section className="content-section">
         <div className="section-header-row">
-          <h2 className="section-heading" style={{ margin: 0 }}>Core Architectural Principles</h2>
+          <h2 className="section-heading" style={{ margin: 0 }}>Core Principles</h2>
           <span className="link-subtle" style={{ cursor: 'default' }}>
-            5 Invariant Design Contracts
+            5 Principles
           </span>
         </div>
         <p className="prose" style={{ marginBottom: 'var(--space-6)' }}>
@@ -74,14 +74,14 @@ export const SystemsPage: React.FC = () => {
               {/* Description Prose */}
               <p className="principle-prose">{p.description}</p>
 
-              {/* Rendered Visual Node Graph Diagram */}
-              <PrincipleNodeGraph principleId={p.id} rawAscii={p.diagram} />
+              {/* Rendered Visual Flow Diagram */}
+              <PrincipleNodeGraph flow={p.flow} />
 
               {/* Key Takeaway Callout */}
               <div className="insight-box principle-takeaway-box">
                 <div className="takeaway-badge-wrap font-mono">
                   <CheckCircle2 size={14} className="takeaway-icon" />
-                  <span className="takeaway-label">ARCHITECTURAL TAKEAWAY:</span>
+                  <span className="takeaway-label">Key Takeaway</span>
                 </div>
                 <p className="takeaway-text">{p.keyTakeaway}</p>
               </div>

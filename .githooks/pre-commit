@@ -59,29 +59,17 @@ if echo "$STAGED_DIFF" | grep -Eq "$SECRET_PATTERN"; then
 fi
 
 # -----------------------------------------------------------------------------
-# 3. TypeScript Type-Checking (tsc --noEmit)
+# 3. TypeScript Type-Checking (npm run typecheck)
 # -----------------------------------------------------------------------------
 STAGED_TS=$(echo "$STAGED_FILES" | grep -E '\.(ts|tsx)$' || true)
 
 if [ -n "$STAGED_TS" ]; then
   echo "⚡ Checking TypeScript types on staged source files..."
-  if ! npx tsc --noEmit; then
+  if ! npm run typecheck; then
     echo "❌ [Pre-Commit] TypeScript type-check failed. Fix compilation errors before committing."
     exit 1
   fi
   echo "✓ TypeScript type-check passed."
-fi
-
-# -----------------------------------------------------------------------------
-# 4. Synchronize README.md Project Structure
-# -----------------------------------------------------------------------------
-if [ -f "scripts/sync-readme.js" ]; then
-  echo "📖 Synchronizing README.md project structure..."
-  node scripts/sync-readme.js
-  if ! git diff --quiet README.md; then
-    git add README.md
-    echo "✓ README.md updated and staged."
-  fi
 fi
 
 echo "✓ All pre-commit checks passed cleanly."

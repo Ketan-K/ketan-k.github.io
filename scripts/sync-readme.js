@@ -3,17 +3,17 @@
 /**
  * sync-readme.js
  * 
- * Automatically synchronizes the "Project Structure" tree in README.md
+ * Synchronizes the "Project Structure" tree in README.md
  * with the actual filesystem structure.
+ * 
+ * Note: Pure file synchronization only. Does not touch git index or commit state.
  * 
  * Usage:
  *   node scripts/sync-readme.js
- *   node scripts/sync-readme.js --commit
  */
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { execSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -82,7 +82,7 @@ function generateTree() {
   return lines.join('\n');
 }
 
-function updateReadme(shouldCommit = false) {
+function updateReadme() {
   if (!fs.existsSync(README_PATH)) {
     console.error('README.md not found at:', README_PATH);
     process.exit(1);
@@ -101,23 +101,11 @@ function updateReadme(shouldCommit = false) {
   const updatedReadme = currentReadme.replace(treeRegex, newTree);
 
   if (updatedReadme === currentReadme) {
-    console.log('✓ README.md project structure is already up to date.');
+    console.log('✓ README.md project structure is up to date.');
   } else {
     fs.writeFileSync(README_PATH, updatedReadme, 'utf-8');
-    console.log('✓ README.md project structure successfully updated.');
-  }
-
-  if (shouldCommit) {
-    try {
-      console.log('Staging and committing README.md...');
-      execSync('git add README.md scripts/sync-readme.js package.json', { cwd: ROOT_DIR, stdio: 'inherit' });
-      execSync('git commit -m "docs: synchronize project structure in README.md with codebase"', { cwd: ROOT_DIR, stdio: 'inherit' });
-      console.log('✓ Committed README sync.');
-    } catch (err) {
-      console.warn('Note: Git commit skipped or working tree already clean.');
-    }
+    console.log('✓ README.md project structure updated.');
   }
 }
 
-const isCommitRequested = process.argv.includes('--commit');
-updateReadme(isCommitRequested);
+updateReadme();

@@ -26,13 +26,24 @@ export interface Project {
   whatILearned: string;
 }
 
+export interface SystemPrincipleNode {
+  id: string;
+  label: string;
+  note?: string;
+}
+
+export interface SystemPrincipleFlow {
+  nodes: SystemPrincipleNode[];
+  edges: ([string, string] | [string, string, string])[];
+}
+
 export interface SystemPrinciple {
   id: string;
   number: string;
   title: string;
   subtitle: string;
   description: string;
-  diagram: string;
+  flow: SystemPrincipleFlow;
   keyTakeaway: string;
 }
 

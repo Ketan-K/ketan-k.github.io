@@ -1,46 +1,40 @@
 # Ketan Katore — Engineering Portfolio
 
-[![Live Site](https://img.shields.io/badge/Live-ketan--k.github.io-38bdf8?style=flat-square&logo=githubpages&logoColor=white)](https://ketan-k.github.io/)
-[![Deploy Status](https://github.com/Ketan-K/ketan-k.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Ketan-K/ketan-k.github.io/actions/workflows/deploy.yml)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-6-646cff?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-emerald?style=flat-square)](LICENSE)
+Personal engineering portfolio for **Ketan Katore** (Senior Software Engineer). Built with React, TypeScript, and Vite. Deployed to GitHub Pages.
 
-The personal engineering portfolio and systems showcase for **Ketan Katore** — Senior Software Engineer specializing in WebRTC, real-time media systems, distributed backend infrastructure, and full-stack engineering.
+Live site: [https://ketan-k.github.io/](https://ketan-k.github.io/)
 
-Hosted at: **[https://ketan-k.github.io/](https://ketan-k.github.io/)**
+## Development
 
----
+```bash
+# Install dependencies and configure git hooks
+npm install
 
-## Highlights & Features
+# Start development server
+npm run dev
+```
 
-- **Interactive System Architecture Visualizers**:
-  - **WebRTC Topology Simulator**: Visualizes bandwidth scaling, latency, and CPU trade-offs across Peer-to-Peer Mesh, SFU (Selective Forwarding Unit), and MCU (Multipoint Control Unit).
-  - **Request Lifecycle Pipeline**: Step-by-step trace of incoming requests traversing DNS, TLS, CDN edge, reverse proxy, API gateway, microservice, Redis cache, and Postgres.
-  - **Real-Time Event Stream**: Live simulated WebSocket / SSE Redis pub-sub stream with event throughput metrics.
-  - **Tiered Caching & Singleflight**: Visual demonstration of L1 (in-memory), L2 (Redis), and DB querying with mutex-based request coalescing.
-  - **AI Token Streaming**: Benchmarks TTFT (Time-To-First-Token), tokens-per-second, and SSE chunk parsing across prompt complexities.
-  - **System Resilience Cascade**: Interactive simulation of breaker states (Closed, Open, Half-Open), exponential backoff retry policies, and fallback degradation.
-- **In-Place Visual Node Graphs**: Clean, monochrome editorial node graphs representing real-time failover cascades, state classification trees, observability rails, and optimistic reconciliation loops.
-- **Dynamic GitHub Repository Sync**: Live public repo telemetry via GitHub REST API with graceful fallback to typed snapshot data.
-- **Zero Heavyweight UI Bloat**: Custom lightweight CSS design system with CSS custom properties, responsive typography, and full Dark/Light theme switching.
-- **CI/CD Deployment**: Automated static site build and deployment to GitHub Pages via GitHub Actions.
+## Build & Typecheck
 
----
+```bash
+# Type check TypeScript codebase
+npm run typecheck
+
+# Build production bundle
+npm run build
+
+# Preview production build locally
+npm run preview
+```
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| **Frontend Framework** | React 19, React Router 7 |
-| **Language** | TypeScript (Strict Mode) |
-| **Build & Tooling** | Vite 6, Rollup |
-| **Styling** | Vanilla CSS with Design System Custom Properties |
-| **Icons** | Lucide React |
-| **Hosting & CI/CD** | GitHub Pages + GitHub Actions |
-
----
+- **Framework**: React 19, React Router 7
+- **Language**: TypeScript (Strict Mode)
+- **Build Tooling**: Vite 6, Rollup
+- **Styling**: Vanilla CSS (CSS custom properties design system)
+- **Icons**: Lucide React
+- **Deployment**: GitHub Pages via GitHub Actions
 
 ## Project Structure
 
@@ -99,89 +93,13 @@ ketan-k.github.io/
 └── vite.config.ts
 ```
 
----
+## Pre-Commit Hook
 
-## Getting Started
-
-### Prerequisites
-
-- **Node.js**: v18.0.0 or later (Node 22 recommended)
-- **npm**: v9.0.0 or later
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Ketan-K/ketan-k.github.io.git
-cd ketan-k.github.io
-
-# Install dependencies (automatically sets up native git hooks)
-npm install
-```
-
-### Development Server
-
-```bash
-npm run dev
-```
-
-Runs the application locally at `http://localhost:5173/`.
-
-### Production Build
-
-```bash
-# Type check and build optimized bundle for production
-npm run build
-```
-
-Built static assets will be output to the `dist/` directory.
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
----
-
-## Git Pre-Commit Hook & Repository Hygiene
-
-This repository includes a **zero-dependency, native Git pre-commit hook** located at [`.githooks/pre-commit`](.githooks/pre-commit).
-
-### What It Checks
-
-1. **Secret & Credential Prevention**: Scans staged diffs for high-risk tokens (AWS Keys, GitHub PATs/tokens, Private Keys, Stripe Live Keys, Google API keys) and prevents accidental commits of `.env` files.
-2. **OS Metadata Prevention**: Blocks committing `.DS_Store`, `Thumbs.db`, or temporary editor artifacts.
-3. **Strict TypeScript Compilation**: Executes `tsc --noEmit` whenever `.ts` or `.tsx` files are staged, blocking commits with type errors.
-4. **Automatic README Synchronization**: Runs `scripts/sync-readme.js` to automatically verify and synchronize the `## Project Structure` tree in `README.md` upon commit.
-
-### Enabling the Hook After Cloning
-
-The hook is automatically configured upon running `npm install` via the npm `prepare` lifecycle script. You can also configure it manually:
-
-```bash
-# Point Git to repository-tracked hooks
-git config core.hooksPath .githooks
-```
-
-### Running Checks Manually
-
-```bash
-# Run TypeScript compilation check
-npm run typecheck
-
-# Run pre-commit script directly
-.githooks/pre-commit
-```
-
----
-
-## Deployment
-
-The portfolio is deployed to **GitHub Pages** automatically on every push to `main` via the GitHub Actions workflow located at [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml).
-
----
+This repository uses a native Git pre-commit hook at [`.githooks/pre-commit`](.githooks/pre-commit) configured via `git config core.hooksPath .githooks`:
+- Scans staged diffs for accidental credentials/tokens and blocks environment files (`.env`).
+- Verifies staged TypeScript files pass strict type checking (`npm run typecheck`).
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+[MIT](LICENSE) © Ketan Katore
+

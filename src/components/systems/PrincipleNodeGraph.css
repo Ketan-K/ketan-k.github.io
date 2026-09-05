@@ -1,349 +1,135 @@
 /* ==========================================================================
-   PRINCIPLE NODE GRAPH — EDITORIAL VISUAL DIAGRAMS
-   Monochrome Technical Blocks · Clear Connectors · Dark/Light Cohesive
+   PRINCIPLE NODE GRAPH — EDITORIAL FLOW DIAGRAMS
+   Clean, restrained technical diagram typography
    ========================================================================== */
 
-.principle-visual-graph-wrapper {
+.flow-diagram-container {
   background: var(--bg-code);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
   padding: var(--space-4) var(--space-5);
-  margin: var(--space-3) 0;
+  margin: var(--space-4) 0;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Common Node Styles */
-.flow-node {
+/* Sequential Layout */
+.flow-sequence-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  width: 100%;
+}
+
+.flow-sequence-node {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.flow-node-content {
   background: var(--bg-primary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
-  padding: 0.45rem 0.85rem;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--text-primary);
+  padding: 0.5rem 0.85rem;
   display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  box-sizing: border-box;
-  transition: border-color var(--transition-fast);
-}
-
-.flow-node:hover {
-  border-color: var(--border-strong);
-}
-
-.flow-node-warning {
-  border-left: 3px solid var(--status-amber);
-  background: var(--status-amber-dim, rgba(217, 119, 6, 0.06));
-}
-
-.node-icon-warn {
-  color: var(--status-amber);
-}
-
-.flow-node-success {
-  border-left: 3px solid var(--status-emerald);
-  background: var(--status-emerald-dim, rgba(16, 185, 129, 0.06));
-}
-
-.node-icon-success {
-  color: var(--status-emerald);
-}
-
-.flow-node-fast {
-  border-left: 3px solid var(--accent);
-  background: var(--accent-subtle);
-}
-
-.speed-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--accent);
-  display: inline-block;
-}
-
-.flow-node-accent {
-  border-left: 3px solid var(--accent);
-}
-
-.flow-node-primary {
-  border-left: 3px solid var(--accent-cyan, #0284c7);
-}
-
-/* Sequential Flow Layouts (Diagram 1 & 5) */
-.flow-graph-container {
-  display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
-  width: 100%;
+  gap: 0.2rem;
+  max-width: 100%;
 }
 
-.flow-seq-row {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.flow-seq-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
-  padding-left: var(--space-4);
-  border-left: 1px dashed var(--border-medium);
-  margin-left: var(--space-4);
-}
-
-.flow-arrow-h {
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.7;
-}
-
-.flow-arrow-v {
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  padding-left: var(--space-6);
-  opacity: 0.7;
-}
-
-/* Tree Branching Layout (Diagram 2: Keep State Intentional) */
-.flow-tree-container {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-  width: 100%;
-}
-
-.tree-root-box {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-xs);
-  padding: 0.45rem 0.85rem;
+.flow-node-title {
   font-size: 0.8125rem;
   font-weight: 600;
   color: var(--text-primary);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  width: fit-content;
+  letter-spacing: -0.01em;
 }
 
-.tree-branches {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding-left: var(--space-3);
-}
-
-.tree-branch-item {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.branch-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
+.flow-node-note {
   font-size: 0.75rem;
   color: var(--text-muted);
+  line-height: 1.4;
 }
 
-.branch-connector {
-  color: var(--text-dim);
-}
-
-.branch-type {
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-
-.branch-arrow {
+.flow-connector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0 0.35rem 0.85rem;
   color: var(--text-muted);
 }
 
-/* Pipeline Rail Layout (Diagram 3: Observe What Matters) */
-.flow-pipeline-container {
+.flow-arrow-icon {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.flow-edge-label {
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* Tree / Branch Layout */
+.flow-tree-layout {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: 0.6rem;
   width: 100%;
 }
 
-.pipeline-origin {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-medium);
-  border-radius: var(--radius-xs);
-  padding: 0.45rem 0.85rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  width: fit-content;
-}
-
-.pipeline-steps-rail {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-  padding-left: var(--space-4);
-  border-left: 2px solid var(--border-subtle);
-  margin-left: var(--space-4);
-}
-
-.pipeline-step-item {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-3);
-  position: relative;
-}
-
-.step-bullet {
-  font-size: 0.6875rem;
-  color: var(--text-muted);
+.flow-tree-root {
   background: var(--bg-primary);
   border: 1px solid var(--border-subtle);
-  border-radius: 2px;
-  padding: 1px 5px;
-  margin-top: 3px;
-  flex-shrink: 0;
+  border-radius: var(--radius-xs);
+  padding: 0.5rem 0.85rem;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-self: flex-start;
 }
 
-.step-bullet-last {
-  border-color: var(--status-emerald);
-  color: var(--status-emerald);
+.flow-tree-branches {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 0.25rem;
 }
 
-.pipeline-step-box {
+.flow-branch-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.flow-branch-connector {
+  color: var(--text-muted);
+  font-size: 0.8125rem;
+  user-select: none;
+  opacity: 0.6;
+}
+
+.flow-branch-node {
   background: var(--bg-primary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-xs);
   padding: 0.4rem 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-  max-width: 580px;
-}
-
-.pipeline-step-final {
-  border-left: 3px solid var(--status-emerald);
-}
-
-.step-title {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.step-note {
-  font-size: 0.6875rem;
-  color: var(--text-muted);
-}
-
-/* Decision Evolution Layout (Diagram 4: Complexity Has a Cost) */
-.flow-decision-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--space-2);
-  width: 100%;
-}
-
-.decision-node-top {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-subtle);
-  border-left: 3px solid var(--accent);
-  border-radius: var(--radius-xs);
-  padding: 0.45rem 0.85rem;
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.decision-node-badge {
-  font-size: 0.625rem;
-  font-weight: 700;
-  color: var(--accent);
-  background: var(--accent-subtle);
-  border: 1px solid var(--accent-border);
-  padding: 1px 5px;
-  border-radius: 2px;
-  letter-spacing: 0.05em;
-}
-
-.decision-node-title {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.decision-gate-wrap {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding-left: var(--space-4);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin: var(--space-1) 0;
-}
-
-.decision-line-v {
-  width: 1px;
-  height: 16px;
-  background: var(--border-medium);
-}
-
-.decision-gate-tag {
-  background: var(--bg-secondary);
-  border: 1px dashed var(--border-medium);
-  padding: 2px 7px;
-  border-radius: var(--radius-xs);
-  font-size: 0.6875rem;
-  color: var(--text-secondary);
-}
-
-.decision-arrow-v {
-  color: var(--text-muted);
-}
-
-.decision-node-target {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-subtle);
-  border-left: 3px solid var(--status-emerald);
-  border-radius: var(--radius-xs);
-  padding: 0.45rem 0.85rem;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-left: var(--space-4);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 640px) {
-  .flow-seq-row {
+  .flow-diagram-container {
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .flow-branch-node {
     flex-direction: column;
-    align-items: flex-start;
-  }
-  .flow-arrow-h {
-    transform: rotate(90deg);
-    padding: 2px 0;
-  }
-  .tree-branch-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .decision-gate-wrap {
-    flex-wrap: wrap;
+    gap: 0.2rem;
   }
 }
