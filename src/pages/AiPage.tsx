@@ -22,7 +22,6 @@ export const AiPage: React.FC = () => {
 
       {/* Interactive Demo E: AI Token Streaming Profiler */}
       <section className="content-section">
-        <div className="section-label">Interactive Simulator</div>
         <h2 className="section-heading">LLM Token Streaming Profiler & TTFT Benchmark</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
           Benchmark Time-To-First-Token (TTFT), tokens-per-second generation rates, memory allocation buffers, and Server-Sent Events (SSE) stream chunk parsing under variable prompt sizes.
@@ -41,14 +40,16 @@ export const AiPage: React.FC = () => {
 
       {/* AI Experiments List */}
       <section className="content-section">
-        <div className="section-label">Laboratory Index</div>
         <h2 className="section-heading">AI Experiments & Benchmark Studies</h2>
 
         <div className="item-list">
           {aiExperiments.map((exp: AiExperiment) => (
             <Link key={exp.id} to={`/ai/${exp.id}`} className="item-row">
               <div className="item-row-header">
-                <span className="item-title">{exp.title}</span>
+                <span className="item-title">
+                  {exp.title}
+                  <span className="row-arrow">→</span>
+                </span>
                 <span className="item-meta">{exp.status} · {exp.category}</span>
               </div>
               <div className="item-summary">{exp.problem}</div>

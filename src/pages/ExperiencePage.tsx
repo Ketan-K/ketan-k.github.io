@@ -49,7 +49,6 @@ export const ExperiencePage: React.FC = () => {
 
               {/* Responsibilities and Accomplishments */}
               <div style={{ marginBottom: 'var(--space-4)' }}>
-                <div className="section-label">Key Achievements & Responsibilities</div>
                 <ul style={{ paddingLeft: 'var(--space-4)', color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.6 }}>
                   {role.achievements.map((ach: string, i: number) => (
                     <li key={i} style={{ marginBottom: 'var(--space-1)' }}>{ach}</li>
@@ -58,13 +57,10 @@ export const ExperiencePage: React.FC = () => {
               </div>
 
               {/* Technologies */}
-              <div>
-                <div className="section-label">Technologies</div>
-                <div className="item-tags">
-                  {role.technologies.map((tech: string) => (
-                    <span key={tech} className="badge">{tech}</span>
-                  ))}
-                </div>
+              <div className="item-tags">
+                {role.technologies.map((tech: string) => (
+                  <span key={tech} className="badge">{tech}</span>
+                ))}
               </div>
             </div>
           ))}
@@ -73,7 +69,6 @@ export const ExperiencePage: React.FC = () => {
 
       {/* Education & Academic Foundation */}
       <section className="content-section" style={{ marginTop: 'var(--space-8)' }}>
-        <div className="section-label">Academic Background</div>
         <h2 className="section-heading">Education</h2>
         
         <div className="item-list">

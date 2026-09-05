@@ -24,7 +24,10 @@ export const WritingPage: React.FC = () => {
         {engineeringNotes.map((article: EngineeringNote) => (
           <Link key={article.id} to={`/writing/${article.slug || article.id}`} className="item-row">
             <div className="item-row-header">
-              <span className="item-title">{article.title}</span>
+              <span className="item-title">
+                {article.title}
+                <span className="row-arrow">→</span>
+              </span>
               <span className="item-meta">{article.date} · {article.readTime}</span>
             </div>
             <div className="item-summary">{article.summary}</div>

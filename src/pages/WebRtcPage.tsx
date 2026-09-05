@@ -43,7 +43,6 @@ export const WebRtcPage: React.FC = () => {
 
       {/* Interactive Demo C: WebRTC ICE Topology */}
       <section className="content-section">
-        <div className="section-label">Interactive Simulator 01</div>
         <h2 className="section-heading">ICE Candidate Gathering & Routing Simulator</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
           Simulate how WebRTC establishes peer connectivity across symmetric NATs, STUN server reflexivity, and TURN relay allocation.
@@ -62,7 +61,6 @@ export const WebRtcPage: React.FC = () => {
 
       {/* Architectural Deep Dive */}
       <section className="content-section">
-        <div className="section-label">Media Topologies</div>
         <h2 className="section-heading">Mesh vs SFU vs MCU Architecture</h2>
         <div className="prose">
           <p>
@@ -93,7 +91,6 @@ export const WebRtcPage: React.FC = () => {
 
       {/* Interactive Demo F: Network Resilience & Packet Recovery */}
       <section className="content-section">
-        <div className="section-label">Interactive Simulator 02</div>
         <h2 className="section-heading">Network Resilience & Packet Loss Recovery</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
           Test how adaptive bitrate (GCC), NACK packet retransmission, Forward Error Correction (RED/ULPFEC), and keyframe generation (PLI/FIR) recover video streams under harsh network degradation.
@@ -112,7 +109,6 @@ export const WebRtcPage: React.FC = () => {
 
       {/* Protocols and RFC Matrix */}
       <section className="content-section">
-        <div className="section-label">Specifications</div>
         <h2 className="section-heading">IETF / W3C Protocol Standards</h2>
 
         <div className="spec-table-container">

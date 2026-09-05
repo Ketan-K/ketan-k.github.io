@@ -44,7 +44,6 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* Problem & Motivation */}
       <section className="content-section">
-        <div className="section-label">Context & Problem</div>
         <h2 className="section-heading">The Engineering Challenge</h2>
         <div className="prose">
           <p>{project.problem}</p>
@@ -53,7 +52,6 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* Architecture Blueprint */}
       <section className="content-section">
-        <div className="section-label">Architecture</div>
         <h2 className="section-heading">System Topology & Data Flow</h2>
         <div className="blueprint-box">
           {project.architecture.diagram}
@@ -62,7 +60,6 @@ export const ProjectDetailPage: React.FC = () => {
           <p>{project.architecture.description}</p>
         </div>
 
-        <div className="section-label">Key Highlights</div>
         <ul className="prose">
           {project.architecture.highlights.map((h: string, idx: number) => (
             <li key={idx}><strong>{h}</strong></li>
@@ -72,7 +69,6 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* Engineering Decisions */}
       <section className="content-section">
-        <div className="section-label">Trade-offs</div>
         <h2 className="section-heading">Key Engineering Decisions</h2>
         <div className="prose">
           <ul>
@@ -87,7 +83,6 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* Technical Challenges */}
       <section className="content-section">
-        <div className="section-label">Execution</div>
         <h2 className="section-heading">Challenges & Solutions</h2>
         <div className="item-list">
           {project.challenges.map((c: { title: string; description: string }, idx: number) => (
@@ -103,8 +98,7 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* What I Learned */}
       <section className="content-section">
-        <div className="section-label">Retrospective</div>
-        <h2 className="section-heading">Lessons Learned & Takeaways</h2>
+        <h2 className="section-heading">Lessons Learned & Retrospective</h2>
         <div className="insight-box">
           <p>{project.whatILearned}</p>
         </div>
@@ -112,7 +106,7 @@ export const ProjectDetailPage: React.FC = () => {
 
       {/* Tech Stack */}
       <section className="content-section">
-        <div className="section-label">Technologies Used</div>
+        <h2 className="section-heading">Technologies</h2>
         <div className="item-tags">
           {project.technologies.map((tech: string) => (
             <span key={tech} className="badge badge-accent">{tech}</span>

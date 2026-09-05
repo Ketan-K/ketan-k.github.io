@@ -44,7 +44,6 @@ export const FullStackPage: React.FC = () => {
 
       {/* Interactive Demo A: Request Lifecycle */}
       <section className="content-section">
-        <div className="section-label">Interactive Simulator 01</div>
         <h2 className="section-heading">Microsecond Request Lifecycle & Middleware Trace</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
           Step through an incoming HTTPS request through Cloudflare Edge TLS termination, rate-limiting, JWT signature validation, application business logic, and PostgreSQL connection pool execution.
@@ -63,7 +62,6 @@ export const FullStackPage: React.FC = () => {
 
       {/* Interactive Demo B: Real-Time Event Bus */}
       <section className="content-section">
-        <div className="section-label">Interactive Simulator 02</div>
         <h2 className="section-heading">High-Throughput Redis Event Stream & Pub/Sub Fan-Out</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
           Simulate high-velocity financial or messaging event streams. Test fan-out backpressure, consumer group acknowledgment (XACK), and WebSocket client push performance.
@@ -82,7 +80,6 @@ export const FullStackPage: React.FC = () => {
 
       {/* Interactive Demo D: Multi-Tier Caching */}
       <section className="content-section">
-        <div className="section-label">Interactive Simulator 03</div>
         <h2 className="section-heading">Tiered Caching Topology & Invalidation Mechanics</h2>
         <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
           Inspect the performance difference between L1 In-Memory LRU Cache (&lt;1ms), L2 Distributed Redis Cache (~3ms), and Cold Disk DB queries (~45ms). Test write-through vs cache-aside invalidation patterns.
@@ -101,7 +98,6 @@ export const FullStackPage: React.FC = () => {
 
       {/* Architecture Patterns Section */}
       <section className="content-section">
-        <div className="section-label">Patterns</div>
         <h2 className="section-heading">Microservices State Management & DB Connection Pools</h2>
         
         <div className="blueprint-box">

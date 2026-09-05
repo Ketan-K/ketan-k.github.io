@@ -1,49 +1,49 @@
 /* ==========================================================================
-   MINIMALIST EDITORIAL DESIGN SYSTEM & TOKENS
-   Monochrome-First · Single Restrained Precision Accent · Editorial Typography
+   KETAN KATORE — PORTFOLIO DESIGN SYSTEM & TOKENS
+   Editorial Engineering Aesthetic · Monochrome-First · Precision Accent
    ========================================================================== */
 
 :root,
 [data-theme="light"] {
   /* Surfaces & Canvas */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-tertiary: #f1f5f9;
+  --bg-primary: #fafafa;
+  --bg-secondary: #f4f4f6;
+  --bg-tertiary: #ebebed;
   --bg-elevated: #ffffff;
-  --bg-panel: #f8fafc;
-  --bg-card: #f8fafc;
-  --bg-code: #f1f5f9;
-  --bg-hover: #f1f5f9;
-  --bg-active: #e2e8f0;
+  --bg-panel: #ffffff;
+  --bg-card: #ffffff;
+  --bg-code: #f1f2f4;
+  --bg-hover: #f0f1f4;
+  --bg-active: #e4e6eb;
 
   /* Hairline Borders & Dividers */
-  --border-color: #e2e8f0;
-  --border-subtle: #e2e8f0;
-  --border-medium: #cbd5e1;
-  --border-strong: #94a3b8;
-  --border-hover: #64748b;
+  --border-color: #e4e5e9;
+  --border-subtle: #e5e6eb;
+  --border-medium: #d2d5dc;
+  --border-strong: #9ca3af;
+  --border-hover: #6b7280;
   --border-focus: #2563eb;
 
   /* Typography Colors */
-  --text-primary: #090d16;
+  --text-primary: #0f172a;
   --text-secondary: #334155;
   --text-muted: #64748b;
   --text-dim: #94a3b8;
   --text-inverse: #ffffff;
 
-  /* Single Restrained Precision Accent (Engineered Cobalt) */
+  /* Precision Engineered Accent (Cobalt) */
   --accent: #2563eb;
   --accent-primary: #2563eb;
   --accent-hover: #1d4ed8;
-  --accent-subtle: rgba(37, 99, 235, 0.06);
-  --accent-dim: rgba(37, 99, 235, 0.06);
-  --accent-border: rgba(37, 99, 235, 0.24);
+  --accent-subtle: rgba(37, 99, 235, 0.07);
+  --accent-dim: rgba(37, 99, 235, 0.07);
+  --accent-border: rgba(37, 99, 235, 0.25);
 
   --accent-cyan: #0284c7;
-  --accent-cyan-dim: rgba(2, 132, 199, 0.06);
-  --accent-cyan-border: rgba(2, 132, 199, 0.24);
+  --accent-cyan-dim: rgba(2, 132, 199, 0.07);
+  --accent-cyan-border: rgba(2, 132, 199, 0.25);
 
-  /* Functional Status Indicators (Telemetry Only) */
+  /* Functional Status Telemetry Indicators */
   --status-emerald: #059669;
   --status-emerald-dim: rgba(5, 150, 105, 0.08);
   --status-emerald-border: rgba(5, 150, 105, 0.25);
@@ -54,52 +54,52 @@
   --status-rose: #e11d48;
   --status-rose-dim: rgba(225, 29, 72, 0.08);
 
-  /* Subtle Hairline Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+  /* Elevation Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.07);
 }
 
 [data-theme="dark"] {
   /* Surfaces & Canvas */
-  --bg-primary: #0a0c10;
-  --bg-secondary: #10131a;
-  --bg-tertiary: #161a24;
-  --bg-elevated: #121620;
-  --bg-panel: #10131a;
-  --bg-card: #10131a;
-  --bg-code: #0c0f16;
-  --bg-hover: #171b26;
-  --bg-active: #1e2433;
+  --bg-primary: #090c12;
+  --bg-secondary: #0f141d;
+  --bg-tertiary: #151b27;
+  --bg-elevated: #121824;
+  --bg-panel: #0f141d;
+  --bg-card: #0f141d;
+  --bg-code: #0b0f17;
+  --bg-hover: #171e2c;
+  --bg-active: #1e2738;
 
   /* Hairline Borders & Dividers */
-  --border-color: #1c212e;
-  --border-subtle: #1c212e;
-  --border-medium: #272f42;
-  --border-strong: #3b465e;
+  --border-color: #1e2636;
+  --border-subtle: #1e2636;
+  --border-medium: #2a3449;
+  --border-strong: #3d4a66;
   --border-hover: #64748b;
   --border-focus: #38bdf8;
 
   /* Typography Colors */
   --text-primary: #f8fafc;
   --text-secondary: #cbd5e1;
-  --text-muted: #8292a6;
-  --text-dim: #4c5970;
-  --text-inverse: #0a0c10;
+  --text-muted: #8092a8;
+  --text-dim: #475569;
+  --text-inverse: #090c12;
 
-  /* Single Restrained Precision Accent (Crisp Electric Sky) */
+  /* Precision Engineered Accent (Crisp Electric Sky) */
   --accent: #38bdf8;
   --accent-primary: #38bdf8;
   --accent-hover: #7dd3fc;
   --accent-subtle: rgba(56, 189, 248, 0.1);
   --accent-dim: rgba(56, 189, 248, 0.1);
-  --accent-border: rgba(56, 189, 248, 0.28);
+  --accent-border: rgba(56, 189, 248, 0.3);
 
   --accent-cyan: #38bdf8;
   --accent-cyan-dim: rgba(56, 189, 248, 0.1);
-  --accent-cyan-border: rgba(56, 189, 248, 0.28);
+  --accent-cyan-border: rgba(56, 189, 248, 0.3);
 
-  /* Functional Status Indicators (Telemetry Only) */
+  /* Functional Status Telemetry Indicators */
   --status-emerald: #34d399;
   --status-emerald-dim: rgba(52, 211, 153, 0.1);
   --status-emerald-border: rgba(52, 211, 153, 0.28);
@@ -110,10 +110,10 @@
   --status-rose: #f43f5e;
   --status-rose-dim: rgba(244, 63, 94, 0.1);
 
-  /* Subtle Depth Shadows */
+  /* Elevation Shadows */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
-  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.6);
 }
 
 :root {
@@ -143,6 +143,7 @@
   --space-12: 3rem;       /* 48px */
   --space-16: 4rem;       /* 64px */
   --space-20: 5rem;       /* 80px */
+  --space-24: 6rem;       /* 96px */
 
   /* Layout Spacing */
   --container-max-w: 860px;
@@ -250,7 +251,7 @@ code, pre, .font-mono {
   background: var(--border-strong);
 }
 
-/* Layout Utilities */
+/* Layout Container */
 .container {
   max-width: var(--container-max-w);
   margin-left: auto;
@@ -265,7 +266,7 @@ code, pre, .font-mono {
 .editorial-divider {
   border: none;
   border-top: 1px solid var(--border-subtle);
-  margin: var(--space-10) 0;
+  margin: var(--space-12) 0;
 }
 
 .editorial-divider-sm {
@@ -274,7 +275,27 @@ code, pre, .font-mono {
   margin: var(--space-4) 0;
 }
 
-/* Technical Badges with Mobile Wrapping Protection */
+/* Chapter Marker */
+.chapter-marker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.chapter-marker::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background-color: var(--border-subtle);
+}
+
+/* Technical Badges */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -332,8 +353,8 @@ code, pre, .font-mono {
   font-family: var(--font-mono);
   font-size: var(--text-xs);
   font-weight: 500;
-  padding: 0.5rem 0.95rem;
-  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.05rem;
+  border-radius: var(--radius-xs);
   background: var(--bg-primary);
   border: 1px solid var(--border-medium);
   color: var(--text-primary);

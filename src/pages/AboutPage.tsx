@@ -24,8 +24,7 @@ export const AboutPage: React.FC = () => {
 
       {/* Bio / Background */}
       <section className="content-section">
-        <div className="section-label">Background</div>
-        <h2 className="section-heading">Bio</h2>
+        <h2 className="section-heading">Background</h2>
         <div className="prose">
           <p>
             I am a Full-Stack Software Engineer with 6+ years of experience designing and scaling low-latency real-time platforms, WebRTC communication architectures, and high-throughput backend services.
@@ -43,8 +42,7 @@ export const AboutPage: React.FC = () => {
 
       {/* Education & Scientific Foundation */}
       <section className="content-section">
-        <div className="section-label">Academic Pedigree</div>
-        <h2 className="section-heading">Scientific Foundation</h2>
+        <h2 className="section-heading">Scientific Foundation & Education</h2>
 
         <div className="item-list">
           {educationHistory.map((edu: EducationItem, idx: number) => (
@@ -68,7 +66,6 @@ export const AboutPage: React.FC = () => {
 
       {/* Tech Stack Matrix */}
       <section className="content-section">
-        <div className="section-label">Capabilities</div>
         <h2 className="section-heading">Technical Skills & Tooling</h2>
 
         <div className="skills-category-grid">
@@ -93,7 +90,6 @@ export const AboutPage: React.FC = () => {
 
       {/* Open Source Repositories */}
       <section className="content-section">
-        <div className="section-label">Open Source</div>
         <h2 className="section-heading">Public Repositories</h2>
 
         <div className="item-list">
@@ -102,7 +98,7 @@ export const AboutPage: React.FC = () => {
               <div className="item-row-header">
                 <span className="item-title">
                   {repo.name}
-                  <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)' }}>↗</span>
+                  <span className="row-arrow">↗</span>
                 </span>
                 <span className="item-meta">{repo.language} · {repo.status}</span>
               </div>
@@ -121,7 +117,6 @@ export const AboutPage: React.FC = () => {
 
       {/* Contact & Profiles */}
       <section className="content-section">
-        <div className="section-label">Connect</div>
         <h2 className="section-heading">Contact & Profiles</h2>
         <div className="prose" style={{ marginBottom: 'var(--space-4)' }}>
           <p>

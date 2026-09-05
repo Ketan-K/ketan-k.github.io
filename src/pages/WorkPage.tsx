@@ -51,6 +51,7 @@ export const WorkPage: React.FC = () => {
                 <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', fontWeight: 400 }}>
                   ({p.clientOrContext})
                 </span>
+                <span className="row-arrow">→</span>
               </span>
               <span className="item-meta">{p.projectType}</span>
             </div>

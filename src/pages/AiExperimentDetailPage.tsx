@@ -40,7 +40,6 @@ export const AiExperimentDetailPage: React.FC = () => {
 
       {/* What Happened */}
       <section className="content-section">
-        <div className="section-label">Implementation & Findings</div>
         <h2 className="section-heading">Experimental Results & Architecture</h2>
         <div className="prose">
           <p>{exp.whatHappened}</p>
@@ -49,7 +48,6 @@ export const AiExperimentDetailPage: React.FC = () => {
 
       {/* What I Learned */}
       <section className="content-section">
-        <div className="section-label">Retrospective</div>
         <h2 className="section-heading">Key Takeaways & Lessons</h2>
         <div className="insight-box">
           <p>{exp.whatILearned}</p>
@@ -58,7 +56,7 @@ export const AiExperimentDetailPage: React.FC = () => {
 
       {/* Technologies */}
       <section className="content-section">
-        <div className="section-label">Technologies</div>
+        <h2 className="section-heading">Technologies</h2>
         <div className="item-tags">
           {exp.technologies.map((t: string) => (
             <span key={t} className="badge badge-accent">{t}</span>

@@ -23,7 +23,6 @@ export const SystemsPage: React.FC = () => {
       <div className="subsystem-grid">
         <Link to="/systems/webrtc" className="subsystem-card">
           <div>
-            <div className="section-label" style={{ color: 'var(--accent)' }}>Subsystem 01</div>
             <h3>WebRTC & Real-Time Media</h3>
             <p>
               Deep dive into ICE candidate gathering, STUN/TURN traversal, SFU vs MCU media routing topologies, jitter buffer sizing, and adaptive bitrate resilience simulators.
@@ -34,7 +33,6 @@ export const SystemsPage: React.FC = () => {
 
         <Link to="/systems/full-stack" className="subsystem-card">
           <div>
-            <div className="section-label" style={{ color: 'var(--accent)' }}>Subsystem 02</div>
             <h3>Full-Stack & Distributed Backend</h3>
             <p>
               In-depth blueprints for request lifecycle optimization, Redis Pub/Sub event distribution, multi-tier cache invalidation strategies, and WebSocket state machines.
@@ -48,7 +46,6 @@ export const SystemsPage: React.FC = () => {
 
       {/* Core Architectural Principles */}
       <section className="content-section">
-        <div className="section-label">Engineering Philosophy</div>
         <h2 className="section-heading">Core Architectural Principles</h2>
         
         <div className="item-list">

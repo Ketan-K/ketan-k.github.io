@@ -15,42 +15,43 @@ export const HomePage: React.FC = () => {
   return (
     <div className="page-container">
       {/* Editorial Hero */}
-      <section className="home-hero">
+      <header className="page-header home-hero">
         <div className="page-breadcrumb">
-          <span>Ketan Katore</span>
+          <span>Index</span>
           <span>/</span>
-          <span>Full-Stack & Real-Time Systems Engineer</span>
+          <span>Full-Stack & Real-Time Systems</span>
         </div>
         <h1 className="home-headline">
-          Building resilient real-time media systems, WebRTC platforms, and distributed backends.
+          Building resilient real-time media systems, WebRTC backends, and full-stack platforms.
         </h1>
         <p className="home-subheadline">
           Senior Full-Stack Engineer with 6+ years architecting low-latency communication engines,
-          distributed event streams, high-concurrency microservices, and experimental AI platforms.
+          distributed event streams, high-concurrency microservices, and experimental AI systems.
         </p>
         <div className="home-actions">
           <Link to="/work" className="btn btn-primary">
             Explore Work
           </Link>
-          <Link to="/resume" className="btn btn-outline">
+          <Link to="/systems" className="btn btn-outline">
+            Systems & Simulators
+          </Link>
+          <Link to="/resume" className="btn btn-ghost">
             Resume · PDF
           </Link>
-          <a
-            href="mailto:ketankatore.9@gmail.com"
-            className="btn btn-ghost"
-          >
-            ketankatore.9@gmail.com
-          </a>
         </div>
-      </section>
+      </header>
 
       <hr className="editorial-divider" />
 
-      {/* Systems Subsystems Snapshot */}
+      {/* Systems & Architecture */}
       <section className="content-section">
-        <div className="section-label">Engineering Focus</div>
-        <h2 className="section-heading">Systems & Architecture</h2>
-        <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
+        <div className="section-header-row">
+          <h2 className="section-heading" style={{ margin: 0 }}>Systems & Architecture</h2>
+          <Link to="/systems" className="link-subtle">
+            Overview →
+          </Link>
+        </div>
+        <p className="prose" style={{ marginBottom: 'var(--space-6)' }}>
           Technical explorations, protocol specifications, and interactive simulators for real-time media and distributed backend architectures.
         </p>
 
@@ -59,10 +60,10 @@ export const HomePage: React.FC = () => {
             <div>
               <h3>WebRTC & Real-Time Media</h3>
               <p>
-                ICE candidate routing, SFU vs MCU topology models, jitter buffers, adaptive bitrate algorithms, and packet loss recovery mechanisms.
+                ICE candidate routing, SFU vs MCU topology models, jitter buffers, adaptive bitrate algorithms, and packet loss recovery simulators.
               </p>
             </div>
-            <span className="action-link">Explore WebRTC Deep Dive →</span>
+            <span className="action-link">Open WebRTC Deep Dive →</span>
           </Link>
 
           <Link to="/systems/full-stack" className="subsystem-card">
@@ -72,7 +73,7 @@ export const HomePage: React.FC = () => {
                 Request lifecycle pipelines, high-throughput Redis event buses, multi-tier caching architectures, and concurrency benchmarks.
               </p>
             </div>
-            <span className="action-link">Explore Full-Stack Blueprints →</span>
+            <span className="action-link">Open Full-Stack Blueprints →</span>
           </Link>
         </div>
       </section>
@@ -82,10 +83,7 @@ export const HomePage: React.FC = () => {
       {/* Selected Work */}
       <section className="content-section">
         <div className="section-header-row">
-          <div>
-            <div className="section-label">Production Systems</div>
-            <h2 className="section-heading" style={{ margin: 0 }}>Selected Work</h2>
-          </div>
+          <h2 className="section-heading" style={{ margin: 0 }}>Selected Work</h2>
           <Link to="/work" className="link-subtle">
             All projects ({projects.length}) →
           </Link>
@@ -95,7 +93,10 @@ export const HomePage: React.FC = () => {
           {featuredProjects.map((p: Project) => (
             <Link key={p.id} to={`/work/${p.id}`} className="item-row">
               <div className="item-row-header">
-                <span className="item-title">{p.title}</span>
+                <span className="item-title">
+                  {p.title}
+                  <span className="row-arrow">→</span>
+                </span>
                 <span className="item-meta">{p.projectType}</span>
               </div>
               <div className="item-summary">{p.tagline}</div>
@@ -112,15 +113,12 @@ export const HomePage: React.FC = () => {
 
       <hr className="editorial-divider" />
 
-      {/* Experience Snapshot */}
+      {/* Experience */}
       <section className="content-section">
         <div className="section-header-row">
-          <div>
-            <div className="section-label">Career History</div>
-            <h2 className="section-heading" style={{ margin: 0 }}>Experience</h2>
-          </div>
+          <h2 className="section-heading" style={{ margin: 0 }}>Experience</h2>
           <Link to="/experience" className="link-subtle">
-            View all roles ({experienceHistory.length}) →
+            Full history ({experienceHistory.length}) →
           </Link>
         </div>
 
@@ -145,13 +143,10 @@ export const HomePage: React.FC = () => {
 
       <hr className="editorial-divider" />
 
-      {/* AI Lab Snapshot */}
+      {/* AI Lab */}
       <section className="content-section">
         <div className="section-header-row">
-          <div>
-            <div className="section-label">Experiments & Benchmarks</div>
-            <h2 className="section-heading" style={{ margin: 0 }}>AI Lab</h2>
-          </div>
+          <h2 className="section-heading" style={{ margin: 0 }}>AI Lab</h2>
           <Link to="/ai" className="link-subtle">
             All experiments ({aiExperiments.length}) →
           </Link>
@@ -161,7 +156,10 @@ export const HomePage: React.FC = () => {
           {featuredAi.map((exp: AiExperiment) => (
             <Link key={exp.id} to={`/ai/${exp.id}`} className="item-row">
               <div className="item-row-header">
-                <span className="item-title">{exp.title}</span>
+                <span className="item-title">
+                  {exp.title}
+                  <span className="row-arrow">→</span>
+                </span>
                 <span className="item-meta">{exp.status}</span>
               </div>
               <div className="item-summary">{exp.problem}</div>
@@ -177,13 +175,10 @@ export const HomePage: React.FC = () => {
 
       <hr className="editorial-divider" />
 
-      {/* Technical Writing Snapshot */}
+      {/* Writing */}
       <section className="content-section">
         <div className="section-header-row">
-          <div>
-            <div className="section-label">Thoughts & Protocols</div>
-            <h2 className="section-heading" style={{ margin: 0 }}>Writing</h2>
-          </div>
+          <h2 className="section-heading" style={{ margin: 0 }}>Writing</h2>
           <Link to="/writing" className="link-subtle">
             All articles ({engineeringNotes.length}) →
           </Link>
@@ -193,7 +188,10 @@ export const HomePage: React.FC = () => {
           {recentWriting.map((w: EngineeringNote) => (
             <Link key={w.id} to={`/writing/${w.id}`} className="item-row">
               <div className="item-row-header">
-                <span className="item-title">{w.title}</span>
+                <span className="item-title">
+                  {w.title}
+                  <span className="row-arrow">→</span>
+                </span>
                 <span className="item-meta">{w.date} · {w.readTime}</span>
               </div>
               <div className="item-summary">{w.summary}</div>

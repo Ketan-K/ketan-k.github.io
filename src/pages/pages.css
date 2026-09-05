@@ -6,14 +6,14 @@
 .page-container {
   max-width: var(--container-max-w);
   margin: 0 auto;
-  padding: var(--space-10) var(--container-pad) var(--space-20);
+  padding: var(--space-12) var(--container-pad) var(--space-24);
   width: 100%;
   box-sizing: border-box;
 }
 
 /* Page Header Block */
 .page-header {
-  margin-bottom: var(--space-10);
+  margin-bottom: var(--space-12);
   width: 100%;
 }
 
@@ -55,7 +55,7 @@
 .page-subtitle {
   font-size: var(--text-base);
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
   max-width: 68ch;
 }
 
@@ -95,7 +95,7 @@
 
 /* Section Containers & Headers */
 .content-section {
-  margin-bottom: var(--space-12);
+  margin-bottom: var(--space-16);
   width: 100%;
 }
 
@@ -217,6 +217,11 @@
   color: var(--accent);
 }
 
+.item-row:hover .row-arrow {
+  transform: translateX(4px);
+  color: var(--accent);
+}
+
 .item-row-header {
   display: flex;
   justify-content: space-between;
@@ -235,6 +240,13 @@
   flex-wrap: wrap;
   gap: var(--space-2);
   transition: color var(--transition-fast);
+}
+
+.row-arrow {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  transition: transform var(--transition-fast), color var(--transition-fast);
 }
 
 .item-meta {
@@ -303,7 +315,7 @@
   padding: var(--space-4) var(--space-5);
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--text-primary);
   overflow-x: auto;
   max-width: 100%;
@@ -377,7 +389,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: var(--space-5);
+  padding: var(--space-6);
   background-color: var(--bg-secondary);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-sm);
@@ -457,7 +469,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: var(--space-3);
-  margin-top: var(--space-10);
+  margin-top: var(--space-12);
   padding-top: var(--space-4);
   border-top: 1px solid var(--border-subtle);
 }
@@ -499,17 +511,19 @@
 
 /* Home Hero Specifics */
 .home-hero {
-  padding: var(--space-6) 0 var(--space-8);
+  padding: 0;
+  margin-bottom: var(--space-12);
 }
 
 .home-headline {
   font-size: var(--text-3xl);
   font-weight: 600;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03em;
   color: var(--text-primary);
   line-height: 1.2;
-  margin-bottom: var(--space-4);
-  max-width: 22ch;
+  margin-bottom: var(--space-3);
+  max-width: 32ch;
+  word-break: break-word;
 }
 
 .home-subheadline {
@@ -608,7 +622,7 @@
 
 @media (max-width: 768px) {
   .page-container {
-    padding: var(--space-6) var(--container-pad) var(--space-12);
+    padding: var(--space-6) var(--container-pad) var(--space-16);
   }
   .item-row {
     margin: 0;
