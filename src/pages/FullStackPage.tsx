@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { RequestLifecycleDemo } from '../components/demos/RequestLifecycleDemo';
 import { RealtimeEventStreamDemo } from '../components/demos/RealtimeEventStreamDemo';
 import { CacheTierDemo } from '../components/demos/CacheTierDemo';
 import './pages.css';
@@ -41,20 +40,6 @@ export const FullStackPage: React.FC = () => {
           <span className="meta-value">&lt; 45ms end-to-end</span>
         </div>
       </div>
-
-      {/* Interactive Request Lifecycle */}
-      <section className="content-section">
-        <h2 className="section-heading">Microsecond Request Lifecycle & Middleware Trace</h2>
-        <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
-          Step through an incoming HTTPS request through Cloudflare Edge TLS termination, rate-limiting, JWT signature validation, application business logic, and PostgreSQL connection pool execution.
-        </p>
-
-        <div className="demo-embed-wrapper">
-          <RequestLifecycleDemo />
-        </div>
-      </section>
-
-      <hr className="editorial-divider" />
 
       {/* Interactive Real-Time Event Bus */}
       <section className="content-section">

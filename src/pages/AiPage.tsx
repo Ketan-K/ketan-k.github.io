@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { aiExperiments } from '../content/ailab';
 import { AiExperiment } from '../types';
-import { AiStreamingDemo } from '../components/demos/AiStreamingDemo';
 import { TechBadge } from '../components/common/TechBadge';
 import { CheckCircle2, FlaskConical, Cpu } from 'lucide-react';
 import './pages.css';
@@ -34,29 +33,12 @@ export const AiPage: React.FC = () => {
       <div className="foundation-banner">
         <div className="foundation-badge font-mono">
           <Cpu size={14} />
-          <span>ENGINEERING LINUX & FOUNDATION</span>
+          <span>ENGINEERING FOUNDATION</span>
         </div>
         <p className="foundation-text">
-          The AI Lab is not a disconnected showcase: it represents the natural extension of my real-time WebRTC, low-latency streaming, and distributed systems engineering experience into generative and edge AI architectures.
+          The AI Lab is grounded in my real-time WebRTC, client-side computer vision (Google MediaPipe, Banuba SDK), and low-latency distributed systems engineering experience.
         </p>
       </div>
-
-      {/* Interactive LLM Token Streaming Profiler */}
-      <section className="content-section">
-        <div className="section-header-row">
-          <h2 className="section-heading" style={{ margin: 0 }}>LLM Token Streaming Profiler & TTFT Benchmark</h2>
-          <span className="badge badge-accent">Interactive Prototype</span>
-        </div>
-        <p className="prose" style={{ marginBottom: 'var(--space-4)' }}>
-          Benchmark Time-To-First-Token (TTFT), tokens-per-second generation rates, memory allocation buffers, and Server-Sent Events (SSE) stream chunk parsing under variable prompt sizes.
-        </p>
-
-        <div className="demo-embed-wrapper">
-          <AiStreamingDemo />
-        </div>
-      </section>
-
-      <hr className="editorial-divider" />
 
       {/* AI Systems & Experiments List */}
       <section className="content-section">
