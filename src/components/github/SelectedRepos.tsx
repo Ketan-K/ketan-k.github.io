@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useGitHubRepos } from '../../hooks/useGitHubRepos';
-import { RefreshCw, ExternalLink, Globe } from 'lucide-react';
+import { RefreshCw, ExternalLink } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { TechBadge } from '../common/TechBadge';
 import './Repos.css';
@@ -128,7 +128,7 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
         ) : (
           displayedRepos.map((repo) => (
             <div key={repo.name} className="item-row repo-item-row">
-              <div className="item-row-header">
+              <div className="item-row-header repo-header-layout">
                 <div className="repo-title-cluster">
                   <a
                     href={repo.url}
@@ -141,33 +141,16 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
                     <GithubIcon size={13} className="repo-gh-mark" />
                   </a>
 
-                  {repo.homepage && (
-                    <span className="repo-live-tag font-mono" title="Verified live web deployment">
-                      <span className="live-demo-dot" />
-                      Live Demo
+                  <div className="item-meta">
+                    <span
+                      className="repo-lang-indicator"
+                      style={{ '--lang-color': repo.languageColor } as React.CSSProperties}
+                    >
+                      {repo.language}
                     </span>
-                  )}
-                </div>
-
-                <div className="item-meta">
-                  <span
-                    className="repo-lang-indicator"
-                    style={{ '--lang-color': repo.languageColor } as React.CSSProperties}
-                  >
-                    {repo.language}
-                  </span>
-                  <span>·</span>
-                  <span>{repo.status}</span>
-                </div>
-              </div>
-
-              <div className="item-summary">{repo.description}</div>
-
-              <div className="repo-row-bottom">
-                <div className="item-tags">
-                  {repo.tags.map((t) => (
-                    <TechBadge key={t} name={t} />
-                  ))}
+                    <span>·</span>
+                    <span>{repo.status}</span>
+                  </div>
                 </div>
 
                 <div className="repo-actions-inline font-mono">
@@ -191,13 +174,25 @@ export const SelectedRepos: React.FC<SelectedReposProps> = ({
                       className="repo-inline-btn repo-inline-btn-demo"
                       title={`Launch working live demo: ${repo.homepage}`}
                     >
-                      <Globe size={12} />
+                      <span className="live-demo-dot" />
                       <span>Live Demo</span>
                       <ExternalLink size={10} />
                     </a>
                   )}
                 </div>
               </div>
+
+              <div className="item-summary">{repo.description}</div>
+
+              {repo.tags && repo.tags.length > 0 && (
+                <div className="repo-tags-row">
+                  <div className="item-tags">
+                    {repo.tags.map((t) => (
+                      <TechBadge key={t} name={t} />
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ))
         )}

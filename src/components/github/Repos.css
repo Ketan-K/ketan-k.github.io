@@ -95,11 +95,20 @@
   background-color: var(--bg-hover);
 }
 
+.repo-header-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
 .repo-title-cluster {
   display: inline-flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: var(--space-3);
 }
 
 .repo-link-title {
@@ -128,19 +137,6 @@
   color: var(--accent);
 }
 
-.repo-live-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-size: 0.6875rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--radius-full);
-  background: var(--status-emerald-dim);
-  border: 1px solid var(--status-emerald-border);
-  color: var(--status-emerald);
-}
-
 .live-demo-dot {
   width: 5px;
   height: 5px;
@@ -148,6 +144,7 @@
   background-color: var(--status-emerald);
   box-shadow: 0 0 6px var(--status-emerald);
   display: inline-block;
+  margin-right: 2px;
 }
 
 .repo-lang-indicator {
@@ -165,19 +162,11 @@
   display: inline-block;
 }
 
-.repo-row-bottom {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  margin-top: var(--space-3);
-}
-
 .repo-actions-inline {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: var(--space-2);
+  margin-left: auto;
 }
 
 .repo-inline-btn {
@@ -202,16 +191,26 @@
 }
 
 .repo-inline-btn-demo {
-  background: var(--accent-subtle);
-  border-color: var(--accent-border);
-  color: var(--accent);
+  background: var(--status-emerald-dim);
+  border-color: var(--status-emerald-border);
+  color: var(--status-emerald);
   font-weight: 600;
 }
 
 .repo-inline-btn-demo:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--text-inverse);
+  background: var(--status-emerald);
+  border-color: var(--status-emerald);
+  color: var(--bg-primary);
+}
+
+.repo-tags-row {
+  margin-top: var(--space-3);
+}
+
+.repo-tags-row .item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 }
 
 .repo-show-more-row {
@@ -238,12 +237,14 @@
 }
 
 @media (max-width: 640px) {
-  .repo-row-bottom {
+  .repo-header-layout {
     flex-direction: column;
     align-items: flex-start;
+    gap: var(--space-2);
   }
   .repo-actions-inline {
     width: 100%;
     justify-content: flex-start;
+    margin-left: 0;
   }
 }
